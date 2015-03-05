@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+	<!-- processorMap -->
+	<processorMap type="grounding">
+		<processor name="SetNameByGlobalId" enabled="true">
+			<class>net.linkedbuildingdata.ifc.util.grounding.SetNameByGlobalId</class>
+			<params>
+				<param name="entityNamePattern" value="GUID_$Entity.GlobalId$" />
+				<param name="encoderType" value="None" />
+			</params>
+		</processor>
+		<processor name="RemoveDuplicatedEntities" enabled="true">
+			<class>net.linkedbuildingdata.ifc.util.grounding.RemoveDuplicatedEntities</class>
+			<params>
+				<param name="entityTypeNames" value="IfcMappedItem, IfcStyledItem" />
+			</params>
+		</processor>
+	</processorMap>
+	
+	<!-- complexProcessorPools -->
+	<complexProcessorPool type="grounding">
+		<complexProcessor name="BASIC GROUNDING RULES" enabled="true" default="true">
+			<add name="SetNameByGlobalId" />
+			<add name="RemoveDuplicatedEntities" />
+		</complexProcessor>
+		<complexProcessor name="NO GROUNDING RULES" enabled="false" />		
+	</complexProcessorPool>
+	
+	
+	<!-- Converters -->	
+	<converterPool type="Ifc2Rdf">
+		<converter name="Working" enabled="true" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		
+		
+		<converter name="Standard" enabled="true" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="Options.PrintPropertyCardinality" value="false" />
+				<param name="Options.PrintPropertyDomainAndRange" value="false" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="false" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="false" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		
+		
+		<converter name="OWL 1 DL_Olo List_Boolean_Enumeration_Cardinalities_Only single domains and ranges_Data properties" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL1_DL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="true" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		<converter name="OWL 1 DL_Olo OrderedList_Boolean as Strings_Enumeration as Strings_Cardinalities_Only single domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL1_DL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="true" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="true" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="true" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		<converter name="OWL 1 DL_Rdf List_Boolean as Strings_Enumeration as Strings_Cardinalities_Only single domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL1_DL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="true" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="true" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		<converter name="OWL 2 EL_Olo Ordered List_Boolean as Strings_Enumeration as Strings_Cardinalities_Only single domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="true" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="true" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="true" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>		
+		<converter name="OWL 2 EL_Rdf List_Boolean as Strings_Enumeration as Strings_Cardinalities_Only single domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="true" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="true" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>		
+		<converter name="OWL 2 Full_Rdf List_Boolean_Enumeration_Cardinalitites_All domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_Full" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="true" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		<converter name="OWL 2 RL_Olo Ordered List_Boolean_Enumeration_Cardinalities_Only single domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_RL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="true" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="true" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="true" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+		<converter name="OWL 2 RL_Rdf List_Boolean_Enumeration_Cardinalities_Only single domains and ranges" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_RL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+	</converterPool>
+	<converterPool type="Ifc2Jena">
+		<converter name="OWL_MEM" enabled="false" default="true">
+			<params>
+				<param name="OntModelSpec" value="OWL_MEM" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />				
+				<param name="OloOrderedList.Ontology.FilePath" value="c:\DRUM\!git\Resources\Ontologies\orderedlistontology_modified.n3" />
+				<param name="OloOrderedList.Ontology.FileFormat" value="N3" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://linkedbuildingdata.net/schema/$Schema.Version$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://linkedbuildingdata.net/model/" />				
+			</params>
+		</converter>
+	</converterPool>
+	
+	<jenaModelPool>
+		<jenaModel name="Memory1" default="true">
+			<class>net.linkedbuildingdata.rdf.modelfactory.MemoryJenaModelFactory</class>
+		</jenaModel>
+		<jenaModel name="AllegroGraph1" default="true">
+			<class>net.linkedbuildingdata.rdf.modelfactory.allegrograph.AGJenaModelFactory</class>
+			<params>
+				<param name="ServerUrl" value="http://murskain.cs.hut.fi:10035/" />
+				<param name="UserName" value="test" />
+				<param name="Password" value="xyz" />
+				<param name="ModelId" value="IFC2X3TC" />				
+			</params>
+		</jenaModel>
+		<jenaModel name="AllegroGraph2" default="false">
+			<class>net.linkedbuildingdata.rdf.modelfactory.allegrograph.AGJenaModelFactory</class>
+			<params>
+				<param name="ServerUrl" value="http://volume376.allegrograph.net:10035" />
+				<param name="UserName" value="test" />
+				<param name="Password" value="xyz" />
+				<param name="ModelId" value="IFC2X3TC" />
+			</params>
+		</jenaModel>
+		<jenaModel name="Virtuoso1" default="true">
+			<class>net.linkedbuildingdata.rdf.modelfactory.virtuoso.VirtuosoJenaModelFactory</class>
+			<params>
+				<param name="ServerUrl" value="jdbc:virtuoso://localhost:1111" />
+				<param name="UserName" value="dba" />
+				<param name="Password" value="dba" />
+				<param name="ModelId" value="IFC" />
+			</params>
+		</jenaModel>
+		<jenaModel name="Stardog1" default="true">
+			<class>net.linkedbuildingdata.rdf.modelfactory.stardog.StardogJenaModelFactory</class>
+			<params>
+				<param name="ServerUrl" value="snarl://localhost:5820" />
+				<param name="UserName" value="admin" />
+				<param name="Password" value="admin" />
+				<param name="ModelId" value="IFC" />
+			</params>
+		</jenaModel>
+	</jenaModelPool>
+</config>

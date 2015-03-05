@@ -1,0 +1,154 @@
+<?xml version="1.0" ?>
+<!-- Configuration of the Ant build system to generate a Jar file -->
+<project name="net.linkedbuildingdata.common" default="CreateJar">
+
+	<!-- set global properties for this build -->
+	<property name="program" value="export-ifc2rdf" />
+	<property name="version" value="1.4.0-SNAPSHOT" />
+	<property name="workspace" location="../" />
+	<property name="dist" location="${workspace}/../distributives/${program}/${version}" />
+	<property name="package" value="net.linkedbuildingdata" />
+	<property name="jena.version" value="2.12.1" />
+	<property name="resources" value="${workspace}/../../Resources" />
+	<property name="resources/apache" value="${resources}/org.apache" />
+	<property name="resources/agraph" value="${resources}/agraph-4.13.2-client-java/lib" />
+	<property name="resources/apache/jena" value="${resources}/org.apache/apache-jena-${jena.version}/lib" />
+	<property name="resources/virtuoso" value="${resources}/virtuoso" />
+	<property name="resources/stardog" value="C:/PROGRAMS/stardog-1.2.3/lib/" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}/lib" />
+		<copy file="${resources/apache}/commons-cli-1.2.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache}/commons-codec-1.6.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache}/commons-lang3-3.1.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache}/log4j-1.2.16.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache}/slf4j-api-1.6.4.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache}/slf4j-log4j12-1.6.4.jar" todir="${dist}/lib" />		
+		<copy file="${resources/apache/jena}/jena-core-${jena.version}.jar" todir="${dist}/lib" /> 
+		<copy file="${resources/apache/jena}/jena-arq-${jena.version}.jar" todir="${dist}/lib" /> 
+		<copy file="${resources/apache/jena}/jena-iri-1.1.1.jar" todir="${dist}/lib" /> 
+		<copy file="${resources/apache/jena}/xercesImpl-2.11.0.jar" todir="${dist}/lib" /> 
+		<copy file="${resources/apache/jena}/xml-apis-1.4.01.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/httpclient-4.2.6.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/httpclient-cache-4.2.6.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/httpcore-4.2.5.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/jackson-annotations-2.3.0.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/jackson-core-2.3.3.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/jackson-databind-2.3.3.jar" todir="${dist}/lib" />
+		<copy file="${resources/apache/jena}/jsonld-java-0.5.0.jar" todir="${dist}/lib" />
+	</target>
+	
+	<target name="init_agraph">
+		<mkdir dir="${dist}/lib/agraph" />		
+		<copy file="${resources/agraph}/agraph-4.13.2.jar" todir="${dist}/lib/agraph" />
+		<copy file="${resources/agraph}/commons-pool-1.5.6.jar" todir="${dist}/lib/agraph" />
+		<copy file="${resources/agraph}/json.jar" todir="${dist}/lib/agraph" />
+		<copy file="${resources/agraph}/logging/commons-logging-1.1.1.jar" todir="${dist}/lib/agraph" /> 
+		<copy file="${resources/agraph}/sesame/commons-httpclient-3.1.jar" todir="${dist}/lib/agraph" /> 
+		<copy file="${resources/agraph}/sesame/openrdf-sesame-2.6.8-onejar.jar" todir="${dist}/lib/agraph" />
+		<jar jarfile="${dist}/lib/agraph/${package}.rdf.modelfactory.allegrograph-${version}.jar" basedir="${workspace}/${package}.rdf.modelfactory.allegrograph/bin" />
+	</target>	
+
+	<target name="init_virtuoso">
+		<mkdir dir="${dist}/lib/virtuoso" />
+		<!--copy file="${resources/virtuoso}/jenajars.zip" todir="${dist}/lib/virtuoso" /--> 
+		<copy file="${resources/virtuoso}/virt_jena.jar" todir="${dist}/lib/virtuoso" /> 
+		<copy file="${resources/virtuoso}/virtjdbc3.jar" todir="${dist}/lib/virtuoso" />
+		<jar jarfile="${dist}/lib/virtuoso/${package}.rdf.modelfactory.virtuoso-${version}.jar" basedir="${workspace}/${package}.rdf.modelfactory.virtuoso/bin" />
+	</target>
+		
+	<target name="init_stardog">
+		<mkdir dir="${dist}/lib/stardog" />
+		<copy file="${resources/stardog}/stardog-1.2.3.jar" todir="${dist}/lib/stardog" /> 
+		<copy file="${resources/stardog}/stardog-jena-1.2.3.jar" todir="${dist}/lib/stardog" /> 
+	</target>
+	
+	<target name="init_resources">
+		<mkdir dir="${dist}/bin" />
+		<copy todir="${dist}/bin">
+			<fileset dir="./dist/bin" />			
+		</copy>
+		
+		<mkdir dir="${dist}/config" />
+		<copy todir="${dist}/config">
+			<fileset dir="./dist/config" />			
+		</copy>	
+
+		<mkdir dir="${dist}/docs" />
+		<copy todir="${dist}/docs">
+			<fileset dir="./dist/docs">
+					<include name="*.pdf" />
+					<include name="*.txt" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="${dist}/resources" />
+		<copy todir="${dist}/resources">
+			<fileset dir="./dist/resources" />			
+		</copy>
+		
+		<mkdir dir="${dist}/samples" />
+		<copy todir="${dist}/samples">
+			<fileset dir="./dist/samples" />			
+		</copy>
+		<copy todir="${dist}/samples/java">
+			<fileset dir="src">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${workspace}/${package}.rdf.modelfactory.allegrograph/src">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${workspace}/${package}.rdf.modelfactory.virtuoso/src">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${workspace}/${package}.rdf.modelfactory.stardog/src">
+				<include name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="create_manifest">
+		<mkdir dir="bin/META-INF" />		
+        <manifest file="bin/META-INF/MANIFEST.MF">
+            <attribute name="Manifest-Version" value="1.0" />
+            <attribute name="Version" value="${version}" />
+            <attribute name="Java-Version" value="${java.version}" />
+        	<!--attribute name="Company" value="Value" />
+        	<attribute name="Project" value="Value" /-->
+            <!--attribute name="Class-Path" value="test.jar" /-->
+            <attribute name="Main-Class" value="net.linkedbuildingdata.ifc.convert.ifc2rdf.cli.Main" />
+        </manifest>
+    </target>	
+
+	<target name="CreateJar" description="Create Jar file" depends="init, init_agraph, init_virtuoso, init_resources, create_manifest">
+		<!--jar jarfile="${dist}/lib/${package}.common-${version}.jar" basedir="${workspace}/${package}.common/bin" />
+		<jar jarfile="${dist}/lib/${package}.ifc.common-${version}.jar" basedir="${workspace}/${package}.ifc.common/bin" />
+		<jar jarfile="${dist}/lib/${package}.ifc.convert.ifc2rdf-${version}.jar" basedir="${workspace}/${package}.ifc.convert.ifc2rdf/bin" />
+		<jar jarfile="${dist}/lib/${package}.ifc.convert.step2ifc-${version}.jar" basedir="${workspace}/${package}.ifc.convert.step2ifc/bin" />
+		<jar jarfile="${dist}/lib/${package}.ifc.data-${version}.jar" basedir="${workspace}/${package}.ifc.data/bin" />
+		<jar jarfile="${dist}/lib/${package}.ifc.util-${version}.jar" basedir="${workspace}/${package}.ifc.util/bin" />
+		<jar jarfile="${dist}/lib/${package}.rdf-${version}.jar" basedir="${workspace}/${package}.rdf/bin" />
+		<jar jarfile="${dist}/lib/${package}.rdf.modelfactory-${version}.jar" basedir="${workspace}/${package}.rdf.modelfactory/bin" />		
+		<jar jarfile="${dist}/lib/stardog/${package}.rdf.modelfactory.stardog-${version}.jar" basedir="${workspace}/${package}.rdf.modelfactory.stardog/bin" />
+		<jar jarfile="${dist}/lib/${package}.ifc.convert.ifc2rdf.cli-${version}.jar" manifest="bin/META-INF/MANIFEST.MF" basedir="bin" /-->
+		
+		<!--zip destfile="${dist}/lib/${package}.ifc.convert.ifc2rdf.cli-${version}.jar">
+			<fileset dir="${workspace}/${package}.ifc.convert.ifc2rdf.cli/bin">
+				<include name="META-INF/**" />
+			    <include name="**/*.class" />
+			    <include name="**/*.properties"/>
+			</fileset>
+		</zip--> 
+		
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="./bin" />
+		<delete dir="${dist}/lib" />
+	</target>
+
+</project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/net.linkedbuildingdata.rdf.modelfactory"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/agraph-4.13.2-client-java/lib/agraph-4.13.2.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/agraph-4.13.2-client-java/lib/commons-pool-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/agraph-4.13.2-client-java/lib/logging/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/agraph-4.13.2-client-java/lib/json.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/agraph-4.13.2-client-java/lib/sesame/openrdf-sesame-2.6.8-onejar.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/agraph-4.13.2-client-java/lib/sesame/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/jena-arq-2.12.1.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/jena-core-2.12.1.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/jena-iri-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

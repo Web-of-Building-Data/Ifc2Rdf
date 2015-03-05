@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/net.linkedbuildingdata.rdf.modelfactory"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-jena-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-cli.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-debug-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-empire-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-http-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-icv-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-logging-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-search-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-security-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-sesame-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/PROGRAMS/stardog-1.2.3/lib/stardog-test-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/DRUM/!git_local/DRUM/Resources/org.apache/apache-jena-2.12.1/lib/jena-core-2.12.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
