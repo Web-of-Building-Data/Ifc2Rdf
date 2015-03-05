@@ -15,6 +15,8 @@
 	<property name="resources/apache/jena" value="${resources}/org.apache/apache-jena-${jena.version}/lib" />
 	<property name="resources/virtuoso" value="${resources}/virtuoso" />
 	<property name="resources/stardog" value="C:/PROGRAMS/stardog-1.2.3/lib/" />
+	
+	<import file="maven-build.xml"/>	
 
 	<target name="init">
 		<!-- Create the time stamp -->
@@ -124,7 +126,7 @@
         </manifest>
     </target>	
 
-	<target name="CreateJar" description="Create Jar file" depends="init, init_agraph, init_virtuoso, init_resources, create_manifest">
+	<target name="CreateJar" description="Create Jar file" depends="init, init_agraph, init_virtuoso, init_resources, create_manifest, package">
 		<!--jar jarfile="${dist}/lib/${package}.common-${version}.jar" basedir="${workspace}/${package}.common/bin" />
 		<jar jarfile="${dist}/lib/${package}.ifc.common-${version}.jar" basedir="${workspace}/${package}.ifc.common/bin" />
 		<jar jarfile="${dist}/lib/${package}.ifc.convert.ifc2rdf-${version}.jar" basedir="${workspace}/${package}.ifc.convert.ifc2rdf/bin" />
@@ -146,7 +148,7 @@
 		
 	</target>
 
-	<target name="clean" description="clean up">
+	<target name="clean_all" description="clean up" depends="clean">
 		<delete dir="./bin" />
 		<delete dir="${dist}/lib" />
 	</target>

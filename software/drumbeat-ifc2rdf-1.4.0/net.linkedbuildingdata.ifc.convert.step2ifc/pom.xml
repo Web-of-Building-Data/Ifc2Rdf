@@ -7,7 +7,6 @@
 	<properties>
 		<!-- All versions updated on 15.02.2015 -->
 		<commons-cli.version>1.2</commons-cli.version>
-		<commons-cli.version>1.2</commons-cli.version>
 		<commons-codec.version>1.10</commons-codec.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<httpcomponents.version>4.4</httpcomponents.version>

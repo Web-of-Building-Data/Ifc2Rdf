@@ -1,0 +1,914 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ifc:   <http://linkedbuildingdata.net/schema/IFC2X3#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix model: <http://linkedbuildingdata.net/model/> .
+
+_:b0    a                      ifc:IfcLocalPlacement ;
+        ifc:lineNumber         "24"^^xsd:long ;
+        ifc:relativePlacement  [ a                 ifc:IfcAxis2Placement3D ;
+                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "27"^^xsd:long
+                                                   ] ;
+                                 ifc:lineNumber    "25"^^xsd:long ;
+                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber   "26"^^xsd:long
+                                                   ] ;
+                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "28"^^xsd:long
+                                                   ]
+                               ] .
+
+_:b1    a                      ifc:IfcLocalPlacement ;
+        ifc:lineNumber         "36"^^xsd:long ;
+        ifc:placementRelTo     _:b2 ;
+        ifc:relativePlacement  [ a                 ifc:IfcAxis2Placement3D ;
+                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "39"^^xsd:long
+                                                   ] ;
+                                 ifc:lineNumber    "37"^^xsd:long ;
+                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber   "38"^^xsd:long
+                                                   ] ;
+                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "40"^^xsd:long
+                                                   ]
+                               ] .
+
+model:GUID_SG92eRqKTeuHmFp-DIx9UQ
+        a                  ifc:IfcPropertySet ;
+        ifc:globalId       "486f7679-1a8a-4deb-8798-5a7e0c8c7d51"^^xsd:string ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "LoadBearing"^^xsd:string ;
+                             ifc:lineNumber    "61"^^xsd:long ;
+                             ifc:name          "LoadBearing"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "Reference"^^xsd:string ;
+                             ifc:lineNumber    "53"^^xsd:long ;
+                             ifc:name          "Reference"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "AcousticRating"^^xsd:string ;
+                             ifc:lineNumber    "54"^^xsd:long ;
+                             ifc:name          "AcousticRating"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "SurfaceSpreadOfFlame"^^xsd:string ;
+                             ifc:lineNumber    "57"^^xsd:long ;
+                             ifc:name          "SurfaceSpreadOfFlame"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "ThermalTransmittance"^^xsd:string ;
+                             ifc:lineNumber    "58"^^xsd:long ;
+                             ifc:name          "ThermalTransmittance"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcReal ;
+                                                 rdf:value  "0.24"^^xsd:double
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "FireRating"^^xsd:string ;
+                             ifc:lineNumber    "55"^^xsd:long ;
+                             ifc:name          "FireRating"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "IsExternal"^^xsd:string ;
+                             ifc:lineNumber    "59"^^xsd:long ;
+                             ifc:name          "IsExternal"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "TRUE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "ExtendToStructure"^^xsd:string ;
+                             ifc:lineNumber    "60"^^xsd:long ;
+                             ifc:name          "ExtendToStructure"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "Combustible"^^xsd:string ;
+                             ifc:lineNumber    "56"^^xsd:long ;
+                             ifc:name          "Combustible"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "Compartmentation"^^xsd:string ;
+                             ifc:lineNumber    "62"^^xsd:long ;
+                             ifc:name          "Compartmentation"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:lineNumber     "52"^^xsd:long ;
+        ifc:name           "Pset_WallCommon"^^xsd:string ;
+        ifc:ownerHistory   _:b3 .
+
+_:b4    a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.75"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "117"^^xsd:long .
+
+model:GUID_JS_hymReRWC4yQHTecgD8g
+        a                 ifc:IfcElementQuantity ;
+        ifc:globalId      "252fe1ca-645e-4560-b8c9-01d379c803f2"^^xsd:string ;
+        ifc:lineNumber    "146"^^xsd:long ;
+        ifc:name          "BaseQuantities"^^xsd:string ;
+        ifc:ownerHistory  _:b3 ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Height"^^xsd:string ;
+                            ifc:lengthValue  "1.4"^^xsd:double ;
+                            ifc:lineNumber   "147"^^xsd:long ;
+                            ifc:name         "Height"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Width"^^xsd:string ;
+                            ifc:lengthValue  "0.75"^^xsd:double ;
+                            ifc:lineNumber   "148"^^xsd:long ;
+                            ifc:name         "Width"^^xsd:string
+                          ] .
+
+model:GUID_-SwomP1oRO-ReDNI40ABew
+        a                    ifc:IfcWallStandardCase ;
+        ifc:description      "Description of Wall"^^xsd:string ;
+        ifc:globalId         "f92c2898-fd68-44ef-9178-3348e340017b"^^xsd:string ;
+        ifc:lineNumber       "45"^^xsd:long ;
+        ifc:name             "Wall xyz"^^xsd:string ;
+        ifc:objectPlacement  _:b5 ;
+        ifc:ownerHistory     _:b3 ;
+        ifc:representation   [ a                    ifc:IfcProductDefinitionShape ;
+                               ifc:lineNumber       "51"^^xsd:long ;
+                               ifc:representations  ( _:b6 _:b7 )
+                             ] .
+
+_:b8    a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "91"^^xsd:long .
+
+_:b9    a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "154"^^xsd:long .
+
+_:b10   a                ifc:IfcOrganization ;
+        ifc:description  "TNO Building Innovation"^^xsd:string ;
+        ifc:lineNumber   "5"^^xsd:long ;
+        ifc:name         "TNO"^^xsd:string .
+
+model:GUID_TDb1Vn1uQdOgarHoc2qu0g
+        a                           ifc:IfcRelFillsElement ;
+        ifc:globalId                "4c36f556-7d6e-41d3-a06a-b1e8736aaed2"^^xsd:string ;
+        ifc:lineNumber              "131"^^xsd:long ;
+        ifc:ownerHistory            _:b3 ;
+        ifc:relatedBuildingElement  model:GUID_FXyGbJwIQ0ig7U1XzWbJ4g ;
+        ifc:relatingOpeningElement  model:GUID_lZjhwLGpRQWTo_MZOvOeHQ .
+
+_:b11   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "118"^^xsd:long .
+
+model:GUID_DCB7pNC4T_-80MHYx_e1_w
+        a                    ifc:IfcBuildingStorey ;
+        ifc:compositionType  "ELEMENT"^^xsd:string ;
+        ifc:description      "Description of Default Building Storey"^^xsd:string ;
+        ifc:elevation        "0.0"^^xsd:double ;
+        ifc:globalId         "0c207ba4-d0b8-4fff-bcd0-c1d8c7f7b5ff"^^xsd:string ;
+        ifc:lineNumber       "35"^^xsd:long ;
+        ifc:name             "Default Building Storey"^^xsd:string ;
+        ifc:objectPlacement  _:b1 ;
+        ifc:ownerHistory     _:b3 .
+
+_:b6    a                             ifc:IfcShapeRepresentation ;
+        ifc:contextOfItems            _:b12 ;
+        ifc:items                     [ a               ifc:IfcPolyline ;
+                                        ifc:lineNumber  "80"^^xsd:long ;
+                                        ifc:points      ( _:b13 _:b14 )
+                                      ] ;
+        ifc:lineNumber                "79"^^xsd:long ;
+        ifc:representationIdentifier  "Axis"^^xsd:string ;
+        ifc:representationType        "Curve2D"^^xsd:string .
+
+model:GUID_PKflhU4-SWmob_BJ9PveUg
+        a                    ifc:IfcBuilding ;
+        ifc:compositionType  "ELEMENT"^^xsd:string ;
+        ifc:description      "Description of Default Building"^^xsd:string ;
+        ifc:globalId         "3ca7e585-4e3e-4969-a86f-f049f4fbde52"^^xsd:string ;
+        ifc:lineNumber       "29"^^xsd:long ;
+        ifc:name             "Default Building"^^xsd:string ;
+        ifc:objectPlacement  _:b2 ;
+        ifc:ownerHistory     _:b3 .
+
+model:GUID_FXyGbJwIQ0ig7U1XzWbJ4g
+        a                    ifc:IfcWindow ;
+        ifc:description      "Description of Window"^^xsd:string ;
+        ifc:globalId         "157c866c-9c08-4348-a0ed-4d57cd66c9e2"^^xsd:string ;
+        ifc:lineNumber       "124"^^xsd:long ;
+        ifc:name             "Window xyz"^^xsd:string ;
+        ifc:objectPlacement  [ a                      ifc:IfcLocalPlacement ;
+                               ifc:lineNumber         "125"^^xsd:long ;
+                               ifc:placementRelTo     _:b15 ;
+                               ifc:relativePlacement  [ a                 ifc:IfcAxis2Placement3D ;
+                                                        ifc:axis          [ a                    ifc:IfcDirection ;
+                                                                            ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                            ifc:lineNumber       "128"^^xsd:long
+                                                                          ] ;
+                                                        ifc:lineNumber    "126"^^xsd:long ;
+                                                        ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                                            ifc:coordinates  ( "0.0"^^xsd:double "0.1"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                            ifc:lineNumber   "127"^^xsd:long
+                                                                          ] ;
+                                                        ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                                            ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                            ifc:lineNumber       "129"^^xsd:long
+                                                                          ]
+                                                      ]
+                             ] ;
+        ifc:overallHeight    "1.4"^^xsd:double ;
+        ifc:overallWidth     "0.75"^^xsd:double ;
+        ifc:ownerHistory     _:b3 ;
+        ifc:representation   [ a                    ifc:IfcProductDefinitionShape ;
+                               ifc:lineNumber       "130"^^xsd:long ;
+                               ifc:representations  ( _:b16 )
+                             ] .
+
+model:GUID_qUVu5ML7RTeUOTlKTLiMbQ
+        a                               ifc:IfcRelDefinesByProperties ;
+        ifc:globalId                    "a9456ee4-c2fb-4537-9439-394a4cb88c6d"^^xsd:string ;
+        ifc:lineNumber                  "145"^^xsd:long ;
+        ifc:ownerHistory                _:b3 ;
+        ifc:relatedObjects              model:GUID_FXyGbJwIQ0ig7U1XzWbJ4g ;
+        ifc:relatingPropertyDefinition  model:GUID_Ka_fpUXhROy_94UbUWXo7w .
+
+_:b12   a                             ifc:IfcGeometricRepresentationContext ;
+        ifc:contextType               "Model"^^xsd:string ;
+        ifc:coordinateSpaceDimension  "3"^^xsd:long ;
+        ifc:lineNumber                "20"^^xsd:long ;
+        ifc:precision                 1.0E-5 ;
+        ifc:worldCoordinateSystem     [ a               ifc:IfcAxis2Placement3D ;
+                                        ifc:lineNumber  "21"^^xsd:long ;
+                                        ifc:location    [ a                ifc:IfcCartesianPoint ;
+                                                          ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                          ifc:lineNumber   "22"^^xsd:long
+                                                        ]
+                                      ] .
+
+_:b17   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.1"^^xsd:double ) ;
+        ifc:lineNumber   "155"^^xsd:long .
+
+_:b15   a                      ifc:IfcLocalPlacement ;
+        ifc:lineNumber         "98"^^xsd:long ;
+        ifc:placementRelTo     _:b5 ;
+        ifc:relativePlacement  [ a                 ifc:IfcAxis2Placement3D ;
+                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "101"^^xsd:long
+                                                   ] ;
+                                 ifc:lineNumber    "99"^^xsd:long ;
+                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                     ifc:coordinates  ( "0.9"^^xsd:double "0.0"^^xsd:double "0.25"^^xsd:double ) ;
+                                                     ifc:lineNumber   "100"^^xsd:long
+                                                   ] ;
+                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "102"^^xsd:long
+                                                   ]
+                               ] .
+
+_:b16   a                             ifc:IfcShapeRepresentation ;
+        ifc:contextOfItems            _:b12 ;
+        ifc:items                     [ a                      ifc:IfcExtrudedAreaSolid ;
+                                        ifc:depth              "1.4"^^xsd:double ;
+                                        ifc:extrudedDirection  [ a                    ifc:IfcDirection ;
+                                                                 ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                 ifc:lineNumber       "163"^^xsd:long
+                                                               ] ;
+                                        ifc:lineNumber         "151"^^xsd:long ;
+                                        ifc:position           [ a                 ifc:IfcAxis2Placement3D ;
+                                                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber       "161"^^xsd:long
+                                                                                   ] ;
+                                                                 ifc:lineNumber    "159"^^xsd:long ;
+                                                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber   "160"^^xsd:long
+                                                                                   ] ;
+                                                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber       "162"^^xsd:long
+                                                                                   ]
+                                                               ] ;
+                                        ifc:sweptArea          [ a                ifc:IfcArbitraryClosedProfileDef ;
+                                                                 ifc:lineNumber   "152"^^xsd:long ;
+                                                                 ifc:outerCurve   [ a               ifc:IfcPolyline ;
+                                                                                    ifc:lineNumber  "153"^^xsd:long ;
+                                                                                    ifc:points      ( _:b9 _:b17 _:b18 _:b19 _:b20 )
+                                                                                  ] ;
+                                                                 ifc:profileType  "AREA"^^xsd:string
+                                                               ]
+                                      ] ;
+        ifc:lineNumber                "150"^^xsd:long ;
+        ifc:representationIdentifier  "Body"^^xsd:string ;
+        ifc:representationType        "SweptSolid"^^xsd:string .
+
+_:b13   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.15"^^xsd:double ) ;
+        ifc:lineNumber   "81"^^xsd:long .
+
+model:GUID_Js1au37CTuiCwCOjwmrweg
+        a                               ifc:IfcRelDefinesByProperties ;
+        ifc:globalId                    "26cd5abb-7ec2-4ee8-82c0-23a3c26af07a"^^xsd:string ;
+        ifc:lineNumber                  "73"^^xsd:long ;
+        ifc:ownerHistory                _:b3 ;
+        ifc:relatedObjects              model:GUID_-SwomP1oRO-ReDNI40ABew ;
+        ifc:relatingPropertyDefinition  model:GUID_QMBtJoXLQEuBG32FAcsGUw .
+
+model:GUID_9V6vlxReRDGy82n5Y08kSw
+        a                    ifc:IfcSite ;
+        ifc:compositionType  "ELEMENT"^^xsd:string ;
+        ifc:description      "Description of Default Site"^^xsd:string ;
+        ifc:globalId         "f55eaf97-145e-4431-b2f3-69f9634f244b"^^xsd:string ;
+        ifc:lineNumber       "23"^^xsd:long ;
+        ifc:name             "Default Site"^^xsd:string ;
+        ifc:objectPlacement  _:b0 ;
+        ifc:ownerHistory     _:b3 ;
+        ifc:refLatitude      ( "24"^^xsd:long "28"^^xsd:long "0"^^xsd:long ) ;
+        ifc:refLongitude     ( "54"^^xsd:long "25"^^xsd:long "0"^^xsd:long ) .
+
+model:GUID_0uz-F0W-SzaVnRvj7IGTvQ
+        a                               ifc:IfcRelDefinesByProperties ;
+        ifc:globalId                    "d2ecfe17-45be-4b36-959d-1be3ec8193bd"^^xsd:string ;
+        ifc:lineNumber                  "63"^^xsd:long ;
+        ifc:ownerHistory                _:b3 ;
+        ifc:relatedObjects              model:GUID_-SwomP1oRO-ReDNI40ABew ;
+        ifc:relatingPropertyDefinition  model:GUID_SG92eRqKTeuHmFp-DIx9UQ .
+
+model:GUID_mPp1uDcdQSq-QiMmxo389Q
+        a                      ifc:IfcRelContainedInSpatialStructure ;
+        ifc:description        "Contents of Building Storey"^^xsd:string ;
+        ifc:globalId           "98fa75b8-371d-412a-be42-2326c68dfcf5"^^xsd:string ;
+        ifc:lineNumber         "44"^^xsd:long ;
+        ifc:name               "Default Building"^^xsd:string ;
+        ifc:ownerHistory       _:b3 ;
+        ifc:relatedElements    model:GUID_-SwomP1oRO-ReDNI40ABew , model:GUID_FXyGbJwIQ0ig7U1XzWbJ4g ;
+        ifc:relatingStructure  model:GUID_DCB7pNC4T_-80MHYx_e1_w .
+
+_:b21   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "114"^^xsd:long .
+
+_:b18   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.75"^^xsd:double "0.1"^^xsd:double ) ;
+        ifc:lineNumber   "156"^^xsd:long .
+
+_:b22   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "87"^^xsd:long .
+
+model:GUID_0-K8GkzbSe2cSsYMl5SRIQ
+        a                   ifc:IfcRelAggregates ;
+        ifc:description     "SiteContainer For Buildings"^^xsd:string ;
+        ifc:globalId        "d3e2bc1a-4cdb-49ed-9c4a-c60c97949121"^^xsd:string ;
+        ifc:lineNumber      "42"^^xsd:long ;
+        ifc:name            "SiteContainer"^^xsd:string ;
+        ifc:ownerHistory    _:b3 ;
+        ifc:relatedObjects  model:GUID_PKflhU4-SWmob_BJ9PveUg ;
+        ifc:relatingObject  model:GUID_9V6vlxReRDGy82n5Y08kSw .
+
+model:GUID_IuZt33lNQLuKpT3aRQ2CVQ
+        a                           ifc:IfcProject ;
+        ifc:description             "Description of Default Project"^^xsd:string ;
+        ifc:globalId                "22e66ddf-794d-40bb-8aa5-3dda450d8255"^^xsd:string ;
+        ifc:lineNumber              "1"^^xsd:long ;
+        ifc:name                    "Default Project"^^xsd:string ;
+        ifc:ownerHistory            _:b3 ;
+        ifc:representationContexts  _:b12 ;
+        ifc:unitsInContext          [ a               ifc:IfcUnitAssignment ;
+                                      ifc:lineNumber  "7"^^xsd:long ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "18"^^xsd:long ;
+                                                        ifc:name        "DEGREE_CELSIUS"^^xsd:string ;
+                                                        ifc:unitType    "THERMODYNAMICTEMPERATUREUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "17"^^xsd:long ;
+                                                        ifc:name        "SECOND"^^xsd:string ;
+                                                        ifc:unitType    "TIMEUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a                     ifc:IfcConversionBasedUnit ;
+                                                        ifc:conversionFactor  [ a                   ifc:IfcMeasureWithUnit ;
+                                                                                ifc:lineNumber      "13"^^xsd:long ;
+                                                                                ifc:unitComponent   [ a               ifc:IfcSIUnit ;
+                                                                                                      ifc:lineNumber  "14"^^xsd:long ;
+                                                                                                      ifc:name        "RADIAN"^^xsd:string ;
+                                                                                                      ifc:unitType    "PLANEANGLEUNIT"^^xsd:string
+                                                                                                    ] ;
+                                                                                ifc:valueComponent  [ a          ifc:IfcPlaneAngleMeasure ;
+                                                                                                      rdf:value  "0.01745"^^xsd:double
+                                                                                                    ]
+                                                                              ] ;
+                                                        ifc:dimensions        [ a                              ifc:IfcDimensionalExponents ;
+                                                                                ifc:amountOfSubstanceExponent  "0"^^xsd:long ;
+                                                                                ifc:electricCurrentExponent    "0"^^xsd:long ;
+                                                                                ifc:lengthExponent             "0"^^xsd:long ;
+                                                                                ifc:lineNumber                 "12"^^xsd:long ;
+                                                                                ifc:luminousIntensityExponent  "0"^^xsd:long ;
+                                                                                ifc:massExponent               "0"^^xsd:long ;
+                                                                                ifc:thermodynamicTemperatureExponent
+                                                                                        "0"^^xsd:long ;
+                                                                                ifc:timeExponent               "0"^^xsd:long
+                                                                              ] ;
+                                                        ifc:lineNumber        "11"^^xsd:long ;
+                                                        ifc:name              "DEGREE"^^xsd:string ;
+                                                        ifc:unitType          "PLANEANGLEUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "16"^^xsd:long ;
+                                                        ifc:name        "GRAM"^^xsd:string ;
+                                                        ifc:unitType    "MASSUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "15"^^xsd:long ;
+                                                        ifc:name        "STERADIAN"^^xsd:string ;
+                                                        ifc:unitType    "SOLIDANGLEUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "10"^^xsd:long ;
+                                                        ifc:name        "CUBIC_METRE"^^xsd:string ;
+                                                        ifc:unitType    "VOLUMEUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "9"^^xsd:long ;
+                                                        ifc:name        "SQUARE_METRE"^^xsd:string ;
+                                                        ifc:unitType    "AREAUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "8"^^xsd:long ;
+                                                        ifc:name        "METRE"^^xsd:string ;
+                                                        ifc:unitType    "LENGTHUNIT"^^xsd:string
+                                                      ] ;
+                                      ifc:units       [ a               ifc:IfcSIUnit ;
+                                                        ifc:lineNumber  "19"^^xsd:long ;
+                                                        ifc:name        "LUMEN"^^xsd:string ;
+                                                        ifc:unitType    "LUMINOUSINTENSITYUNIT"^^xsd:string
+                                                      ]
+                                    ] .
+
+model:GUID_QMBtJoXLQEuBG32FAcsGUw
+        a                 ifc:IfcElementQuantity ;
+        ifc:globalId      "40c06d26-85cb-404b-811b-7d8501cb0653"^^xsd:string ;
+        ifc:lineNumber    "64"^^xsd:long ;
+        ifc:name          "BaseQuantities"^^xsd:string ;
+        ifc:ownerHistory  _:b3 ;
+        ifc:quantities    [ a                ifc:IfcQuantityArea ;
+                            ifc:areaValue    "10.45"^^xsd:double ;
+                            ifc:description  "NetSideArea"^^xsd:string ;
+                            ifc:lineNumber   "68"^^xsd:long ;
+                            ifc:name         "NetSideArea"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityArea ;
+                            ifc:areaValue    "11.5"^^xsd:double ;
+                            ifc:description  "GrossSideArea"^^xsd:string ;
+                            ifc:lineNumber   "67"^^xsd:long ;
+                            ifc:name         "GrossSideArea"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Height"^^xsd:string ;
+                            ifc:lengthValue  "2.3"^^xsd:double ;
+                            ifc:lineNumber   "71"^^xsd:long ;
+                            ifc:name         "Height"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Lenght"^^xsd:string ;
+                            ifc:lengthValue  "5.0"^^xsd:double ;
+                            ifc:lineNumber   "66"^^xsd:long ;
+                            ifc:name         "Lenght"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityVolume ;
+                            ifc:description  "NetVolume"^^xsd:string ;
+                            ifc:lineNumber   "70"^^xsd:long ;
+                            ifc:name         "NetVolume"^^xsd:string ;
+                            ifc:volumeValue  "3.135"^^xsd:double
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityArea ;
+                            ifc:areaValue    "1.5"^^xsd:double ;
+                            ifc:description  "GrossFootprintArea"^^xsd:string ;
+                            ifc:lineNumber   "72"^^xsd:long ;
+                            ifc:name         "GrossFootprintArea"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityVolume ;
+                            ifc:description  "GrossVolume"^^xsd:string ;
+                            ifc:lineNumber   "69"^^xsd:long ;
+                            ifc:name         "GrossVolume"^^xsd:string ;
+                            ifc:volumeValue  "3.45"^^xsd:double
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Width"^^xsd:string ;
+                            ifc:lengthValue  "0.3"^^xsd:double ;
+                            ifc:lineNumber   "65"^^xsd:long ;
+                            ifc:name         "Width"^^xsd:string
+                          ] .
+
+_:b14   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "5.0"^^xsd:double "0.15"^^xsd:double ) ;
+        ifc:lineNumber   "82"^^xsd:long .
+
+model:GUID_lZjhwLGpRQWTo_MZOvOeHQ
+        a                    ifc:IfcOpeningElement ;
+        ifc:description      "Description of Opening"^^xsd:string ;
+        ifc:globalId         "9598e1c0-b1a9-4505-93a3-f3193af39e1d"^^xsd:string ;
+        ifc:lineNumber       "97"^^xsd:long ;
+        ifc:name             "Opening Element xyz"^^xsd:string ;
+        ifc:objectPlacement  _:b15 ;
+        ifc:ownerHistory     _:b3 ;
+        ifc:representation   [ a                    ifc:IfcProductDefinitionShape ;
+                               ifc:lineNumber       "103"^^xsd:long ;
+                               ifc:representations  ( _:b23 )
+                             ] .
+
+_:b3    a                      ifc:IfcOwnerHistory ;
+        ifc:changeAction       "ADDED"^^xsd:string ;
+        ifc:creationDate       "Fri Aug 01 22:53:56 EEST 2008"^^<java:java.util.Date> ;
+        ifc:lineNumber         "2"^^xsd:long ;
+        ifc:owningApplication  [ a                          ifc:IfcApplication ;
+                                 ifc:applicationDeveloper   _:b10 ;
+                                 ifc:applicationFullName    "Test Application"^^xsd:string ;
+                                 ifc:applicationIdentifier  "TA 1001"^^xsd:string ;
+                                 ifc:lineNumber             "6"^^xsd:long ;
+                                 ifc:version                "0.10"^^xsd:string
+                               ] ;
+        ifc:owningUser         [ a                    ifc:IfcPersonAndOrganization ;
+                                 ifc:lineNumber       "3"^^xsd:long ;
+                                 ifc:theOrganization  _:b10 ;
+                                 ifc:thePerson        [ a               ifc:IfcPerson ;
+                                                        ifc:familyName  "Bonsma"^^xsd:string ;
+                                                        ifc:givenName   "Peter"^^xsd:string ;
+                                                        ifc:id          "ID001"^^xsd:string ;
+                                                        ifc:lineNumber  "4"^^xsd:long
+                                                      ]
+                               ] .
+
+_:b24   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.3"^^xsd:double ) ;
+        ifc:lineNumber   "115"^^xsd:long .
+
+_:b5    a                      ifc:IfcLocalPlacement ;
+        ifc:lineNumber         "46"^^xsd:long ;
+        ifc:placementRelTo     _:b1 ;
+        ifc:relativePlacement  [ a                 ifc:IfcAxis2Placement3D ;
+                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "49"^^xsd:long
+                                                   ] ;
+                                 ifc:lineNumber    "47"^^xsd:long ;
+                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber   "48"^^xsd:long
+                                                   ] ;
+                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "50"^^xsd:long
+                                                   ]
+                               ] .
+
+_:b19   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.75"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "157"^^xsd:long .
+
+_:b25   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.3"^^xsd:double ) ;
+        ifc:lineNumber   "88"^^xsd:long .
+
+model:GUID_vaKqi7biSheppg7iTItJ1Q
+        a                     ifc:IfcRelAssociatesMaterial ;
+        ifc:globalId          "bda2aa8b-b6e2-4a17-a9a6-0ee24c8b49d5"^^xsd:string ;
+        ifc:lineNumber        "74"^^xsd:long ;
+        ifc:ownerHistory      _:b3 ;
+        ifc:relatedObjects    model:GUID_-SwomP1oRO-ReDNI40ABew ;
+        ifc:relatingMaterial  [ a                            ifc:IfcMaterialLayerSetUsage ;
+                                ifc:directionSense           "POSITIVE"^^xsd:string ;
+                                ifc:forLayerSet              [ a                   ifc:IfcMaterialLayerSet ;
+                                                               ifc:lineNumber      "76"^^xsd:long ;
+                                                               ifc:materialLayers  ( _:b26 )
+                                                             ] ;
+                                ifc:layerSetDirection        "AXIS2"^^xsd:string ;
+                                ifc:lineNumber               "75"^^xsd:long ;
+                                ifc:offsetFromReferenceLine  "-0.15"^^xsd:double
+                              ] .
+
+_:b23   a                             ifc:IfcShapeRepresentation ;
+        ifc:contextOfItems            _:b12 ;
+        ifc:items                     [ a                      ifc:IfcExtrudedAreaSolid ;
+                                        ifc:depth              "1.4"^^xsd:double ;
+                                        ifc:extrudedDirection  [ a                    ifc:IfcDirection ;
+                                                                 ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                 ifc:lineNumber       "123"^^xsd:long
+                                                               ] ;
+                                        ifc:lineNumber         "111"^^xsd:long ;
+                                        ifc:position           [ a                 ifc:IfcAxis2Placement3D ;
+                                                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber       "121"^^xsd:long
+                                                                                   ] ;
+                                                                 ifc:lineNumber    "119"^^xsd:long ;
+                                                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber   "120"^^xsd:long
+                                                                                   ] ;
+                                                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber       "122"^^xsd:long
+                                                                                   ]
+                                                               ] ;
+                                        ifc:sweptArea          [ a                ifc:IfcArbitraryClosedProfileDef ;
+                                                                 ifc:lineNumber   "112"^^xsd:long ;
+                                                                 ifc:outerCurve   [ a               ifc:IfcPolyline ;
+                                                                                    ifc:lineNumber  "113"^^xsd:long ;
+                                                                                    ifc:points      ( _:b21 _:b24 _:b27 _:b4 _:b11 )
+                                                                                  ] ;
+                                                                 ifc:profileType  "AREA"^^xsd:string
+                                                               ]
+                                      ] ;
+        ifc:lineNumber                "110"^^xsd:long ;
+        ifc:representationIdentifier  "Body"^^xsd:string ;
+        ifc:representationType        "SweptSolid"^^xsd:string .
+
+model:  a                owl:Ontology ;
+        rdfs:comment     "OWL profile: OWL2_EL.\r\n\t\tConversion options: [\r\n\t\t\t PrintPropertyCardinality\r\n\t\t\t PrintPropertyDomainAndRange\r\n\t\t\t AvoidDuplicationOfPropertyNames\r\n\t\t\t ExportDebugInfo\r\n\t\t]" ;
+        owl:versionInfo  "v1.0 2015/03/5 12:39:51" .
+
+_:b7    a                             ifc:IfcShapeRepresentation ;
+        ifc:contextOfItems            _:b12 ;
+        ifc:items                     [ a                      ifc:IfcExtrudedAreaSolid ;
+                                        ifc:depth              "2.3"^^xsd:double ;
+                                        ifc:extrudedDirection  [ a                    ifc:IfcDirection ;
+                                                                 ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                 ifc:lineNumber       "96"^^xsd:long
+                                                               ] ;
+                                        ifc:lineNumber         "84"^^xsd:long ;
+                                        ifc:position           [ a                 ifc:IfcAxis2Placement3D ;
+                                                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber       "94"^^xsd:long
+                                                                                   ] ;
+                                                                 ifc:lineNumber    "92"^^xsd:long ;
+                                                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber   "93"^^xsd:long
+                                                                                   ] ;
+                                                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                                                     ifc:lineNumber       "95"^^xsd:long
+                                                                                   ]
+                                                               ] ;
+                                        ifc:sweptArea          [ a                ifc:IfcArbitraryClosedProfileDef ;
+                                                                 ifc:lineNumber   "85"^^xsd:long ;
+                                                                 ifc:outerCurve   [ a               ifc:IfcPolyline ;
+                                                                                    ifc:lineNumber  "86"^^xsd:long ;
+                                                                                    ifc:points      ( _:b22 _:b25 _:b28 _:b29 _:b8 )
+                                                                                  ] ;
+                                                                 ifc:profileType  "AREA"^^xsd:string
+                                                               ]
+                                      ] ;
+        ifc:lineNumber                "83"^^xsd:long ;
+        ifc:representationIdentifier  "Body"^^xsd:string ;
+        ifc:representationType        "SweptSolid"^^xsd:string .
+
+model:GUID_D8KkgDW4RCWIVfv4JAmQTg
+        a                               ifc:IfcRelDefinesByProperties ;
+        ifc:globalId                    "0fc2a480-35b8-4425-8855-fbf82409904e"^^xsd:string ;
+        ifc:lineNumber                  "149"^^xsd:long ;
+        ifc:ownerHistory                _:b3 ;
+        ifc:relatedObjects              model:GUID_FXyGbJwIQ0ig7U1XzWbJ4g ;
+        ifc:relatingPropertyDefinition  model:GUID_JS_hymReRWC4yQHTecgD8g .
+
+model:GUID_V7_i0rUFS7qCePhng0oL4A
+        a                   ifc:IfcRelAggregates ;
+        ifc:description     "ProjectContainer for Sites"^^xsd:string ;
+        ifc:globalId        "57bfe2d2-b505-4bba-8278-f867834a0be0"^^xsd:string ;
+        ifc:lineNumber      "43"^^xsd:long ;
+        ifc:name            "ProjectContainer"^^xsd:string ;
+        ifc:ownerHistory    _:b3 ;
+        ifc:relatedObjects  model:GUID_9V6vlxReRDGy82n5Y08kSw ;
+        ifc:relatingObject  model:GUID_IuZt33lNQLuKpT3aRQ2CVQ .
+
+_:b27   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.75"^^xsd:double "0.3"^^xsd:double ) ;
+        ifc:lineNumber   "116"^^xsd:long .
+
+model:GUID_vDWXIIoKQwSaYJIIOWe-ig
+        a                 ifc:IfcElementQuantity ;
+        ifc:globalId      "bc359720-8a0a-4304-9a60-92083967be8a"^^xsd:string ;
+        ifc:lineNumber    "104"^^xsd:long ;
+        ifc:name          "BaseQuantities"^^xsd:string ;
+        ifc:ownerHistory  _:b3 ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Depth"^^xsd:string ;
+                            ifc:lengthValue  "0.3"^^xsd:double ;
+                            ifc:lineNumber   "105"^^xsd:long ;
+                            ifc:name         "Depth"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Height"^^xsd:string ;
+                            ifc:lengthValue  "1.4"^^xsd:double ;
+                            ifc:lineNumber   "106"^^xsd:long ;
+                            ifc:name         "Height"^^xsd:string
+                          ] ;
+        ifc:quantities    [ a                ifc:IfcQuantityLength ;
+                            ifc:description  "Width"^^xsd:string ;
+                            ifc:lengthValue  "0.75"^^xsd:double ;
+                            ifc:lineNumber   "107"^^xsd:long ;
+                            ifc:name         "Width"^^xsd:string
+                          ] .
+
+_:b26   a                   ifc:IfcMaterialLayer ;
+        ifc:layerThickness  "0.3"^^xsd:double ;
+        ifc:lineNumber      "77"^^xsd:long ;
+        ifc:material        [ a               ifc:IfcMaterial ;
+                              ifc:lineNumber  "78"^^xsd:long ;
+                              ifc:name        "Name of the material used for the wall"^^xsd:string
+                            ] .
+
+_:b20   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "158"^^xsd:long .
+
+model:GUID_gRiHicWUReyw3sze_uFAQQ
+        a                   ifc:IfcRelAggregates ;
+        ifc:description     "BuildingContainer for BuildigStories"^^xsd:string ;
+        ifc:globalId        "81188789-c594-45ec-b0de-ccdefee14041"^^xsd:string ;
+        ifc:lineNumber      "41"^^xsd:long ;
+        ifc:name            "BuildingContainer"^^xsd:string ;
+        ifc:ownerHistory    _:b3 ;
+        ifc:relatedObjects  model:GUID_DCB7pNC4T_-80MHYx_e1_w ;
+        ifc:relatingObject  model:GUID_PKflhU4-SWmob_BJ9PveUg .
+
+_:b28   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "5.0"^^xsd:double "0.3"^^xsd:double ) ;
+        ifc:lineNumber   "89"^^xsd:long .
+
+_:b29   a                ifc:IfcCartesianPoint ;
+        ifc:coordinates  ( "5.0"^^xsd:double "0.0"^^xsd:double ) ;
+        ifc:lineNumber   "90"^^xsd:long .
+
+model:GUID_Ka_fpUXhROy_94UbUWXo7w
+        a                  ifc:IfcPropertySet ;
+        ifc:globalId       "29afdfa5-45e1-44ec-bff7-851b5165e8ef"^^xsd:string ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "AcousticRating"^^xsd:string ;
+                             ifc:lineNumber    "135"^^xsd:long ;
+                             ifc:name          "AcousticRating"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "FireRating"^^xsd:string ;
+                             ifc:lineNumber    "134"^^xsd:long ;
+                             ifc:name          "FireRating"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "Reference"^^xsd:string ;
+                             ifc:lineNumber    "133"^^xsd:long ;
+                             ifc:name          "Reference"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "ThermalTransmittance"^^xsd:string ;
+                             ifc:lineNumber    "139"^^xsd:long ;
+                             ifc:name          "ThermalTransmittance"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcReal ;
+                                                 rdf:value  "0.24"^^xsd:double
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "Infiltration"^^xsd:string ;
+                             ifc:lineNumber    "138"^^xsd:long ;
+                             ifc:name          "Infiltration"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "IsExternal"^^xsd:string ;
+                             ifc:lineNumber    "137"^^xsd:long ;
+                             ifc:name          "IsExternal"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "TRUE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "SmokeStop"^^xsd:string ;
+                             ifc:lineNumber    "144"^^xsd:long ;
+                             ifc:name          "SmokeStop"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "SelfClosing"^^xsd:string ;
+                             ifc:lineNumber    "143"^^xsd:long ;
+                             ifc:name          "SelfClosing"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "SecurityRating"^^xsd:string ;
+                             ifc:lineNumber    "136"^^xsd:long ;
+                             ifc:name          "SecurityRating"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcText ;
+                                                 rdf:value  ""^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "FireExit"^^xsd:string ;
+                             ifc:lineNumber    "142"^^xsd:long ;
+                             ifc:name          "FireExit"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "HandicapAccessible"^^xsd:string ;
+                             ifc:lineNumber    "141"^^xsd:long ;
+                             ifc:name          "HandicapAccessible"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcBoolean ;
+                                                 rdf:value  "FALSE"^^xsd:string
+                                               ]
+                           ] ;
+        ifc:hasProperties  [ a                 ifc:IfcPropertySingleValue ;
+                             ifc:description   "GlazingAresFraction"^^xsd:string ;
+                             ifc:lineNumber    "140"^^xsd:long ;
+                             ifc:name          "GlazingAresFraction"^^xsd:string ;
+                             ifc:nominalValue  [ a          ifc:IfcReal ;
+                                                 rdf:value  "0.7"^^xsd:double
+                                               ]
+                           ] ;
+        ifc:lineNumber     "132"^^xsd:long ;
+        ifc:name           "Pset_WindowCommon"^^xsd:string ;
+        ifc:ownerHistory   _:b3 .
+
+_:b2    a                      ifc:IfcLocalPlacement ;
+        ifc:lineNumber         "30"^^xsd:long ;
+        ifc:placementRelTo     _:b0 ;
+        ifc:relativePlacement  [ a                 ifc:IfcAxis2Placement3D ;
+                                 ifc:axis          [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "0.0"^^xsd:double "0.0"^^xsd:double "1.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "33"^^xsd:long
+                                                   ] ;
+                                 ifc:lineNumber    "31"^^xsd:long ;
+                                 ifc:location      [ a                ifc:IfcCartesianPoint ;
+                                                     ifc:coordinates  ( "0.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber   "32"^^xsd:long
+                                                   ] ;
+                                 ifc:refDirection  [ a                    ifc:IfcDirection ;
+                                                     ifc:directionRatios  ( "1.0"^^xsd:double "0.0"^^xsd:double "0.0"^^xsd:double ) ;
+                                                     ifc:lineNumber       "34"^^xsd:long
+                                                   ]
+                               ] .
+
+model:GUID_njmAZb4VSdmcJQSlqIByuw
+        a                               ifc:IfcRelDefinesByProperties ;
+        ifc:globalId                    "9e398065-be15-49d9-9c25-04a5a88072bb"^^xsd:string ;
+        ifc:lineNumber                  "108"^^xsd:long ;
+        ifc:ownerHistory                _:b3 ;
+        ifc:relatedObjects              model:GUID_lZjhwLGpRQWTo_MZOvOeHQ ;
+        ifc:relatingPropertyDefinition  model:GUID_vDWXIIoKQwSaYJIIOWe-ig .
+
+model:GUID_72xbsknRQVOuJ7sBaEsneA
+        a                            ifc:IfcRelVoidsElement ;
+        ifc:globalId                 "ef6c5bb2-49d1-4153-ae27-bb01684b2778"^^xsd:string ;
+        ifc:lineNumber               "109"^^xsd:long ;
+        ifc:ownerHistory             _:b3 ;
+        ifc:relatedOpeningElement    model:GUID_lZjhwLGpRQWTo_MZOvOeHQ ;
+        ifc:relatingBuildingElement  model:GUID_-SwomP1oRO-ReDNI40ABew .
