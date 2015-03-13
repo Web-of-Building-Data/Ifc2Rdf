@@ -1,0 +1,22 @@
+usage: fi.hut.cs.drumbeat.ifc.convert.ifc2rdf.cli.Main -?
+ -?,--help   Help
+usage: fi.hut.cs.drumbeat.ifc.convert.ifc2rdf.cli.Main -lcf <file> -cf <file>
+       -oln <file> -isf <file> [-imf <file>] [-osn <name> | -osf <file>]  [-omn
+       <name> | -omf <file>]  [-off <name>]
+ -lcf,--log-config-file <file>      Logger configuration file (.properties or
+                                    .xml)
+ -cf,--config <file>                Configuration file
+ -oln,--output-layer-name <file>    Layer name
+ -isf,--input-schema-file <file>    Source IFC schema file or folder
+ -imf,--input-model-file <file>     Source IFC model file
+ -osn,--output-schema-name <name>   Target RDF store for the ontology (optional)
+ -osf,--output-schema-file <file>   Target RDF file for the ontology (optional)
+ -omn,--output-model-name <name>    Target RDF store for the model (optional)
+ -omf,--output-model-file <file>    Target RDF file for the model (optional)
+ -off,--output-file-format <name>   RDF format (add suffix .GZ to gzip file),
+                                    e.g.: TURTLE (default), TURTLE.GZ, NTRIPLES,
+                                    NQUADS, RDFXML_ABBREV, RDFXML_PRETTY,
+                                    JSONLD, etc. (see more:
+                                    https://jena.apache.org/documentation/javado
+                                    c/arq/org/apache/jena/riot/RDFFormat.html)
+Press any key to continue . . . 
