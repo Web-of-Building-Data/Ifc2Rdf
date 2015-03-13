@@ -43,6 +43,7 @@ public class Test {
 		
 		//
 		// load IFC schemas
+		// Note: inputSchemaFilePath can be path to folder or file
 		//
 		List<IfcSchema> schemas = IfcParserUtil.parseSchemas(inputSchemaFilePath);
 		
