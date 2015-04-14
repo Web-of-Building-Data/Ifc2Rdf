@@ -1,0 +1,15 @@
+usage: Ifc2RdfExporter -?
+ -?,--help   Help
+usage: Ifc2RdfExporter -lcf <file> -cf <file> -isf <file> [-imf <file>] [-osn
+       <name> | -osf <file>]  [-omn <name> | -omf <file>]  [-ofl <name>]
+ -lcf,--log-config-file <file>      Logger configuration file (.properties or
+                                    .xml)
+ -cf,--config <file>                Configuration file
+ -isf,--input-schema-file <file>    Source IFC schema file
+ -imf,--input-model-file <file>     Source IFC model file
+ -osn,--output-schema-name <name>   Target RDF store for the ontology (optional)
+ -osf,--output-schema-file <file>   Target RDF file for the ontology (optional)
+ -omn,--output-model-name <name>    Target RDF store for the model (optional)
+ -omf,--output-model-file <file>    Target RDF file for the model (optional)
+ -ofl,--output-file-lang <name>     RDF syntax: "N3" (default), "RDF/XML",
+                                    "RDF/XML-ABBREV", "N-TRIPLE", or "TURTLE"
