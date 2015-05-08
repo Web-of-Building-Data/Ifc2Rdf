@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<!-- Configuration of the Ant build system to generate a Jar file -->
+<project name="fi.hut.cs.drumbeat.common" default="deploy_local">
+
+	<!-- set global properties for this build -->
+	<property name="program" value="export-ifc2rdf" />
+	<property name="version" value="1.5.0-SNAPSHOT" />
+	<property name="workspace" location="../" />
+	<property name="dist" location="${workspace}/../distributives/${program}/${version}" />
+	<property name="package" value="fi.hut.cs.drumbeat" />
+	<property name="jena.version" value="2.12.1" />
+	<property name="resources" value="${workspace}/../../Resources" />
+	<property name="resources/apache" value="${resources}/org.apache" />
+	<property name="resources/agraph" value="${resources}/agraph-4.13.2-client-java/lib" />
+	<property name="resources/apache/jena" value="${resources}/org.apache/apache-jena-${jena.version}/lib" />
+	<property name="resources/virtuoso" value="${resources}/virtuoso" />
+	<property name="resources/stardog" value="C:/PROGRAMS/stardog-1.2.3/lib/" />
+	<property name="mavenTarget" value="${source.dir}/" />
+	
+	<import file="maven-build.xml"/>
+	
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}/lib" />
+	</target>
+	
+	<target name="copy_resources">
+		<mkdir dir="${dist}/bin" />
+		<copy todir="${dist}/bin">
+			<fileset dir="./dist/bin" />			
+		</copy>
+		
+		<mkdir dir="${dist}/config" />
+		<copy todir="${dist}/config">
+			<fileset dir="./dist/config" />			
+		</copy>	
+
+		<mkdir dir="${dist}/docs" />
+		<copy todir="${dist}/docs">
+			<fileset dir="./dist/docs">
+					<include name="*.pdf" />
+					<include name="*.txt" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="${dist}/resources" />
+		<copy todir="${dist}/resources">
+			<fileset dir="./dist/resources" />			
+		</copy>
+		
+		<mkdir dir="${dist}/samples" />
+		<copy todir="${dist}/samples">
+			<fileset dir="./dist/samples" />			
+		</copy>
+		<!-- 
+		<copy todir="${dist}/samples/java">
+			<fileset dir="src">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${workspace}/${package}.rdf.modelfactory.allegrograph/src">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${workspace}/${package}.rdf.modelfactory.virtuoso/src">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${workspace}/${package}.rdf.modelfactory.stardog/src">
+				<include name="**/*.java" />
+			</fileset>
+		</copy>
+		--> 
+	</target>
+	
+	<target name="create_manifest">
+		<mkdir dir="bin/META-INF" />		
+        <manifest file="bin/META-INF/MANIFEST.MF">
+            <attribute name="Manifest-Version" value="1.0" />
+            <attribute name="Version" value="${version}" />
+            <attribute name="Java-Version" value="${java.version}" />
+        	<!--attribute name="Company" value="Value" />
+        	<attribute name="Project" value="Value" /-->
+            <!--attribute name="Class-Path" value="test.jar" /-->
+            <attribute name="Main-Class" value="fi.hut.cs.drumbeat.ifc.convert.ifc2rdf.cli.Main" />
+        </manifest>
+    </target>
+	
+	<target name="copy_dependencies" description="Copies all maven dependencies" depends="init">
+	    <exec executable="cmd">
+	        <arg value="mvn"/>
+	        <arg line="dependency:copy-dependencies -DoutputDirectory=${dist}/lib" />
+		</exec>
+	</target>	
+
+	<target name="deploy_local" description="Create Jar file" depends="init, copy_resources, create_manifest, package, copy_dependencies">
+	</target>
+
+	<target name="clean_all" description="clean up" depends="clean">
+		<delete dir="./bin" />
+		<delete dir="${dist}/lib" />
+	</target>
+
+</project>

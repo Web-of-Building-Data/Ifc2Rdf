@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+	<!-- processorMap -->
+	<processorMap type="grounding">
+		<processor name="SetNameByGlobalId" enabled="true">
+			<class>fi.hut.cs.drumbeat.ifc.processing.grounding.SetNameByGlobalId</class>
+			<params>
+				<!-- use $Entity.ShortGlobalId$ or $Entity.StandardGlobalId$ -->
+				<param name="entityNamePattern" value="GUID_$Entity.StandardGlobalId$" />
+				<param name="encoderType" value="SafeUrl" />
+			</params>
+		</processor>
+		<processor name="ReplacePropertiesWithValueGlobalId" enabled="true">
+			<class>fi.hut.cs.drumbeat.ifc.processing.grounding.ReplacePropertiesWithValueGlobalId</class>
+		</processor>
+	</processorMap>
+	
+	<!-- complexProcessorPools -->
+	<complexProcessorPool type="grounding">
+		<complexProcessor name="BASIC GROUNDING RULES" enabled="true" default="true">
+			<add name="SetNameByGlobalId" />
+			<add name="ReplacePropertiesWithValueGlobalId" />
+		</complexProcessor>
+		<complexProcessor name="NO GROUNDING RULES" enabled="false" />		
+	</complexProcessorPool>
+	
+	
+	<!-- Converters -->	
+	<converterPool type="Ifc2Rdf">
+		<converter name="Working" enabled="false" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="true" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="true" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="true" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$_$ConverterProfile.Name$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://drumbeat.cs.hut.fi/tomcat/marmotta/resource/" />				
+			</params>
+		</converter>
+		
+		
+		<converter name="Lite" enabled="true" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="Options.ExportSelectTypes" value="false" />
+				<param name="Options.ExportEnumerationTypes" value="false" />
+				<param name="Options.ExportProperties" value="false" />
+				<param name="Options.ExportInverseProperties" value="false" />
+				<param name="Options.PrintPropertyCardinality" value="false" />
+				<param name="Options.PrintPropertyDomainAndRange" value="false" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="false" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="false" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$_$Converter.Context.Name$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://drumbeat.cs.hut.fi/tomcat/marmotta/resource/" />				
+			</params>
+		</converter>
+		
+		<converter name="Standard" enabled="true" default="true">
+			<params>
+				<param name="OwlProfile" value="OWL2_RL" />
+				<param name="Options.ExportSelectTypes" value="true" />
+				<param name="Options.ExportEnumerationTypes" value="true" />
+				<param name="Options.ExportProperties" value="true" />
+				<param name="Options.ExportInverseProperties" value="true" />
+				<param name="Options.PrintPropertyCardinality" value="false" />
+				<param name="Options.PrintPropertyDomainAndRange" value="false" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="false" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="false" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="true" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="false" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$_$Converter.Context.Name$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://drumbeat.cs.hut.fi/tomcat/marmotta/resource/" />				
+			</params>
+		</converter>
+		
+		<converter name="Extended" enabled="true" default="false">
+			<params>
+				<param name="OwlProfile" value="OWL2_RL" />
+				<param name="Options.ExportSelectTypes" value="true" />
+				<param name="Options.ExportEnumerationTypes" value="true" />
+				<param name="Options.ExportProperties" value="true" />
+				<param name="Options.ExportInverseProperties" value="true" />
+				<param name="Options.PrintPropertyCardinality" value="true" />
+				<param name="Options.PrintPropertyDomainAndRange" value="false" />
+				<param name="Options.AvoidDuplicationOfPropertyNames" value="false" />
+				<param name="Options.PrintPropertyDomainAndRangeAsUnion" value="false" />
+				<param name="Options.ForceConvertRdfListToOloOrderedList" value="true" />
+				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
+				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
+				<param name="Options.ForceConvertPropertyToObjectProperty" value="false" />
+				<param name="Options.ExportDebugInfo" value="false" />
+				<param name="Ontology.Prefix" value="ifc" />
+				<param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$_$Converter.Context.Name$#" />
+				<param name="Model.Prefix" value="model" />
+				<param name="Model.NamespaceFormat" value="http://drumbeat.cs.hut.fi/tomcat/marmotta/resource/" />				
+			</params>
+		</converter>
+
+	</converterPool>
+	
+	<jenaModelPool>
+		<jenaModel name="Memory1" default="true">
+			<class>fi.hut.cs.drumbeat.rdf.modelfactory.MemoryJenaModelFactory</class>
+		</jenaModel>
+		<jenaModel name="AllegroGraph1" default="true">
+			<class>fi.hut.cs.drumbeat.rdf.modelfactory.allegrograph.AGJenaModelFactory</class>
+			<params>
+				<param name="ServerUrl" value="http://murskain.cs.hut.fi:10035/" />
+				<param name="UserName" value="test" />
+				<param name="Password" value="xyz" />
+				<param name="ModelId" value="IFC2X3TC" />				
+			</params>
+		</jenaModel>
+	</jenaModelPool>
+</config>

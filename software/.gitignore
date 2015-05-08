@@ -1,0 +1,9 @@
+/.metadata/
+/.recommenders/
+/output/
+/net.linkedbuildingdata.rdf.versioning/
+/Servers/
+/*test*/
+/*web*/
+/drumbeat-ifc2ld-1.0.0/
+/drumbeat-service/
