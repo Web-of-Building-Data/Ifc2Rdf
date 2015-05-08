@@ -1,0 +1,13 @@
+0    INFO  [root                     ] Loading configuration in 'config\ifc2rdf-config.xml'
+6    INFO  [root                     ] Loading configuration has been completed successfully
+41   INFO  [root                     ] Parsing schema from file or folder 'resources\IFC2X3_TC1.exp'
+42   INFO  [root                     ] Parsing schema in 'resources\IFC2X3_TC1.exp'
+158  INFO  [root                     ] Parsing schema has been completed successfully
+158  INFO  [root                     ] Parsing schema is compeleted
+218  INFO  [root                     ] Exporting schema to RDF graph
+383  INFO  [root                     ] Exporting schema to Jena
+691  INFO  [root                     ] Exporting schema has been completed successfully
+691  INFO  [root                     ] Exporting schema RDF graph is completed
+695  INFO  [root                     ] Exporting graph to file 'output\schema.ttl' with format 'Turtle/pretty'
+902  INFO  [root                     ] Exporting graph to file is completed, file size: 311.9 KB
+903  INFO  [root                     ] END OF PROGRAM

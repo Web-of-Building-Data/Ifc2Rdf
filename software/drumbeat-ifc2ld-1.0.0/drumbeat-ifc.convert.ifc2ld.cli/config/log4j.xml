@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender class="org.apache.log4j.ConsoleAppender" name="CONSOLE">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5r %-5p [%-25c{1}] %m%n"/>
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.ConsoleAppender" name="CONSOLE_HIGHLIGHT">
+		<param name="target" value="System.err"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="--&gt; %-5r %-5p %m%n"/>
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.FileAppender" name="FILE_ANALYSER">
+		<param name="append" value="false"/>
+		<param name="file" value="logs/IfcAnalysis_ANALYSER.log"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-4r %-5p [%-25c{1}] %m%n"/>
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.FileAppender" name="FILE_COMMON">
+		<param name="append" value="false"/>
+		<param name="file" value="logs/IfcAnalysis_COMMON.log"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-4r %-5p [%-25c{1}] %m%n"/>
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.FileAppender" name="FILE_PARSER">
+		<param name="append" value="false"/>
+		<param name="file" value="logs/IfcAnalysis_PARSER.log"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-4r %-5p [%-25c{1}] %m%n"/>
+		</layout>
+	</appender>
+	
+	<logger name="fi.hut.cs.drumbeat" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="FILE_COMMON"/>
+	</logger>
+	<logger name="fi.hut.cs.drumbeat.ifc.convert">
+		<level value="info"/>
+		<appender-ref ref="FILE_PARSER"/>
+	</logger>
+	<logger name="fi.hut.cs.drumbeat.ifc.util">
+		<level value="info"/>
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE_ANALYSER"/>
+	</logger>	
+	<logger name="fi.hut.cs.drumbeat.ifc.processing">
+		<level value="info"/>
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE_ANALYSER"/>
+	</logger>	
+	<logger name="com.hp.hpl.jena">
+		<level value="warn"/>
+	</logger>
+	<logger name="com.hp.hpl.jena.arq.exec">
+		<level value="info"/>
+	</logger>
+	<logger name="com.hp.hpl.jena.arq.info">
+		<level value="info"/>
+	</logger>
+	<logger name="org.apache.jena">
+		<level value="warn"/>
+	</logger>
+	<logger name="org.apache.jena.arq.exec">
+		<level value="info"/>
+	</logger>
+	<logger name="org.apache.jena.arq.info">
+		<level value="info"/>
+	</logger>
+	<logger name="org.openjena">
+		<level value="warn"/>
+	</logger>
+	
+	<root>
+		<level value="info"/>
+		<appender-ref ref="CONSOLE_HIGHLIGHT"/>
+		<appender-ref ref="FILE_COMMON"/>
+	</root>
+
+</log4j:configuration>
