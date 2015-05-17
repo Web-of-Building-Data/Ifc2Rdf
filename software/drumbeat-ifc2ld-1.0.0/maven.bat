@@ -1,23 +1,35 @@
-@ECHO OFF
+@SET OUTPUT_FILE=maven-output.txt
 
-CALL maven-single.bat drumbeat-common
+@ECHO ON
+CALL maven-single.bat drumbeat-common 1> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-ifc.common
+@ECHO ON
+CALL maven-single.bat drumbeat-ifc.common 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-ifc.data
+@ECHO ON
+CALL maven-single.bat drumbeat-ifc.data 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-rdf
+@ECHO ON
+CALL maven-single.bat drumbeat-rdf 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-rdf.modelfactory
+@ECHO ON
+CALL maven-single.bat drumbeat-rdf.modelfactory 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-ifc.convert.stff2ifc
+@ECHO ON
+CALL maven-single.bat drumbeat-ifc.convert.stff2ifc 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-ifc.processing.grounding.ifc
+@ECHO ON
+CALL maven-single.bat drumbeat-ifc.processing.grounding.ifc 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-ifc.convert.ifc2ld
+@ECHO ON
+CALL maven-single.bat drumbeat-ifc.convert.ifc2ld 1>> %OUTPUT_FILE%
 
-CALL maven-single.bat drumbeat-ifc.convert.ifc2ld.cli
+@ECHO ON
+CALL maven-single.bat drumbeat-ifc.convert.ifc2ld.cli 1>> %OUTPUT_FILE%
 
+@ECHO ON
+CALL maven-single.bat drumbeat-test 1>> %OUTPUT_FILE%
 
+@PAUSE
 
 

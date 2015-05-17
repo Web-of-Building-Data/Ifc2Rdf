@@ -67,6 +67,16 @@ public class StringUtils {
 		return stringBuilder.toString();		
 	}
 	
+	/**
+	 * Merges a collection to a string using a common string format for each item
+	 * 
+	 * @param collection The collection of items to be merged 
+	 * @param prefix The prefix appended before the result
+	 * @param suffix The suffix appended after the result
+	 * @param itemFormat The string format applied for each item
+	 * @param separator The separator between each item
+	 * @return Merged string
+	 */
 	public static <T> String collectionToString(Iterable<T> collection, CharSequence prefix, CharSequence suffix, String itemFormat, String separator) {
 		
 		StringBuilder stringBuilder = new StringBuilder();

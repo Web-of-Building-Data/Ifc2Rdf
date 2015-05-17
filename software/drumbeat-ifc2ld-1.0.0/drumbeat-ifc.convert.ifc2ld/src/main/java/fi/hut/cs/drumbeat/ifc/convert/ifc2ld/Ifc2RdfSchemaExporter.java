@@ -8,9 +8,7 @@ package fi.hut.cs.drumbeat.ifc.convert.ifc2ld;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.Map.Entry;
 
-import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFList;
@@ -22,14 +20,12 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
-import fi.hut.cs.drumbeat.common.string.StringUtils;
 import fi.hut.cs.drumbeat.ifc.common.IfcException;
 import fi.hut.cs.drumbeat.ifc.data.Cardinality;
 import fi.hut.cs.drumbeat.ifc.data.schema.*;
 import fi.hut.cs.drumbeat.rdf.OwlProfile;
 import fi.hut.cs.drumbeat.rdf.RdfVocabulary;
 import fi.hut.cs.drumbeat.rdf.OwlProfile.RdfTripleObjectTypeEnum;
-import fi.hut.cs.drumbeat.rdf.RdfVocabulary.OLO;
 import fi.hut.cs.drumbeat.rdf.export.RdfExportAdapter;
 
 
@@ -43,23 +39,17 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 	
 	private IfcSchema ifcSchema;
 	private Ifc2RdfConversionContext context;
+	private OwlProfile owlProfile;
 	private RdfExportAdapter adapter;
 
-//	private Map<IfcLiteralTypeInfo, Resource> literalTypeInfomap;
-	
-	private Map<String, List<IfcAttributeInfo>> attributeInfoMap = new HashMap<>();
-	private boolean avoidDuplicationOfPropertyNames;
-	private Map<String, IfcCollectionTypeInfo> collectionSuperTypes = new HashMap<>();
-	
-	private static final IfcEntityTypeInfo IFC_ENTITY = new IfcEntityTypeInfo(null, "ENTITY");
+	private Map<String, IfcCollectionTypeInfo> additionalCollectionTypeDictionary = new HashMap<>();
 	
 	public Ifc2RdfSchemaExporter(IfcSchema ifcSchema, Ifc2RdfConversionContext context, RdfExportAdapter rdfExportAdapter) {
 		super(context, rdfExportAdapter);
 		this.ifcSchema = ifcSchema;
 		this.context = context;
+		this.owlProfile = context.getOwlProfile();
 		this.adapter = rdfExportAdapter;
-		
-		super.setOntologyNamespacePrefix(context.getOntologyPrefix());
 		
 		super.setOntologyNamespaceUri(
 				String.format(context.getOntologyNamespaceFormat(), ifcSchema.getVersion(), context.getName()));
@@ -72,16 +62,14 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		//
 		adapter.startExport();
 		
-		adapter.setNamespacePrefix(RdfVocabulary.OWL.BASE_PREFIX.replace(StringUtils.COLON, ""), OWL.getURI());
-		adapter.setNamespacePrefix(RdfVocabulary.RDF.BASE_PREFIX.replace(StringUtils.COLON, ""), RDF.getURI());
-		adapter.setNamespacePrefix(RdfVocabulary.RDFS.BASE_PREFIX.replace(StringUtils.COLON, ""), RDFS.getURI());
-		adapter.setNamespacePrefix(RdfVocabulary.XSD.BASE_PREFIX.replace(StringUtils.COLON, ""), XSD.getURI());		
+		adapter.setNamespacePrefix(RdfVocabulary.OWL.BASE_PREFIX, OWL.getURI());
+		adapter.setNamespacePrefix(RdfVocabulary.RDF.BASE_PREFIX, RDF.getURI());
+		adapter.setNamespacePrefix(RdfVocabulary.RDFS.BASE_PREFIX, RDFS.getURI());
+		adapter.setNamespacePrefix(RdfVocabulary.XSD.BASE_PREFIX, XSD.getURI());
 		
-		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ForceConvertRdfListToOloOrderedList)) {
-			adapter.setNamespacePrefix(RdfVocabulary.OLO.BASE_PREFIX, RdfVocabulary.OLO.BASE_URI);
-		}
+		adapter.setNamespacePrefix(Ifc2RdfVocabulary.EXPRESS.BASE_PREFIX, Ifc2RdfVocabulary.EXPRESS.getBaseUri());		
+		adapter.setNamespacePrefix(Ifc2RdfVocabulary.IFC.BASE_PREFIX, getOntologyNamespaceUri());
 		
-		adapter.setNamespacePrefix(getOntologyNamespacePrefix(), getOntologyNamespaceUri());
 		adapter.exportEmptyLine();
 		
 		String conversionOptionsString = context.getConversionOptions().toString()
@@ -90,152 +78,99 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 				.replaceAll(",", "\r\n\t\t\t");
 		
 		conversionOptionsString = String.format("OWL profile: %s.\r\n\t\tConversion options: %s",
-				context.getOwlProfileId(),
+				owlProfile.getOwlProfileId(),
 				conversionOptionsString); 
 		
 		adapter.exportOntologyHeader(getOntologyNamespaceUri(), "1.0", conversionOptionsString);		
 		
 		
 		//
-		// write defined types section
+		// write non-entity types section
 		//
-		Collection<IfcDefinedTypeInfo> definedTypeInfos = ifcSchema.getDefinedTypeInfos(); 
+		Collection<IfcNonEntityTypeInfo> nonEntityTypeInfos = ifcSchema.getNonEntityTypeInfos(); 
 
 		// simple types
 		adapter.startSection("SIMPLE TYPES");
-		for (IfcDefinedTypeInfo definedTypeInfo : definedTypeInfos) {
-			if (definedTypeInfo instanceof IfcLiteralTypeInfo) {
-				exportLiteralTypeInfo((IfcLiteralTypeInfo)definedTypeInfo);
+		for (IfcNonEntityTypeInfo nonEntityTypeInfo : nonEntityTypeInfos) {
+			if (nonEntityTypeInfo instanceof IfcLiteralTypeInfo) {
+				exportLiteralTypeInfo((IfcLiteralTypeInfo)nonEntityTypeInfo);
 				adapter.exportEmptyLine();
 			} 
 		}
 		adapter.endSection();
 
 		// enumeration types
-		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ExportEnumerationTypes)) {
+		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreEnumerationTypes)) {
 			adapter.startSection("ENUMERATION TYPES");
-			for (IfcDefinedTypeInfo definedTypeInfo : definedTypeInfos) {
-				if (definedTypeInfo instanceof IfcEnumerationTypeInfo) {
-					exportEnumerationTypeInfo((IfcEnumerationTypeInfo)definedTypeInfo);
+			for (IfcNonEntityTypeInfo nonEntityTypeInfo : nonEntityTypeInfos) {
+				if (nonEntityTypeInfo instanceof IfcEnumerationTypeInfo) {
+					exportEnumerationTypeInfo((IfcEnumerationTypeInfo)nonEntityTypeInfo);
 					adapter.exportEmptyLine();
 				} 
 			}
 			adapter.endSection();
 		}
 
-		// redirect types
-		adapter.startSection("REDIRECT TYPES");
-		for (IfcDefinedTypeInfo definedTypeInfo : definedTypeInfos) {
-			if (definedTypeInfo instanceof IfcRedirectTypeInfo) {
-				writeRedirectTypeInfo((IfcRedirectTypeInfo)definedTypeInfo);
-				adapter.exportEmptyLine();
-			}
-		}
-		adapter.endSection();
-
 		// select types
-		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ExportSelectTypes)) {
+		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreSelectTypes)) {
 			adapter.startSection("SELECT TYPES");
-			for (IfcDefinedTypeInfo definedTypeInfo : definedTypeInfos) {
-				if (definedTypeInfo instanceof IfcSelectTypeInfo) {
-					exportSelectTypeInfo((IfcSelectTypeInfo)definedTypeInfo);
+			for (IfcNonEntityTypeInfo nonEntityTypeInfo : nonEntityTypeInfos) {
+				if (nonEntityTypeInfo instanceof IfcSelectTypeInfo) {
+					exportSelectTypeInfo((IfcSelectTypeInfo)nonEntityTypeInfo);
 					adapter.exportEmptyLine();
 				} 
+			}
+			adapter.endSection();
+		}
+
+		// defined types
+		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreDefinedTypes)) {
+			adapter.startSection("DEFINED TYPES");
+			for (IfcNonEntityTypeInfo nonEntityTypeInfo : nonEntityTypeInfos) {
+				if (nonEntityTypeInfo instanceof IfcDefinedTypeInfo) {
+					writeDefinedTypeInfo((IfcDefinedTypeInfo)nonEntityTypeInfo);
+					adapter.exportEmptyLine();
+				}
 			}
 			adapter.endSection();
 		}
 
 		// collection types
-		adapter.startSection("COLLECTION TYPES");
-		
-		for (IfcDefinedTypeInfo definedTypeInfo : definedTypeInfos) {
-			if (definedTypeInfo instanceof IfcCollectionTypeInfo) {
-				writeCollectionTypeInfo((IfcCollectionTypeInfo)definedTypeInfo);
-				adapter.exportEmptyLine();
-			} 
-		}
-		
-//		for (IfcCollectionTypeInfo superTypeInfo : collectionSuperTypes.values()) {
-//			writeCollectionTypeInfo((IfcCollectionTypeInfo)superTypeInfo);
-//			adapter.exportEmptyLine();			
-//		}
-		
-//		writeAdditionalListTypeInfos();		
-		adapter.endSection();
-		
-		//
-		// build attribute info map
-		//
-		// Added 20140929 - Nam: to check if export properties is needed
-		// 
-		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ExportProperties)) {
-			for (IfcEntityTypeInfo entityTypeInfo : ifcSchema.getEntityTypeInfos()) {
-				for (IfcAttributeInfo attributeInfo : entityTypeInfo.getAttributeInfos()) {
-					String attributeName = attributeInfo.getName();
-					List<IfcAttributeInfo> attributeInfoList = attributeInfoMap.get(attributeName);
-					if (attributeInfoList == null) {
-						attributeInfoList = new ArrayList<>();
-						attributeInfoMap.put(attributeName, attributeInfoList);
-					}
-					attributeInfoList.add(attributeInfo);
-				}
-				
-				for (IfcAttributeInfo attributeInfo : entityTypeInfo.getInverseLinkInfos()) {
-					String attributeName = attributeInfo.getName();
-					List<IfcAttributeInfo> attributeInfoList = attributeInfoMap.get(attributeName);
-					if (attributeInfoList == null) {
-						attributeInfoList = new ArrayList<>();
-						attributeInfoMap.put(attributeName, attributeInfoList);
-					}
-					attributeInfoList.add(attributeInfo);
-				}
-			}
-
-			//
-			// avoid duplication of property names
-			//
-			avoidDuplicationOfPropertyNames = context.isEnabledOption(Ifc2RdfConversionOptionsEnum.AvoidDuplicationOfPropertyNames);		
-			if (avoidDuplicationOfPropertyNames) {
-				for (Entry<String, List<IfcAttributeInfo>> entry : attributeInfoMap.entrySet()) {
-					if (entry.getValue().size() > 1) {
-						for (IfcAttributeInfo attributeInfo : entry.getValue()) {
-							attributeInfo.setUniqueName(String.format("%s_of_%s", attributeInfo.getName(), attributeInfo.getEntityTypeInfo().getName()));
-						}
-					}
-				}
-			}
-		
+		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreCollectionTypes)) {
+			adapter.startSection("COLLECTION TYPES");			
+			for (IfcNonEntityTypeInfo nonEntityTypeInfo : nonEntityTypeInfos) {
+				if (nonEntityTypeInfo instanceof IfcCollectionTypeInfo) {
+					writeCollectionTypeInfo((IfcCollectionTypeInfo)nonEntityTypeInfo);
+					adapter.exportEmptyLine();
+				} 
+			}			
+			adapter.endSection();		
 		}
 		
 
 		//
 		// write entity types section
 		//
-		adapter.startSection("ENTITY TYPES");
-		Resource entityTypeResource = createUriResource(super.formatTypeName(IFC_ENTITY));
-		adapter.exportTriple(entityTypeResource, RDF.type, OWL.Class);
-		adapter.exportTriple(entityTypeResource, RDFS.subClassOf, OWL.Thing);
-		adapter.exportEmptyLine();
-
-		for (IfcEntityTypeInfo entityTypeInfo : ifcSchema.getEntityTypeInfos()) {
-			writeEntityTypeInfoSection(entityTypeInfo);
-			adapter.exportEmptyLine();
+		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreEntityTypes)) {
+			adapter.startSection("ENTITY TYPES");
+			for (IfcEntityTypeInfo entityTypeInfo : ifcSchema.getEntityTypeInfos()) {
+				writeEntityTypeInfo(entityTypeInfo);
+				adapter.exportEmptyLine();
+			}
+			adapter.endSection();
 		}
-		adapter.endSection();
 
 		//
-		// write collection types used for entity attributes
+		// write entity types section
 		//
-		adapter.startSection("ENTITY ATTRIBUTES");
-		for (Entry<String, List<IfcAttributeInfo>> entry : attributeInfoMap.entrySet()) {
-			writeAttributeInfo(entry.getKey(), entry.getValue());
-			adapter.exportEmptyLine();
+		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreCollectionTypes)) {
+			adapter.startSection("ADDITIONAL COLLECTION TYPES");
+			for (IfcCollectionTypeInfo collectionTypeInfo : additionalCollectionTypeDictionary.values()) {
+				writeCollectionTypeInfo(collectionTypeInfo);
+				adapter.exportEmptyLine();
+			}
+			adapter.endSection();
 		}
-		adapter.endSection();
-		
-//		adapter.writeSectionHead("PREDEFINED VALUES");
-//		adapter.writeRdfTriple(converter.getNull(), RDF.type, RdfVocabulary.OWL_NOTHING);
-		adapter.endSection();
 
 		adapter.endExport();
 		
@@ -261,20 +196,20 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		List<String> enumValues = typeInfo.getValues(); 
 		List<RDFNode> enumValueNodes = new ArrayList<>();
 
-		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ForceConvertEnumerationValuesToString)) {
+//		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ForceConvertEnumerationValuesToString)) {
 			for (String value : enumValues) {
 				enumValueNodes.add(super.createUriResource(super.formatOntologyName(value)));
 			}
-		} else {
-			for (String value : enumValues) {
-				enumValueNodes.add(getJenaModel().createTypedLiteral(value));
-			}
-		}
+//		} else {
+//			for (String value : enumValues) {
+//				enumValueNodes.add(getJenaModel().createTypedLiteral(value));
+//			}
+//		}
 		
-		if (context.supportsRdfProperty(OWL.oneOf, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOneOrMany))) {			
+		if (owlProfile.supportsRdfProperty(OWL.oneOf, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOneOrMany))) {			
 			RDFList rdfList = super.createList(enumValueNodes);			
 			adapter.exportTriple(typeResource, OWL.oneOf, rdfList);
-		} else if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ForceConvertEnumerationValuesToString)) {
+		} else { // if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ForceConvertEnumerationValuesToString)) {
 			enumValueNodes.stream().forEach(node ->
 					adapter.exportTriple((Resource)node, RDF.type, typeResource));			
 		}	
@@ -294,7 +229,7 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 			subTypeResources.add(super.createUriResource(super.formatOntologyName(typeName)));
 		}
 		
-		if (context.supportsRdfProperty(OWL.unionOf, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOneOrMany))) {			
+		if (owlProfile.supportsRdfProperty(OWL.unionOf, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOneOrMany))) {			
 			RDFList rdfList = super.createList(subTypeResources);			
 			// See samples: [2, p.250]
 			adapter.exportTriple(typeResource, OWL.unionOf, rdfList);
@@ -305,31 +240,26 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		
 	}
 	
-	private Resource createOwlRestrictionClass(Property onProperty, Property restriction, Resource valueType) {
-		Resource baseTypeResource = super.createAnonResource();
-		adapter.exportTriple(baseTypeResource, RDF.type, OWL.Restriction);
-		adapter.exportTriple(baseTypeResource, OWL.onProperty, onProperty);
-		adapter.exportTriple(baseTypeResource, restriction, valueType);
-		return baseTypeResource;
-	}	
-
-	private void writeRedirectTypeInfo(IfcRedirectTypeInfo typeInfo) {
+	private void writeDefinedTypeInfo(IfcDefinedTypeInfo typeInfo) {
 		
 		Resource typeResource = super.createUriResource(super.formatTypeName(typeInfo));
 		adapter.exportTriple(typeResource, RDF.type, OWL.Class);
-		adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.DefinedClass);
 		
-		IfcTypeInfo baseTypeInfo = typeInfo.getRedirectTypeInfo();
-		if (!(baseTypeInfo instanceof IfcLiteralTypeInfo)) {
+		IfcTypeInfo baseTypeInfo = typeInfo.getSuperTypeInfo();
+		if (baseTypeInfo instanceof IfcLiteralTypeInfo) {
+			
+			adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.DefinedClass);
+			
+			if (owlProfile.supportsRdfProperty(OWL.allValuesFrom, null)) {		
+			
+				writePropertyRestriction(typeResource, RDF.value, OWL.allValuesFrom, super.getXsdDataType((IfcLiteralTypeInfo)baseTypeInfo));
+			
+			}
+			
+		} else {
 			
 			adapter.exportTriple(typeResource, RDFS.subClassOf, createUriResource(super.formatTypeName(baseTypeInfo)));			
-			
-		} else if (context.supportsRdfProperty(OWL.allValuesFrom, null)) {
-			
-			Resource baseTypeResource = createOwlRestrictionClass(RDF.value, OWL.allValuesFrom,
-					super.getXsdDataType((IfcLiteralTypeInfo)baseTypeInfo));
-			
-			adapter.exportTriple(typeResource, RDFS.subClassOf, baseTypeResource);			
+
 		}		
 		
 	}
@@ -339,22 +269,16 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		Resource typeResource = super.createUriResource(super.formatTypeName(typeInfo)); 
 		adapter.exportTriple(typeResource, RDF.type, OWL.Class);
 		
-		Cardinality cardinality = typeInfo.getCardinality();
+		IfcCollectionKindEnum collectionKind = typeInfo.getCollectionKind();
+		IfcCollectionTypeInfo superCollectionTypeWithItemTypeAndNoCardinalities = typeInfo.getSuperCollectionTypeWithItemTypeAndNoCardinalities();
+		IfcCollectionTypeInfo superCollectionTypeWithCardinalititesAndNoItemType = typeInfo.getSuperCollectionTypeWithCardinalitiesAndNoItemType();
 		
-		IfcCollectionTypeInfo superCollectionTypeWithoutCardinalities = typeInfo.getSuperCollectionTypeWithoutCardinalities();
-		if (superCollectionTypeWithoutCardinalities == null) {
+		if (superCollectionTypeWithItemTypeAndNoCardinalities == null) {
 			
-			IfcCollectionKindEnum collectionKind = typeInfo.getCollectionKind();
-			if (collectionKind == IfcCollectionKindEnum.List) {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.ListClass);				
-			} else if (collectionKind == IfcCollectionKindEnum.Set) {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.SetClass);				
-			} else if (collectionKind == IfcCollectionKindEnum.Array) {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.ArrayClass);				
-			} else {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.BagClass);				
+			if (superCollectionTypeWithCardinalititesAndNoItemType == null) { // both supertypes are null			
+				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.getCollectionClass(collectionKind));
 			}			
-
+			
 			Resource slotClassResource = createUriResource(super.formatOntologyName(super.formatSlotClassName(typeInfo.getName())));
 			adapter.exportTriple(slotClassResource, RDF.type, OWL.Class);
 			adapter.exportTriple(slotClassResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.CollectionSlotClass);
@@ -362,87 +286,59 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 			//
 			// write restriction on type of property olo:slot
 			//
-			if (typeInfo.getItemTypeInfo() != null && context.supportsRdfProperty(OWL.allValuesFrom, null)) {
-				Resource blankNode = super.createAnonResource();
-				adapter.exportTriple(blankNode, RDF.type, OWL.Restriction);
-				adapter.exportTriple(blankNode, OWL.onProperty, Ifc2RdfVocabulary.EXPRESS.slot);
-				adapter.exportTriple(blankNode, OWL.allValuesFrom, slotClassResource);			
+			if (typeInfo.getItemTypeInfo() != null && owlProfile.supportsRdfProperty(OWL.allValuesFrom, null)) {
 	
-				adapter.exportTriple(typeResource, RDFS.subClassOf, blankNode);
+				writePropertyRestriction(typeResource, Ifc2RdfVocabulary.EXPRESS.slot, OWL.allValuesFrom, slotClassResource);
 				
 				adapter.exportEmptyLine();
 			
-				Resource oloItemClassNode = super.createAnonResource();
-				adapter.exportTriple(oloItemClassNode, RDF.type, OWL.Restriction);
-				adapter.exportTriple(oloItemClassNode, OWL.onProperty, Ifc2RdfVocabulary.EXPRESS.item);
-				adapter.exportTriple(oloItemClassNode, OWL.allValuesFrom, createUriResource(super.formatTypeName(typeInfo.getItemTypeInfo())));
-	
-				adapter.exportTriple(slotClassResource, RDFS.subClassOf, oloItemClassNode);
+				writePropertyRestriction(slotClassResource, Ifc2RdfVocabulary.EXPRESS.item, OWL.allValuesFrom,
+						createUriResource(super.formatTypeName(typeInfo.getItemTypeInfo())));
 			}
 			
 		} else {
 			
-			String superTypeName = super.formatTypeName(superCollectionTypeWithoutCardinalities);			
+			String superTypeName = super.formatTypeName(superCollectionTypeWithItemTypeAndNoCardinalities);			
 			adapter.exportTriple(typeResource, RDFS.subClassOf, createUriResource(superTypeName));
-			collectionSuperTypes.put(superTypeName, superCollectionTypeWithoutCardinalities);
+			additionalCollectionTypeDictionary.put(superTypeName, superCollectionTypeWithItemTypeAndNoCardinalities);
 			
 		}
 		
-		IfcCollectionTypeInfo superCollectionTypeWithoutItemType = typeInfo.getSuperCollectionTypeWithoutItemType();
-		if (superCollectionTypeWithoutItemType == null) {
-			assert (cardinality != null);
-			
-			IfcCollectionKindEnum collectionKind = typeInfo.getCollectionKind();
-			if (collectionKind == IfcCollectionKindEnum.List) {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.ListClass);				
-			} else if (collectionKind == IfcCollectionKindEnum.Set) {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.SetClass);				
-			} else if (collectionKind == IfcCollectionKindEnum.Array) {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.ArrayClass);				
-			} else {
-				adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.BagClass);				
-			}
+		if (superCollectionTypeWithCardinalititesAndNoItemType == null) {
 			
 			//
 			// write restriction on type of property olo:slot
 			//
-			if (context.supportsRdfProperty(OWL.cardinality, null)) {
-				Resource blankNode = super.createAnonResource();
+			Cardinality cardinality = typeInfo.getCardinality();
+			if (cardinality != null &&
+					context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ExportPropertyCardinalities) &&
+					owlProfile.supportsRdfProperty(OWL.cardinality, null)) {
 				
-				int minCardinality = cardinality.getMin();
-				int maxCardinality = cardinality.getMax();
-				
+
+				int minCardinality = cardinality.getMinCardinality();
+				int maxCardinality = cardinality.getMaxCardinality();				
+
 				if (minCardinality != maxCardinality) {
 					
 					if (minCardinality != Cardinality.UNBOUNDED) {
 						
-						adapter.exportTriple(blankNode, RDF.type, OWL.Restriction);
-						adapter.exportTriple(blankNode, OWL.onProperty, Ifc2RdfVocabulary.EXPRESS.slot);
-						adapter.exportTriple(blankNode, OWL.minCardinality, getJenaModel().createTypedLiteral(minCardinality));			
-		
-						adapter.exportTriple(typeResource, RDFS.subClassOf, blankNode);
+						writePropertyRestriction(typeResource, Ifc2RdfVocabulary.EXPRESS.slot, OWL.minCardinality,
+								getJenaModel().createTypedLiteral(cardinality.getMinCardinality()));
+						
 						
 					}
 					
 					if (maxCardinality != Cardinality.UNBOUNDED) {
 						
-						adapter.exportTriple(blankNode, RDF.type, OWL.Restriction);
-						adapter.exportTriple(blankNode, OWL.onProperty, Ifc2RdfVocabulary.EXPRESS.slot);
-						adapter.exportTriple(blankNode, OWL.maxCardinality, getJenaModel().createTypedLiteral(maxCardinality));			
-		
-						adapter.exportTriple(typeResource, RDFS.subClassOf, blankNode);
+						writePropertyRestriction(typeResource, Ifc2RdfVocabulary.EXPRESS.slot, OWL.maxCardinality,
+								getJenaModel().createTypedLiteral(cardinality.getMaxCardinality()));						
 						
 					}
 					
 				} else {
 					
-					if (minCardinality != Cardinality.UNBOUNDED) {				
-						adapter.exportTriple(blankNode, RDF.type, OWL.Restriction);
-						adapter.exportTriple(blankNode, OWL.onProperty, Ifc2RdfVocabulary.EXPRESS.slot);
-						adapter.exportTriple(blankNode, OWL.cardinality, getJenaModel().createTypedLiteral(minCardinality));			
-		
-						adapter.exportTriple(typeResource, RDFS.subClassOf, blankNode);
-					}					
+					writePropertyRestriction(typeResource, Ifc2RdfVocabulary.EXPRESS.slot, OWL.cardinality,
+							getJenaModel().createTypedLiteral(cardinality.getMaxCardinality()));					
 					
 				}
 				
@@ -453,9 +349,9 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 
 		} else {
 			
-			String superTypeName = super.formatTypeName(superCollectionTypeWithoutItemType);			
+			String superTypeName = super.formatTypeName(superCollectionTypeWithCardinalititesAndNoItemType);			
 			adapter.exportTriple(typeResource, RDFS.subClassOf, createUriResource(superTypeName));
-			collectionSuperTypes.put(superTypeName, superCollectionTypeWithoutItemType);
+			additionalCollectionTypeDictionary.put(superTypeName, superCollectionTypeWithCardinalititesAndNoItemType);
 
 		}		
 
@@ -521,19 +417,17 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 //		}
 //	}
 
-	private void writeEntityTypeInfoSection(IfcEntityTypeInfo typeInfo) throws IOException, IfcException {
-		
-		List<IfcEntityTypeInfo> disjointClasses = null;
+	private void writeEntityTypeInfo(IfcEntityTypeInfo typeInfo) throws IOException, IfcException {
 		
 		Resource typeResource = createUriResource(super.formatTypeName(typeInfo));
-
 		adapter.exportTriple(typeResource, RDF.type, OWL.Class);
 
 		//
 		// OWL2 supports owl:disjointUnionOf
 		// See: http://www.w3.org/2007/OWL/wiki/New_Features_and_Rationale#F1:_DisjointUnion
 		//
-		if (typeInfo.isAbstractSuperType() && context.supportsRdfProperty(OWL2.disjointUnionOf, OwlProfile.RdfTripleObjectTypeEnum.ObjectList)) {
+		List<IfcEntityTypeInfo> disjointClasses = null;
+		if (typeInfo.isAbstractSuperType() && owlProfile.supportsRdfProperty(OWL2.disjointUnionOf, OwlProfile.RdfTripleObjectTypeEnum.ObjectList)) {
 			List<IfcEntityTypeInfo> allSubtypeInfos = typeInfo.getSubTypeInfos();
 			List<RDFNode> allSubtypeResources = new ArrayList<>(allSubtypeInfos.size());
 			for (IfcEntityTypeInfo subTypeInfo : allSubtypeInfos) {
@@ -549,7 +443,7 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		if (superTypeInfo != null) {
 			adapter.exportTriple(typeResource, RDFS.subClassOf, createUriResource(super.formatTypeName(superTypeInfo)));
 			
-			if (!superTypeInfo.isAbstractSuperType() || !context.supportsRdfProperty(OWL2.disjointUnionOf, OwlProfile.RdfTripleObjectTypeEnum.ObjectList)) {
+			if (!superTypeInfo.isAbstractSuperType() || !owlProfile.supportsRdfProperty(OWL2.disjointUnionOf, OwlProfile.RdfTripleObjectTypeEnum.ObjectList)) {
 				
 				List<IfcEntityTypeInfo> allSubtypeInfos = superTypeInfo.getSubTypeInfos();
 				
@@ -557,7 +451,7 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 					
 					int indexOfCurrentType = allSubtypeInfos.indexOf(typeInfo);
 					
-					if (allSubtypeInfos.size() > 2 && context.supportsRdfProperty(OWL.disjointWith, OwlProfile.RdfTripleObjectTypeEnum.ObjectList)) {
+					if (allSubtypeInfos.size() > 2 && owlProfile.supportsRdfProperty(OWL.disjointWith, OwlProfile.RdfTripleObjectTypeEnum.ObjectList)) {
 						//
 						// OWL2 allow object of property "owl:disjointWith" to be rdf:list
 						// All classes will be pairwise disjoint
@@ -565,7 +459,7 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 						//
 						disjointClasses = allSubtypeInfos;
 						
-					} else if (context.supportsRdfProperty(OWL.disjointWith, OwlProfile.RdfTripleObjectTypeEnum.SingleObject)) { // context.getOwlVersion() < OwlProfile.OWL_VERSION_2_0
+					} else if (owlProfile.supportsRdfProperty(OWL.disjointWith, OwlProfile.RdfTripleObjectTypeEnum.SingleObject)) { // context.getOwlVersion() < OwlProfile.OWL_VERSION_2_0
 						
 						//
 						// OWL1 doesn't allow object of property "owl:disjointWith" to be rdf:list
@@ -585,14 +479,14 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 			}
 			
 		} else {
-			adapter.exportTriple(typeResource, RDFS.subClassOf, createUriResource(super.formatTypeName(IFC_ENTITY)));			
+			adapter.exportTriple(typeResource, RDFS.subClassOf, Ifc2RdfVocabulary.EXPRESS.EntityClass);			
 		}
 		
 		//
 		// write unique keys
 		//
 		List<IfcUniqueKeyInfo> uniqueKeyInfos = typeInfo.getUniqueKeyInfos();
-		if (uniqueKeyInfos != null && context.supportsRdfProperty(OWL2.hasKey, OwlProfile.RdfTripleObjectTypeEnum.ANY)) {
+		if (uniqueKeyInfos != null && owlProfile.supportsRdfProperty(OWL2.hasKey, OwlProfile.RdfTripleObjectTypeEnum.ANY)) {
 			for (IfcUniqueKeyInfo uniqueKeyInfo : uniqueKeyInfos) {
 				List<Resource> attributeResources = new ArrayList<>();
 				for (IfcAttributeInfo attributeInfo : uniqueKeyInfo.getAttributeInfos()) {
@@ -608,45 +502,36 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ExportProperties)) {
 			List<IfcAttributeInfo> attributeInfos = typeInfo.getAttributeInfos();
 			if (attributeInfos != null) {
-				if (context.supportsRdfProperty(OWL.Restriction, null)) {
+				if (owlProfile.supportsRdfProperty(OWL.Restriction, null)) {
 					for (IfcAttributeInfo attributeInfo : attributeInfos) {
-						// TODO: Write attribute infos
-//						Resource attributeResource = createUriResource(super.formatAttributeName(attributeInfo));
-//						Cardinality attributeCardinality = attributeInfo.getCardinality();
-//						
-//						//
-//						// write constraint about property type
-//						//
-//						writeAttributeConstraint(typeResource, attributeResource, OWL.allValuesFrom,
-//								createUriResource(super.formatTypeName(attributeInfo.getAttributeTypeInfo())));
-//						
-//						if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.PrintPropertyCardinality)) {
-//							//
-//							// write constraint about property cardinality
-//							//
-//							int min = attributeInfo.isOptional() ? 0 : attributeCardinality.getMin();
-//							int max = attributeCardinality.getMax();
-//							boolean supportPropertyCardinalityConstraintsGreaterThanOne = 
-//									context.supportsRdfProperty(OWL.cardinality, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOneOrMany));
-//							
-//							if (min == max) {
-//								if (min <= 1 || supportPropertyCardinalityConstraintsGreaterThanOne) { 
-//									writeAttributeConstraint(typeResource, attributeResource, OWL.cardinality,
-//											getJenaModel().createTypedLiteral(min));
-//								}
-//							} else {
-//								if (min <= 1 || supportPropertyCardinalityConstraintsGreaterThanOne) { 
-//									writeAttributeConstraint(typeResource, attributeResource, OWL.minCardinality,
-//											getJenaModel().createTypedLiteral(min));
-//								}
-//								
-//								if (max != Cardinality.UNBOUNDED &&
-//									(max <= 1 || supportPropertyCardinalityConstraintsGreaterThanOne)) {
-//									writeAttributeConstraint(typeResource, attributeResource, OWL.maxCardinality,
-//											getJenaModel().createTypedLiteral(max));
-//								}
-//							}						
-//						}
+						Resource attributeResource = createUriResource(super.formatAttributeName(attributeInfo));
+						
+						//
+						// write constraint about property type
+						//
+						if (owlProfile.supportsRdfProperty(OWL.allValuesFrom, null)) {
+							writePropertyRestriction(typeResource, attributeResource, OWL.allValuesFrom,
+									createUriResource(super.formatTypeName(attributeInfo.getAttributeTypeInfo())));
+						}
+						
+						if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ExportPropertyCardinalities) &&
+								owlProfile.supportsRdfProperty(OWL.cardinality, null)) {
+							
+							// write attribute cardinality
+							if (attributeInfo.isOptional()) {
+								writePropertyRestriction(typeResource, attributeResource, OWL.minCardinality,
+										getJenaModel().createTypedLiteral(0));
+						
+								writePropertyRestriction(typeResource, attributeResource, OWL.maxCardinality,
+										getJenaModel().createTypedLiteral(1));								
+						
+							} else {								
+								writePropertyRestriction(typeResource, attributeResource, OWL.cardinality,
+										getJenaModel().createTypedLiteral(1));
+							}
+							
+						}
+						
 					}
 				}
 			}
@@ -675,142 +560,151 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 
 	}
 	
-	private void writeAttributeConstraint(Resource typeResource, Resource attributeResource, Property constraintKindProperty, RDFNode constraintValueTypeResource) {		
-		Resource blankNode = super.createAnonResource();
-		adapter.exportTriple(blankNode, RDF.type, OWL.Restriction);
-		adapter.exportTriple(blankNode, OWL.onProperty, attributeResource);
-		adapter.exportTriple(blankNode, constraintKindProperty, constraintValueTypeResource);
-		adapter.exportTriple(typeResource, RDFS.subClassOf, blankNode);		
-	}
+//	private void writeAttributeConstraint(Resource typeResource, Resource attributeResource, Property constraintKindProperty, RDFNode constraintValueTypeResource) {		
+//		Resource blankNode = super.createAnonResource();
+//		adapter.exportTriple(blankNode, RDF.type, OWL.Restriction);
+//		adapter.exportTriple(blankNode, OWL.onProperty, attributeResource);
+//		adapter.exportTriple(blankNode, constraintKindProperty, constraintValueTypeResource);
+//		adapter.exportTriple(typeResource, RDFS.subClassOf, blankNode);		
+//	}
 
-	private void writeAttributeInfo(String attributeName, List<IfcAttributeInfo> attributeInfoList) {
-
-		Set<String> domainTypeNames = new TreeSet<>();
-		Set<String> rangeTypeNames = new TreeSet<>();
-		EnumSet<IfcTypeEnum> valueTypes = EnumSet.noneOf(IfcTypeEnum.class);
-		boolean isFunctionalProperty = true;
-		boolean isInverseFunctionalProperty = true;
-		
-		if (!context.supportsRdfProperty(OWL.FunctionalProperty, OwlProfile.RdfTripleObjectTypeEnum.SingleObject)) {
-			isFunctionalProperty = false;
-			isInverseFunctionalProperty = false;
-		}
-		
-		for (IfcAttributeInfo attributeInfo : attributeInfoList) {
-			IfcEntityTypeInfo domainTypeInfo = attributeInfo.getEntityTypeInfo();
-			domainTypeNames.add(super.formatTypeName(domainTypeInfo));
-			
-			IfcTypeInfo rangeTypeInfo = attributeInfo.getAttributeTypeInfo(); 
-			rangeTypeNames.add(super.formatTypeName(rangeTypeInfo));
-			valueTypes.addAll(rangeTypeInfo.getValueTypes());
-			
-			isFunctionalProperty = isFunctionalProperty && attributeInfo.isFunctional();
-			isInverseFunctionalProperty = isInverseFunctionalProperty && attributeInfo.isInverseFunctional();			
-		}
-		
-		//
-		// owl:DataProperty, owl:ObjectProperty, or rdf:Property
-		//
-		Resource attributeResource = createUriResource(super.formatOntologyName(attributeName));
-		if (valueTypes.size() == 1 && !valueTypes.contains(IfcTypeEnum.ENTITY)) {
-			adapter.exportTriple(attributeResource, RDF.type, OWL.DatatypeProperty);
-		} else {
-			adapter.exportTriple(attributeResource, RDF.type, OWL.ObjectProperty);
-		}
-
-		//
-		// owl:FunctionalProperty
-		//
-		if (isFunctionalProperty) {
-			adapter.exportTriple(attributeResource, RDF.type, OWL.FunctionalProperty);			
-		}
-		
-		//
-		// owl:InverseFunctionalProperty
-		//
-		if (isInverseFunctionalProperty) {
-			adapter.exportTriple(attributeResource, RDF.type, OWL.InverseFunctionalProperty);
-		}
-		
-		//
-		// rdfs:domain, rdfs:range
-		//
-		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.PrintPropertyDomainAndRange)) {
-		
-			if (domainTypeNames.size() == 1) {
-				adapter.exportTriple(attributeResource, RDFS.domain, createUriResource(domainTypeNames.iterator().next()));
-			} else if (context.allowPrintingPropertyDomainAndRangeAsUnion()) {
-				//
-				// In OWL Lite the value of rdfs:domain must be a class identifier. 
-				// See: http://www.w3.org/TR/owl-ref/#domain-def
-				//
-				
-				List<RDFNode> domainTypeResources = new ArrayList<>();
-				for (String domainTypeName : domainTypeNames) {
-					domainTypeResources.add(createUriResource(domainTypeName));
-				}				
-				
-				Resource domainTypeResource = super.createAnonResource();
-				adapter.exportTriple(domainTypeResource, RDF.type, OWL.Class);
-				adapter.exportTriple(domainTypeResource, OWL.unionOf, createList(domainTypeResources));	
-				adapter.exportTriple(attributeResource, RDFS.domain, domainTypeResource);			
-			}
+//	private void writeAttributeInfo(String attributeName, List<IfcAttributeInfo> attributeInfoList) {
+//
+//		Set<String> domainTypeNames = new TreeSet<>();
+//		Set<String> rangeTypeNames = new TreeSet<>();
+//		EnumSet<IfcTypeEnum> valueTypes = EnumSet.noneOf(IfcTypeEnum.class);
+//		boolean isFunctionalProperty = true;
+//		boolean isInverseFunctionalProperty = true;
+//		
+//		if (!context.supportsRdfProperty(OWL.FunctionalProperty, OwlProfile.RdfTripleObjectTypeEnum.SingleObject)) {
+//			isFunctionalProperty = false;
+//			isInverseFunctionalProperty = false;
+//		}
+//		
+//		for (IfcAttributeInfo attributeInfo : attributeInfoList) {
+//			IfcEntityTypeInfo domainTypeInfo = attributeInfo.getEntityTypeInfo();
+//			domainTypeNames.add(super.formatTypeName(domainTypeInfo));
+//			
+//			IfcTypeInfo rangeTypeInfo = attributeInfo.getAttributeTypeInfo(); 
+//			rangeTypeNames.add(super.formatTypeName(rangeTypeInfo));
+//			valueTypes.addAll(rangeTypeInfo.getValueTypes());
+//			
+//			isFunctionalProperty = isFunctionalProperty && attributeInfo.isFunctional();
+//			isInverseFunctionalProperty = isInverseFunctionalProperty && attributeInfo.isInverseFunctional();			
+//		}
+//		
+//		//
+//		// owl:DataProperty, owl:ObjectProperty, or rdf:Property
+//		//
+//		Resource attributeResource = createUriResource(super.formatOntologyName(attributeName));
+//		if (valueTypes.size() == 1 && !valueTypes.contains(IfcTypeEnum.ENTITY)) {
+//			adapter.exportTriple(attributeResource, RDF.type, OWL.DatatypeProperty);
+//		} else {
+//			adapter.exportTriple(attributeResource, RDF.type, OWL.ObjectProperty);
+//		}
+//
+//		//
+//		// owl:FunctionalProperty
+//		//
+//		if (isFunctionalProperty) {
+//			adapter.exportTriple(attributeResource, RDF.type, OWL.FunctionalProperty);			
+//		}
+//		
+//		//
+//		// owl:InverseFunctionalProperty
+//		//
+//		if (isInverseFunctionalProperty) {
+//			adapter.exportTriple(attributeResource, RDF.type, OWL.InverseFunctionalProperty);
+//		}
+//		
+//		//
+//		// rdfs:domain, rdfs:range
+//		//
+//		if (context.isEnabledOption(Ifc2RdfConversionOptionsEnum.PrintPropertyDomainAndRange)) {
+//		
+//			if (domainTypeNames.size() == 1) {
+//				adapter.exportTriple(attributeResource, RDFS.domain, createUriResource(domainTypeNames.iterator().next()));
+//			} else if (context.allowPrintingPropertyDomainAndRangeAsUnion()) {
+//				//
+//				// In OWL Lite the value of rdfs:domain must be a class identifier. 
+//				// See: http://www.w3.org/TR/owl-ref/#domain-def
+//				//
+//				
+//				List<RDFNode> domainTypeResources = new ArrayList<>();
+//				for (String domainTypeName : domainTypeNames) {
+//					domainTypeResources.add(createUriResource(domainTypeName));
+//				}				
+//				
+//				Resource domainTypeResource = super.createAnonResource();
+//				adapter.exportTriple(domainTypeResource, RDF.type, OWL.Class);
+//				adapter.exportTriple(domainTypeResource, OWL.unionOf, createList(domainTypeResources));	
+//				adapter.exportTriple(attributeResource, RDFS.domain, domainTypeResource);			
+//			}
+//	
+//			//
+//			// Caution: rdfs:range should be used with care
+//			// See: http://www.w3.org/TR/owl-ref/#range-def
+//			//
+//			if (rangeTypeNames.size() == 1) {
+//				adapter.exportTriple(attributeResource, RDFS.range, createUriResource(rangeTypeNames.iterator().next()));
+//			} else if (context.allowPrintingPropertyDomainAndRangeAsUnion()) {
+//				//
+//				// In OWL Lite the only type of class descriptions allowed as objects of rdfs:range are class names. 
+//				// See: http://www.w3.org/TR/owl-ref/#range-def
+//				//				
+//				List<RDFNode> rangeTypeResources = new ArrayList<>();
+//				for (String rangeTypeName : rangeTypeNames) {
+//					rangeTypeResources.add(createUriResource(rangeTypeName));
+//				}				
+//				
+//				Resource rangeTypeResource = super.createAnonResource();
+//				adapter.exportTriple(rangeTypeResource, RDF.type, OWL.Class);
+//				adapter.exportTriple(rangeTypeResource, OWL.unionOf, createList(rangeTypeResources));	
+//				adapter.exportTriple(attributeResource, RDFS.range, rangeTypeResource);				
+//			}
+//			
+//		}
+//		
+//		if (attributeInfoList.size() == 1) {
+//			//
+//			// write owl:inverseOf
+//			// See: http://www.w3.org/TR/owl-ref/#inverseOf-def
+//			//
+//			if (attributeInfoList.get(0) instanceof IfcInverseLinkInfo && context.supportsRdfProperty(OWL.inverseOf, OwlProfile.RdfTripleObjectTypeEnum.SingleObject)) {
+//				IfcInverseLinkInfo inverseLinkInfo = (IfcInverseLinkInfo)attributeInfoList.get(0);
+//				adapter.exportTriple(attributeResource, OWL.inverseOf, createUriResource(super.formatAttributeName(inverseLinkInfo.getOutgoingLinkInfo())));
+//			}
+//		} else {
+//			if (avoidDuplicationOfPropertyNames) {
+//				for (IfcAttributeInfo subAttributeInfo : attributeInfoList) {
+//					adapter.exportEmptyLine();
+//					List<IfcAttributeInfo> attributeInfoSubList = new ArrayList<>();
+//					attributeInfoSubList.add(subAttributeInfo);
+//					String subAttributeName = subAttributeInfo.getUniqueName();
+//					writeAttributeInfo(subAttributeName, attributeInfoSubList);
+//					adapter.exportTriple(createUriResource(super.formatOntologyName(subAttributeName)), RDFS.subPropertyOf, attributeResource);
+//				}
+//			}
+//		}
+//	}
 	
-			//
-			// Caution: rdfs:range should be used with care
-			// See: http://www.w3.org/TR/owl-ref/#range-def
-			//
-			if (rangeTypeNames.size() == 1) {
-				adapter.exportTriple(attributeResource, RDFS.range, createUriResource(rangeTypeNames.iterator().next()));
-			} else if (context.allowPrintingPropertyDomainAndRangeAsUnion()) {
-				//
-				// In OWL Lite the only type of class descriptions allowed as objects of rdfs:range are class names. 
-				// See: http://www.w3.org/TR/owl-ref/#range-def
-				//				
-				List<RDFNode> rangeTypeResources = new ArrayList<>();
-				for (String rangeTypeName : rangeTypeNames) {
-					rangeTypeResources.add(createUriResource(rangeTypeName));
-				}				
-				
-				Resource rangeTypeResource = super.createAnonResource();
-				adapter.exportTriple(rangeTypeResource, RDF.type, OWL.Class);
-				adapter.exportTriple(rangeTypeResource, OWL.unionOf, createList(rangeTypeResources));	
-				adapter.exportTriple(attributeResource, RDFS.range, rangeTypeResource);				
-			}
-			
-		}
-		
-		if (attributeInfoList.size() == 1) {
-			//
-			// write owl:inverseOf
-			// See: http://www.w3.org/TR/owl-ref/#inverseOf-def
-			//
-			if (attributeInfoList.get(0) instanceof IfcInverseLinkInfo && context.supportsRdfProperty(OWL.inverseOf, OwlProfile.RdfTripleObjectTypeEnum.SingleObject)) {
-				IfcInverseLinkInfo inverseLinkInfo = (IfcInverseLinkInfo)attributeInfoList.get(0);
-				adapter.exportTriple(attributeResource, OWL.inverseOf, createUriResource(super.formatAttributeName(inverseLinkInfo.getOutgoingLinkInfo())));
-			}
-		} else {
-			if (avoidDuplicationOfPropertyNames) {
-				for (IfcAttributeInfo subAttributeInfo : attributeInfoList) {
-					adapter.exportEmptyLine();
-					List<IfcAttributeInfo> attributeInfoSubList = new ArrayList<>();
-					attributeInfoSubList.add(subAttributeInfo);
-					String subAttributeName = subAttributeInfo.getUniqueName();
-					writeAttributeInfo(subAttributeName, attributeInfoSubList);
-					adapter.exportTriple(createUriResource(super.formatOntologyName(subAttributeName)), RDFS.subPropertyOf, attributeResource);
-				}
-			}
-		}
-	}
+//	private RDFList getCardinalityValueList(int min, int max) {
+//		List<Literal> literals = new ArrayList<>();
+//		for (int i = min; i <= max; ++i) {
+//			literals.add(getJenaModel().createTypedLiteral(i));
+//		}
+//		return super.createList(literals);
+//	}	
 	
-	private RDFList getCardinalityValueList(int min, int max) {
-		List<Literal> literals = new ArrayList<>();
-		for (int i = min; i <= max; ++i) {
-			literals.add(getJenaModel().createTypedLiteral(i));
-		}
-		return super.createList(literals);
+	private void writePropertyRestriction(Resource classResource, Resource propertyResource, Property restrictionProperty, RDFNode propertyValue) {
+		Resource baseTypeResource = super.createAnonResource();
+		adapter.exportTriple(baseTypeResource, RDF.type, OWL.Restriction);
+		adapter.exportTriple(baseTypeResource, OWL.onProperty, propertyResource);
+		adapter.exportTriple(baseTypeResource, restrictionProperty, propertyValue);
+		
+		adapter.exportTriple(classResource, RDFS.subClassOf, baseTypeResource);
 	}	
-	
+
 	
 	
 }

@@ -1,0 +1,168 @@
+
+*****************************************
+BUILDING drumbeat-common (started)
+*****************************************
+
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building drumbeat-common 1.0.0-RELEASE
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ drumbeat-common ---
+[INFO] Deleting C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ drumbeat-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ drumbeat-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 37 source files to C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\target\classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ drumbeat-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ drumbeat-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ drumbeat-common ---
+[INFO] Surefire report directory: C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running fi.hut.cs.drumbeat.common.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ drumbeat-common ---
+[INFO] Building jar: C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\target\drumbeat-common-1.0.0-RELEASE.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ drumbeat-common ---
+[INFO] Installing C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\target\drumbeat-common-1.0.0-RELEASE.jar to C:\Users\vuhoan1\.m2\repository\fi\hut\cs\drumbeat\drumbeat-common\1.0.0-RELEASE\drumbeat-common-1.0.0-RELEASE.jar
+[INFO] Installing C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-common\pom.xml to C:\Users\vuhoan1\.m2\repository\fi\hut\cs\drumbeat\drumbeat-common\1.0.0-RELEASE\drumbeat-common-1.0.0-RELEASE.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.682 s
+[INFO] Finished at: 2015-05-12T15:36:18+03:00
+[INFO] Final Memory: 15M/215M
+[INFO] ------------------------------------------------------------------------
+
+*****************************************
+BUILDING drumbeat-common (completed)
+*****************************************
+
+
+
+
+
+
+*****************************************
+BUILDING drumbeat-ifc.common (started)
+*****************************************
+
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building drumbeat-ifc.common 1.0.0-RELEASE
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ drumbeat-ifc.common ---
+[INFO] Deleting C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ drumbeat-ifc.common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ drumbeat-ifc.common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 8 source files to C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\target\classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ drumbeat-ifc.common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ drumbeat-ifc.common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ drumbeat-ifc.common ---
+[INFO] Surefire report directory: C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running fi.hut.cs.drumbeat.ifc.common.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ drumbeat-ifc.common ---
+[INFO] Building jar: C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\target\drumbeat-ifc.common-1.0.0-RELEASE.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ drumbeat-ifc.common ---
+[INFO] Installing C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\target\drumbeat-ifc.common-1.0.0-RELEASE.jar to C:\Users\vuhoan1\.m2\repository\fi\hut\cs\drumbeat\drumbeat-ifc.common\1.0.0-RELEASE\drumbeat-ifc.common-1.0.0-RELEASE.jar
+[INFO] Installing C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.common\pom.xml to C:\Users\vuhoan1\.m2\repository\fi\hut\cs\drumbeat\drumbeat-ifc.common\1.0.0-RELEASE\drumbeat-ifc.common-1.0.0-RELEASE.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.244 s
+[INFO] Finished at: 2015-05-12T15:36:26+03:00
+[INFO] Final Memory: 17M/215M
+[INFO] ------------------------------------------------------------------------
+
+*****************************************
+BUILDING drumbeat-ifc.common (completed)
+*****************************************
+
+
+
+
+
+
+*****************************************
+BUILDING drumbeat-ifc.data (started)
+*****************************************
+
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building drumbeat-ifc.data 1.0.0-RELEASE
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ drumbeat-ifc.data ---
+[INFO] Deleting C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.data\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ drumbeat-ifc.data ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.data\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ drumbeat-ifc.data ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 44 source files to C:\DRUM\!github\drumbeat\Ifc2Rdf\software\drumbeat-ifc2ld-1.0.0\drumbeat-ifc.data\target\classes
+Terminate batch job (Y/N)? 
+
+*****************************************
+BUILDING drumbeat-ifc.data (completed)
+*****************************************
+
+
+
+
+
+
+*****************************************
+BUILDING drumbeat-rdf (started)
+*****************************************
+

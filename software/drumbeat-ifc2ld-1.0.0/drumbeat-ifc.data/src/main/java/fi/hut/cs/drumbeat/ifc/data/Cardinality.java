@@ -15,54 +15,65 @@ public class Cardinality implements Serializable {
 	public static final int ONE = 1;
 	public static final int UNBOUNDED = Integer.MAX_VALUE;
 	
-	private int min;
-	private int max;
+	private int minCardinality;
+	private int maxCardinality;
+	private int minIndex;
+	private int maxIndex;
+	private boolean isArrayIndex;
 	
-	public Cardinality(int min, int max) {
-		this.min = min;
-		this.max = max;
-	}
-	
-	public boolean isOptional() {
-		return min == ZERO;
-	}
-	
-	public boolean isMultiple() {
-		return max > ONE;
-	}
-	
-	public void setOptional(boolean optional) {
-		if (optional) {
-			min = ZERO;
+	public Cardinality(int min, int max, boolean isArrayIndex) {
+		this.isArrayIndex = isArrayIndex;
+		if (isArrayIndex) {
+			this.minIndex = min;
+			this.maxCardinality = max;
+			this.minCardinality = max - min + 1;
+			this.maxCardinality = this.minCardinality;
+		} else {
+			this.minCardinality = min;
+			this.maxCardinality = max;
+			this.minIndex = 1;
+			this.maxIndex = this.minIndex + maxCardinality - 1;
 		}
 	}
 	
+	public boolean isArrayIndex() {
+		return isArrayIndex;
+	}
+	
+	public boolean isCardinalityFixed() {
+		return minCardinality == maxCardinality;
+	}
+	
+	public boolean isMultiple() {
+		return maxCardinality > ONE;
+	}
+	
 	public boolean isSingle() {
-		return max <= ONE;
+		return maxCardinality <= ONE;
 	}	
 	
-	public int getMin() {
-		return min;
+	public int getMinCardinality() {
+		return minCardinality;
 	}
 	
-	public int getMax() {
-		return max;
+	public int getMaxCardinality() {
+		return maxCardinality;
 	}
 	
-	public int setMin(int min) {
-		return this.min = min;
+	public int getMinIndex() {
+		return minIndex;
 	}
 	
-	public int setMax(int max) {
-		return this.max = max;
+	public int getMaxIndex() {
+		return maxIndex;
 	}
-
+	
 	public CardinalityTypeEnum getMinType() {
-		return CardinalityTypeEnum.getType(min);
+		return CardinalityTypeEnum.getType(minCardinality);
 	}
 	
 	public CardinalityTypeEnum getMaxType() {
-		return CardinalityTypeEnum.getType(max);
+		return CardinalityTypeEnum.getType(maxCardinality);
 	}
 	
 	@Override
@@ -71,12 +82,12 @@ public class Cardinality implements Serializable {
 	}
 	
 	public String toShortString() {
-		if (max == 1) {
-			return min == 0 ? "1?" : "1";
-		} else if (min == 0) {
+		if (maxCardinality == 1) {
+			return minCardinality == 0 ? "1?" : "1";
+		} else if (minCardinality == 0) {
 			return "N?";
 		}  else {
-			return min == 1 ? "N+" : "N";
+			return minCardinality == 1 ? "N+" : "N";
 		}		
 	}
 

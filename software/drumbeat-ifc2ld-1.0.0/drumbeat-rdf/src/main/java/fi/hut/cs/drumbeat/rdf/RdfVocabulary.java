@@ -29,19 +29,19 @@ public class RdfVocabulary {
 		public static final Property minExclusive = DEFAULT_MODEL.createProperty(com.hp.hpl.jena.vocabulary.XSD.getURI() + "minExclusive");		
 	}	
 	
-	public static class OLO {
-		public static final String BASE_PREFIX = "olo";
-		public static final String BASE_URI = "http://purl.org/ontology/olo/core#";
-		public static final String IMPORT_URI = "http://purl.org/ontology/olo/orderedlistontology.owl"; 
-
-		public static final Resource OrderedList = DEFAULT_MODEL.createResource(BASE_URI + "OrderedList");
-		public static final Resource Slot = DEFAULT_MODEL.createResource(BASE_URI +  "Slot");
-		
-		public static final Property index = DEFAULT_MODEL.createProperty(BASE_URI +  "index");
-		public static final Property item = DEFAULT_MODEL.createProperty(BASE_URI +  "item");
-		public static final Property length = DEFAULT_MODEL.createProperty(BASE_URI +  "length");
-		public static final Property slot = DEFAULT_MODEL.createProperty(BASE_URI +  "slot");		
-	}
+//	public static class OLO {
+//		public static final String BASE_PREFIX = "olo";
+//		public static final String BASE_URI = "http://purl.org/ontology/olo/core#";
+//		public static final String IMPORT_URI = "http://purl.org/ontology/olo/orderedlistontology.owl"; 
+//
+//		public static final Resource OrderedList = DEFAULT_MODEL.createResource(BASE_URI + "OrderedList");
+//		public static final Resource Slot = DEFAULT_MODEL.createResource(BASE_URI +  "Slot");
+//		
+//		public static final Property index = DEFAULT_MODEL.createProperty(BASE_URI +  "index");
+//		public static final Property item = DEFAULT_MODEL.createProperty(BASE_URI +  "item");
+//		public static final Property length = DEFAULT_MODEL.createProperty(BASE_URI +  "length");
+//		public static final Property slot = DEFAULT_MODEL.createProperty(BASE_URI +  "slot");		
+//	}
 	
 	public static class VOID {
 		public static final String BASE_PREFIX = "void";

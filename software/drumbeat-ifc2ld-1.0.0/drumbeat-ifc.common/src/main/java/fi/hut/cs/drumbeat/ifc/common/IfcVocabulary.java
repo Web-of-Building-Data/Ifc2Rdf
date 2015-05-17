@@ -106,29 +106,35 @@ public class IfcVocabulary {
 	
 	public static class TypeNames {
 		
-		public static final String IFC_TIME_STAMP = "IfcTimeStamp";	
-		public static final String IFC_ROOT = "IfcRoot";
-		public static final String IFC_PROJECT = "IfcProject";
+		public static final String IFC_ELEMENT = "IfcElement";
 		public static final String IFC_OBJECT = "IfcObject";
 		public static final String IFC_OBJECT_DEFINITION = "IfcObjectDefinition";
+		public static final String IFC_OWNER_HISTORY = "IfcOwnerHistory";
 		public static final String IFC_PRODUCT = "IfcProduct";
-		public static final String IFC_ELEMENT = "IfcElement";
+		public static final String IFC_PROJECT = "IfcProject";
+		public static final String IFC_ROOT = "IfcRoot";
 		public static final String IFC_SPACIAL_STRUCTURAL_ELEMENT = "IfcSpacialStructuralElement";
 		public static final String IFC_RELATIONSHIP = "IfcRelationship";
 		public static final String IFC_PROPERTY_DEFINITION = "IfcPropertydefinition";
-		public static final String IFC_OWNER_HISTORY = "IfcOwnerHistory";
 		
-		public static final String REAL = "REAL";
-		public static final String NUMBER = "NUMBER";
-		public static final String INTEGER = "INTEGER";
+		public static final String IFC_BOOLEAN = "IfcBoolean";
+		public static final String IFC_INTEGER = "IfcInteger";
+		public static final String IFC_LOGICAL = "IfcLogical";
+		public static final String IFC_REAL = "IfcReal";
+		public static final String IFC_TEXT = "IfcText";
+		public static final String IFC_TIME_STAMP = "IfcTimeStamp";	
+		
 		public static final String BINARY = "BINARY";
 		public static final String BINARY32 = "BINARY32";
-		public static final String GUID = "STRING22";
-		public static final String STRING = "STRING";
-		public static final String STRING255 = "STRING255";
-		public static final String LOGICAL = "LOGICAL";
 		public static final String BOOLEAN = "BOOLEAN";
 		public static final String DATETIME = "DATETIME";		
+		public static final String GUID = "STRING22";
+		public static final String INTEGER = "INTEGER";
+		public static final String LOGICAL = "LOGICAL";
+		public static final String NUMBER = "NUMBER";
+		public static final String REAL = "REAL";
+		public static final String STRING = "STRING";
+		public static final String STRING255 = "STRING255";
 		
 	}
 	

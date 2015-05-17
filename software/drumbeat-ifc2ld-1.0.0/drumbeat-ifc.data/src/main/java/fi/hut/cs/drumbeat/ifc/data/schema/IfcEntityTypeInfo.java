@@ -10,24 +10,6 @@ public class IfcEntityTypeInfo extends IfcTypeInfo { // implements IRdfNode {
 	
 	private static final long serialVersionUID = 1L;
 	
-	//////////////////////////////////
-	// Static Members
-	//////////////////////////////////
-	public static void addPredefinedTypesToSchema(IfcSchema schema) {
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_ROOT));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_PROJECT));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_OBJECT));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_OBJECT_DEFINITION));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_PRODUCT));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_ELEMENT));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_SPACIAL_STRUCTURAL_ELEMENT));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_RELATIONSHIP));
-		schema.addEntityTypeInfo(new IfcEntityTypeInfo(schema, IfcVocabulary.TypeNames.IFC_PROPERTY_DEFINITION));		
-	}	
-
-	//////////////////////////////////
-	// Non-Static Members
-	//////////////////////////////////
 	private IfcEntityTypeInfo superTypeInfo;
 	private List<IfcEntityTypeInfo> subTypeInfos;
 	private List<IfcAttributeInfo> attributeInfos = new ArrayList<>();
@@ -140,10 +122,10 @@ public class IfcEntityTypeInfo extends IfcTypeInfo { // implements IRdfNode {
 		return this.equals(typeInfo) || isSubtypeOf(typeInfo);
 	}
 	
-	@Override
-	public boolean isEntityOrSelectType() {
-		return true;
-	}		
+//	@Override
+//	public boolean isEntityOrSelectType() {
+//		return true;
+//	}		
 	
 	@Override
 	public boolean isCollectionType() {

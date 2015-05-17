@@ -29,7 +29,7 @@ public abstract class Ifc2RdfExporterBase {
 	
 	private Model jenaModel;
 	private Ifc2RdfConversionContext context;
-	private String ontologyNamespacePrefix;
+//	private String ontologyNamespacePrefix;
 	private String ontologyNamespaceUri;
 	private String modelNamespacePrefix;
 	private String modelNamespaceUri;
@@ -43,13 +43,13 @@ public abstract class Ifc2RdfExporterBase {
 		return jenaModel;
 	}
 	
-	protected void setOntologyNamespacePrefix(String prefix) {
-		ontologyNamespacePrefix = prefix;
-	}
-	
-	protected String getOntologyNamespacePrefix() {
-		return ontologyNamespacePrefix;
-	}
+//	protected void setOntologyNamespacePrefix(String prefix) {
+//		ontologyNamespacePrefix = prefix;
+//	}
+//	
+//	protected String getOntologyNamespacePrefix() {
+//		return ontologyNamespacePrefix;
+//	}
 
 	protected String getOntologyNamespaceUri() {
 		return ontologyNamespaceUri;

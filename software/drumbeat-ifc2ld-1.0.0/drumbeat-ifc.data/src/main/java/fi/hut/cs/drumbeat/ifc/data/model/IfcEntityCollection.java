@@ -2,14 +2,14 @@ package fi.hut.cs.drumbeat.ifc.data.model;
 
 import java.util.List;
 
-public class IfcEntityList extends IfcCollectionValue<IfcEntityBase> {
+public class IfcEntityCollection extends IfcCollectionValue<IfcEntityBase> {
 
 	private static final long serialVersionUID = 1L;
 
-	public IfcEntityList() {
+	public IfcEntityCollection() {
 	}
 
-	public IfcEntityList(List<IfcEntityBase> values) {
+	public IfcEntityCollection(List<IfcEntityBase> values) {
 		super(values);
 	}
 

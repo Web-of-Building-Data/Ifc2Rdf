@@ -1,7 +1,6 @@
 package fi.hut.cs.drumbeat.ifc.convert.ifc2ld;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -14,15 +13,13 @@ import fi.hut.cs.drumbeat.ifc.data.metamodel.IfcStepFileDescription;
 import fi.hut.cs.drumbeat.ifc.data.metamodel.IfcStepFileName;
 import fi.hut.cs.drumbeat.ifc.data.model.*;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcSchema;
+import fi.hut.cs.drumbeat.rdf.OwlProfile;
 import fi.hut.cs.drumbeat.rdf.RdfVocabulary;
 import fi.hut.cs.drumbeat.rdf.export.RdfExportAdapter;
 
 
 public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 	
-	public static final String STEP_PREFIX = "step"; 
-	public static final String STEP_URI = "http://drumbeat.cs.hut.fi/owl/step#"; 
-
 	private String metaDataSetUri;
 	private IfcSchema ifcSchema;
 //	private IfcModel ifcModel;
@@ -30,26 +27,25 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 	private Model jenaModel;
 	
 	private Ifc2RdfConversionContext context;
+	private OwlProfile owlProfile;
 	private RdfExportAdapter adapter;
 	
 	public Ifc2RdfMetaModelExporter(String metaDataSetUri, IfcModel ifcModel, Ifc2RdfConversionContext context, RdfExportAdapter rdfExportAdapter) {
 		super(context, rdfExportAdapter);
 		
 		this.metaDataSetUri = metaDataSetUri;
-//		this.ifcModel = ifcModel;
 		this.metaModel = ifcModel.getMetaModel();
 		this.ifcSchema = ifcModel.getSchema();
 		this.context = context;
+		this.owlProfile = context.getOwlProfile();
 		this.jenaModel = getJenaModel();
 		adapter = rdfExportAdapter;
 		
-		String ontologyNamespacePrefix = context.getOntologyPrefix();
-		String ontologyNamespaceUri = String.format(context.getOntologyNamespaceFormat(), ifcSchema.getVersion(), context.getName());
 
 		String modelNamespacePrefix = context.getModelPrefix();
 		String modelNamespaceUri = String.format(context.getModelNamespaceFormat(), ifcSchema.getVersion(), context.getName());
 		
-		super.setOntologyNamespacePrefix(ontologyNamespacePrefix);
+		String ontologyNamespaceUri = String.format(context.getOntologyNamespaceFormat(), ifcSchema.getVersion(), context.getName());
 		super.setOntologyNamespaceUri(ontologyNamespaceUri);
 		super.setModelNamespacePrefix(modelNamespacePrefix);
 		super.setModelNamespaceUri(modelNamespaceUri);		
@@ -68,10 +64,11 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 		adapter.setNamespacePrefix(RdfVocabulary.XSD.BASE_PREFIX, XSD.getURI());	
 		adapter.setNamespacePrefix(RdfVocabulary.VOID.BASE_PREFIX, RdfVocabulary.VOID.BASE_URI);
 		adapter.setNamespacePrefix(RdfVocabulary.DCTERMS.BASE_PREFIX, RdfVocabulary.DCTERMS.BASE_URI);
-		adapter.setNamespacePrefix(STEP_PREFIX, STEP_URI);
 		
+		adapter.setNamespacePrefix(Ifc2RdfVocabulary.EXPRESS.BASE_PREFIX, Ifc2RdfVocabulary.EXPRESS.getBaseUri());		
+		adapter.setNamespacePrefix(Ifc2RdfVocabulary.STEP.BASE_PREFIX,Ifc2RdfVocabulary.STEP.getBaseUri());
+
 		
-		adapter.setNamespacePrefix(getOntologyNamespacePrefix(), getOntologyNamespaceUri());
 		adapter.exportEmptyLine();
 		
 		Resource dataSetResource = super.createUriResource(metaDataSetUri);
@@ -86,7 +83,7 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 //				.replaceFirst("\\]", "\r\n\t\t]")
 //				.replaceAll(",", "\r\n\t\t\t");		
 		conversionOptionsString = String.format("OWL profile: %s.\r\n\t\tConversion options: %s",
-				context.getOwlProfileId(),
+				owlProfile.getOwlProfileId(),
 				conversionOptionsString); 
 		adapter.exportTriple(dataSetResource, RdfVocabulary.DCTERMS.description, jenaModel.createTypedLiteral(conversionOptionsString));		
 
@@ -115,31 +112,31 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 		Resource fileNameResource = jenaModel.createResource();
 		Resource fileSchemaResource = jenaModel.createResource();
 		
-		adapter.exportTriple(dataSetResource, createProperty(STEP_URI + "fileDescription"), fileDescriptionResource);
-		adapter.exportTriple(dataSetResource, createProperty(STEP_URI + "fileName"), fileNameResource);
-		adapter.exportTriple(dataSetResource, createProperty(STEP_URI + "fileSchema"), fileSchemaResource);
+		adapter.exportTriple(dataSetResource, Ifc2RdfVocabulary.STEP.fileDescription, fileDescriptionResource);
+		adapter.exportTriple(dataSetResource, Ifc2RdfVocabulary.STEP.fileName, fileNameResource);
+		adapter.exportTriple(dataSetResource, Ifc2RdfVocabulary.STEP.fileSchema, fileSchemaResource);
 		
 		stepFileDescription.getDescriptions().forEach(x ->
-			adapter.exportTriple(fileDescriptionResource, createProperty(STEP_URI + "description"), jenaModel.createTypedLiteral(x))
+			adapter.exportTriple(fileDescriptionResource, Ifc2RdfVocabulary.STEP.FileDescription.description, jenaModel.createTypedLiteral(x))
 		);
-		adapter.exportTriple(fileDescriptionResource, createProperty(STEP_URI + "implementation_level"), jenaModel.createTypedLiteral(stepFileDescription.getImplementationLevel()));
+		adapter.exportTriple(fileDescriptionResource, Ifc2RdfVocabulary.STEP.FileDescription.implementation_level, jenaModel.createTypedLiteral(stepFileDescription.getImplementationLevel()));
 		
-		adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "name"), jenaModel.createTypedLiteral(stepFileName.getName()));
-		adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "time_stamp"), jenaModel.createTypedLiteral(stepFileName.getTimeStamp()));
+		adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.name, jenaModel.createTypedLiteral(stepFileName.getName()));
+		adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.time_stamp, jenaModel.createTypedLiteral(stepFileName.getTimeStamp()));
 		stepFileName.getAuthors().forEach(x ->
-			adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "author"), jenaModel.createTypedLiteral(x))
+			adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.author, jenaModel.createTypedLiteral(x))
 		);
 
 		stepFileName.getOrganizations().forEach(x ->
-			adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "organization"), jenaModel.createTypedLiteral(x))
+			adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.organization, jenaModel.createTypedLiteral(x))
 		);
 		
-		adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "preprocessor_version"), jenaModel.createTypedLiteral(stepFileName.getPreprocessorVersion()));
-		adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "originating_system"), jenaModel.createTypedLiteral(stepFileName.getOriginatingSystem()));
-		adapter.exportTriple(fileNameResource, createProperty(STEP_URI + "authorization"), jenaModel.createTypedLiteral(stepFileName.getAuthorization()));
+		adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.preprocessor_version, jenaModel.createTypedLiteral(stepFileName.getPreprocessorVersion()));
+		adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.originating_system, jenaModel.createTypedLiteral(stepFileName.getOriginatingSystem()));
+		adapter.exportTriple(fileNameResource, Ifc2RdfVocabulary.STEP.FileName.authorization, jenaModel.createTypedLiteral(stepFileName.getAuthorization()));
 		
 		metaModel.getFileSchema().getSchemas().forEach(x ->
-			adapter.exportTriple(fileSchemaResource, createProperty(STEP_URI + "schema_identifiers"), jenaModel.createTypedLiteral(x))
+			adapter.exportTriple(fileSchemaResource, Ifc2RdfVocabulary.STEP.FileSchema.schema_identifiers, jenaModel.createTypedLiteral(x))
 		);
 		
 		//		IfcEntity ownerHistory = ifcModel.getFirstEntityByType(IfcVocabulary.TypeNames.IFC_OWNER_HISTORY);
@@ -147,15 +144,9 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 //			
 //		}
 		
-		
-		
 		adapter.endExport();
 		
 		return jenaModel;
-	}
-	
-	private static Property createProperty(String uri) {
-		return RdfVocabulary.DEFAULT_MODEL.createProperty(uri);
 	}
 	
 }

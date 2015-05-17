@@ -115,8 +115,8 @@ public class IfcSchemaParser {
 				if (tokens[0].equals(IfcVocabulary.ExpressFormat.TYPE)) {
 					
 					// parse an non-entity type info
-					IfcDefinedTypeInfo definedTypeInfo = parseDefinedTypeInfo(tokens);
-					schema.addDefinedTypeInfo(definedTypeInfo);
+					IfcNonEntityTypeInfo nonEntityTypeInfo = parseNonEntityTypeInfo(tokens);
+					schema.addNonEntityTypeInfo(nonEntityTypeInfo);
 					
 				} else if (tokens[0].equals(IfcVocabulary.ExpressFormat.ENTITY)) {
 					
@@ -134,7 +134,7 @@ public class IfcSchemaParser {
 //				//
 //				// bind all types
 //				//
-//				for (IfcDefinedTypeInfo typeInfo : schema.getDefinedTypeInfos()) {
+//				for (IfcNonEntityTypeInfo typeInfo : schema.getNonEntityTypeInfos()) {
 //					if (typeInfo instanceof IIfcLateBindingTypeInfo) {
 //						((IIfcLateBindingTypeInfo)typeInfo).bindTypeInfo(schema);
 //					}				
@@ -170,7 +170,7 @@ public class IfcSchemaParser {
 		}
 	}
 	
-	private IfcDefinedTypeInfo parseDefinedTypeInfo(String[] tokens) throws IOException, IfcFormatException, IfcNotFoundException {
+	private IfcNonEntityTypeInfo parseNonEntityTypeInfo(String[] tokens) throws IOException, IfcFormatException, IfcNotFoundException {
 		
 		tokens = RegexUtils.split2(tokens[1].trim(), RegexUtils.WHITE_SPACE);			
 		String typeName = IfcHelper.getFormattedTypeName(tokens[0]);
@@ -178,7 +178,7 @@ public class IfcSchemaParser {
 		tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.EQUAL);			
 		String typeInfoString = tokens[1].trim();
 		
-		IfcDefinedTypeInfo typeInfo = parseDefinedTypeInfoBody(typeInfoString, typeName);
+		IfcNonEntityTypeInfo typeInfo = parseNonEntityTypeInfoBody(typeInfoString, typeName);
 		
 		for (;;) {
 
@@ -205,7 +205,7 @@ public class IfcSchemaParser {
 	 * @throws IOException
 	 * @throws IfcFormatException
 	 */
-	private IfcDefinedTypeInfo parseDefinedTypeInfoBody(String typeInfoString, String typeName) throws IOException, IfcFormatException {		
+	private IfcNonEntityTypeInfo parseNonEntityTypeInfoBody(String typeInfoString, String typeName) throws IOException, IfcFormatException {		
 		String[] tokens = RegexUtils.split2(typeInfoString, RegexUtils.WHITE_SPACE);
 		
 		IfcCollectionKindEnum collectionKind = IfcCollectionKindEnum.parse(tokens[0]);
@@ -214,11 +214,11 @@ public class IfcSchemaParser {
 			//
 			// create a collection type
 			//
-			boolean isSorted = !tokens[0].equals(IfcVocabulary.ExpressFormat.SET);
+			boolean isArray = tokens[0].equals(IfcVocabulary.ExpressFormat.ARRAY);
 			
 			tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.OF);
 			
-			Cardinality cardinality = parseCardinality(tokens[0]);
+			Cardinality cardinality = parseCardinality(tokens[0], isArray);
 			
 			tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.UNIQUE);			
 			boolean itemsAreUnique = tokens.length == 2;
@@ -229,11 +229,14 @@ public class IfcSchemaParser {
 			
 			tokens = RegexUtils.split2(itemTypeInfoName, RegexUtils.WHITE_SPACE);
 			
+			IfcCollectionTypeInfo typeInfo;
 			if (isCollectionTypeHeader(tokens[0])) {
-				parseDefinedTypeInfoBody(typeInfoString, itemTypeInfoName); 
-			}		
+				IfcTypeInfo itemTypeInfo = parseNonEntityTypeInfoBody(typeInfoString, itemTypeInfoName); 
+				typeInfo = new IfcCollectionTypeInfo(schema, typeName, collectionKind, itemTypeInfo);
+			} else {
+				typeInfo = new IfcCollectionTypeInfo(schema, typeName, collectionKind, itemTypeInfoName);				
+			}
 			
-			IfcCollectionTypeInfo typeInfo = new IfcCollectionTypeInfo(schema, typeName, collectionKind, itemTypeInfoName);
 			typeInfo.setCardinality(cardinality);
 			return typeInfo;		
 			
@@ -274,52 +277,37 @@ public class IfcSchemaParser {
 			
 			String internalTypeInfoName = IfcHelper.getFormattedTypeName(tokens[0]);
 			
+			assert(typeName != null);
 			
-			if (typeName != null) {
-			
-				//
-				// create a redirect types
-				//
-				if (typeName.equalsIgnoreCase(IfcVocabulary.TypeNames.IFC_TIME_STAMP)) {
-					internalTypeInfoName = IfcVocabulary.TypeNames.DATETIME;
-				}
-				return new IfcRedirectTypeInfo(schema, typeName, internalTypeInfoName);
-			} else {
-				
-				throw new NullPointerException("typeName");
-				
-			}
+			try {
+				return schema.getNonEntityTypeInfo(typeName);
+			} catch (IfcNotFoundException e) {			
+				return new IfcDefinedTypeInfo(schema, typeName, internalTypeInfoName);
+			}			
 				
 		}			
 			
 	}
 	
-	private static Cardinality parseCardinality(String s) {
+	private static Cardinality parseCardinality(String s, boolean isArrayIndex) {
 		
 		s = s.trim();
 		
-		Cardinality cardinality = new Cardinality(Cardinality.ONE, Cardinality.ONE);
-
-		if (!s.isEmpty()) {
-		
-			String[] cardinalityTokens = 
-					RegexUtils.split2(s.replaceAll("[\\[\\]\\s]", ""), StringUtils.COLON);			
-			
-			if (!cardinalityTokens[0].equals(IfcVocabulary.ExpressFormat.UNBOUNDED)) {
-				cardinality.setMin(Integer.parseInt(cardinalityTokens[0]));
-			} else {
-				cardinality.setMin(Cardinality.UNBOUNDED);				
-			}
-			
-			if (!cardinalityTokens[1].equals(IfcVocabulary.ExpressFormat.UNBOUNDED)) {
-				cardinality.setMax(Integer.parseInt(cardinalityTokens[1]));
-			} else {
-				cardinality.setMax(Cardinality.UNBOUNDED);				
-			}
-			
+		if (s.isEmpty()) {
+			return null;
 		}
 		
-		return cardinality;		
+		String[] cardinalityTokens = 
+				RegexUtils.split2(s.replaceAll("[\\[\\]\\s]", ""), StringUtils.COLON);
+		
+		int min = cardinalityTokens[0].equals(IfcVocabulary.ExpressFormat.UNBOUNDED) ?
+				Cardinality.UNBOUNDED : Integer.parseInt(cardinalityTokens[0]); 
+		
+		int max = cardinalityTokens[1].equals(IfcVocabulary.ExpressFormat.UNBOUNDED) ?
+				Cardinality.UNBOUNDED : Integer.parseInt(cardinalityTokens[1]);
+		
+		return new Cardinality(min, max, isArrayIndex);
+			
 	}
 
 	/**
@@ -429,7 +417,7 @@ public class IfcSchemaParser {
 		
 		// read collection cardinality
 		String[] tokens = RegexUtils.split2(typeInfoString, IfcVocabulary.ExpressFormat.OF);				
-		Cardinality collectionCardinality = parseCardinality(tokens[0]);				
+		Cardinality collectionCardinality = parseCardinality(tokens[0], collectionKind == IfcCollectionKindEnum.Array);				
 		tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.UNIQUE);				
 		
 		boolean collectionItemsAreUnique = tokens.length == 2;		
@@ -448,26 +436,10 @@ public class IfcSchemaParser {
 				return (IfcCollectionTypeInfo)schema.getTypeInfo(collectionTypeInfoName);
 			} catch (IfcNotFoundException e) {					
 			
-				// create or get the same collection type, but without cardinality
-				IfcCollectionTypeInfo superCollectionTypeInfoWithoutCardinalities;
-				String superCollectionTypeInfoName = IfcCollectionTypeInfo.formatCollectionTypeName(collectionKind, collectionItemTypeInfoName, null);
-				assert (superCollectionTypeInfoName != collectionTypeInfoName) : "Expected: (superCollectionTypeInfoName != collectionTypeInfoName)";
-				try {
-					superCollectionTypeInfoWithoutCardinalities = (IfcCollectionTypeInfo)schema.getTypeInfo(superCollectionTypeInfoName);
-				} catch (IfcNotFoundException e1) {					
-					// create collection type (with cardinality)
-					superCollectionTypeInfoWithoutCardinalities = new IfcCollectionTypeInfo(schema, superCollectionTypeInfoName, collectionKind, collectionItemTypeInfoName);
-					superCollectionTypeInfoWithoutCardinalities.setCardinality(null);
-					//superCollectionTypeInfo.bindTypeInfo(schema);
-					schema.addDefinedTypeInfo(superCollectionTypeInfoWithoutCardinalities);
-				}
-				
 				// create collection type (with cardinality)
 				IfcCollectionTypeInfo collectionTypeInfo = new IfcCollectionTypeInfo(schema, collectionTypeInfoName, collectionKind, collectionItemTypeInfoName);
 				collectionTypeInfo.setCardinality(collectionCardinality);
-				collectionTypeInfo.setSuperCollectionTypeWithoutCardinalities(superCollectionTypeInfoWithoutCardinalities);
-				//collectionTypeInfo.bindTypeInfo(schema);
-				schema.addDefinedTypeInfo(collectionTypeInfo);
+				schema.addNonEntityTypeInfo(collectionTypeInfo);
 				
 				return collectionTypeInfo;
 			}
@@ -484,26 +456,13 @@ public class IfcSchemaParser {
 			IfcCollectionTypeInfo collectionItemTypeInfo = parseCollectionType(collectionKind2, tokens[1]);
 			
 			// create or get the super collection type (without cardinality)
-			IfcCollectionTypeInfo superCollectionTypeInfoWithoutCardinalities;
-			String collectionTypeInfoName = collectionItemTypeInfo.getName();
-			String superCollectionTypeInfoName = IfcCollectionTypeInfo.formatCollectionTypeName(collectionKind2, collectionTypeInfoName, null);
-			assert (superCollectionTypeInfoName != collectionTypeInfoName) : "Expected: (superCollectionTypeInfoName != collectionTypeInfoName)";
-			try {
-				superCollectionTypeInfoWithoutCardinalities = (IfcCollectionTypeInfo)schema.getTypeInfo(superCollectionTypeInfoName);
-			} catch (IfcNotFoundException e1) {					
-				// create collection type (with cardinality)
-				superCollectionTypeInfoWithoutCardinalities = new IfcCollectionTypeInfo(schema, superCollectionTypeInfoName, collectionKind2, collectionItemTypeInfo);
-				superCollectionTypeInfoWithoutCardinalities.setCardinality(null);
-				//superCollectionTypeInfo.bindTypeInfo(schema);
-				schema.addDefinedTypeInfo(superCollectionTypeInfoWithoutCardinalities);
-			}
+			String collectionTypeInfoName = IfcCollectionTypeInfo.formatCollectionTypeName(collectionKind, collectionItemTypeInfo.getName(), collectionCardinality);
 			
 			// create collection type (with cardinality)
 			IfcCollectionTypeInfo collectionTypeInfo = new IfcCollectionTypeInfo(schema, collectionTypeInfoName, collectionKind2, collectionItemTypeInfo);
 			collectionTypeInfo.setCardinality(collectionCardinality);
-			collectionTypeInfo.setSuperCollectionTypeWithoutCardinalities(superCollectionTypeInfoWithoutCardinalities);
 			//collectionTypeInfo.bindTypeInfo(schema);
-			schema.addDefinedTypeInfo(collectionTypeInfo);
+			schema.addNonEntityTypeInfo(collectionTypeInfo);
 			
 			return collectionTypeInfo;
 			
@@ -536,45 +495,39 @@ public class IfcSchemaParser {
 				tokens = RegexUtils.split2(tokens[1].trim(), RegexUtils.WHITE_SPACE);
 			}
 			
-//			Cardinality cardinality;
 			IfcTypeInfo attributeTypeInfo;
 			
 			IfcCollectionKindEnum collectionKind = IfcCollectionKindEnum.parse(tokens[0]); 
 			
-			if (collectionKind != null) {
-				
-				attributeTypeInfo = parseCollectionType(collectionKind, tokens[1]);
-//				cardinality = new Cardinality(isOptional ? Cardinality.ZERO : Cardinality.ONE, Cardinality.ONE);
-				
-//			} else if (tokens[0].equals(IfcVocabulary.ExpressFormat.SET)) {
-//				
-//				tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.OF);				
-//				cardinality = parseCardinality(tokens[0]);
-//				assert (!isOptional || cardinality.getMin() == Cardinality.ONE) :
-//					String.format("Expected: !isOptional || cardinality.getMin() == Cardinality.ONE (Actual: cardinality.getMin() = %d, type = %s)",
-//							cardinality.getMin(), entityTypeInfo.getName());
-//				tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.UNIQUE);				
-//				boolean listItemsAreUnique = tokens.length == 2;				
-//				String attributeTypeInfoName = IfcHelper.getFormattedTypeName(listItemsAreUnique ? tokens[1].trim(): tokens[0].trim());
-//				attributeTypeInfo = schema.getTypeInfo(attributeTypeInfoName);
-				
+			if (collectionKind != null) {				
+				attributeTypeInfo = parseCollectionType(collectionKind, tokens[1]);				
 			} else {
-//				cardinality = new Cardinality(isOptional ? Cardinality.ZERO : Cardinality.ONE, Cardinality.ONE);
 				String attributeTypeInfoName = IfcHelper.getFormattedTypeName(tokens[0]);
 				attributeTypeInfo = schema.getTypeInfo(attributeTypeInfoName);
 			}
 			
 			IfcAttributeInfo attributeInfo;
-			if (attributeTypeInfo.isEntityOrSelectType()) {
+			if (attributeTypeInfo instanceof IfcEntityTypeInfo ||
+					attributeTypeInfo instanceof IfcSelectTypeInfo ||
+					attributeTypeInfo instanceof IfcCollectionTypeInfo) {
 				attributeInfo = new IfcLinkInfo(entityTypeInfo, attributeName, attributeTypeInfo);
 			} else {
+				assert (attributeTypeInfo instanceof IfcDefinedTypeInfo ||
+						attributeTypeInfo instanceof IfcEnumerationTypeInfo ||
+						attributeTypeInfo instanceof IfcLiteralTypeInfo) :
+					attributeTypeInfo.getClass();
+				
+//				if (attributeTypeInfo instanceof IfcLiteralTypeInfo) {
+//				attributeTypeInfo = schema.getEquivalentDefinedType((IfcLiteralTypeInfo)attributeTypeInfo);
+//			}
+
+				if (!attributeName.equals(IfcVocabulary.TypeNames.IFC_TIME_STAMP)) {
+					attributeTypeInfo = schema.IFC_TIME_STAMP;
+				}
 				attributeInfo = new IfcAttributeInfo(entityTypeInfo, attributeName, attributeTypeInfo);				
 			}
 			attributeInfo.setOptional(isOptional);
-//			attributeInfo.setCardinality(cardinality);
-//			if (cardinality.isSingle()) {
-//				attributeInfo.setFunctional(true);
-//			}
+			attributeInfo.setFunctional(true);
 			
 			entityTypeInfo.addAttributeInfo(attributeInfo);			
 		}			
@@ -605,13 +558,13 @@ public class IfcSchemaParser {
 			
 			if (tokens.length == 1) {
 								
-				cardinality = new Cardinality(Cardinality.ONE, Cardinality.ONE);
+				cardinality = new Cardinality(Cardinality.ONE, Cardinality.ONE, false);
 				tokens = RegexUtils.split2(tokens[0].trim(), RegexUtils.WHITE_SPACE);
 				
 			} else {
 				
 				tokens = RegexUtils.split2(tokens[1].trim(), IfcVocabulary.ExpressFormat.OF);
-				cardinality = parseCardinality(tokens[0]);
+				cardinality = parseCardinality(tokens[0], false);
 				tokens = RegexUtils.split2(tokens[1].trim(), RegexUtils.WHITE_SPACE);
 				
 			}
@@ -622,6 +575,8 @@ public class IfcSchemaParser {
 			String outgoingLinkName = IfcHelper.getFormattedAttributeName(tokens[1].trim());
 			
 			IfcEntityTypeInfo sourceEntityTypeInfo = schema.getEntityTypeInfo(sourceEntityTypeInfoName);
+
+			assert sourceEntityTypeInfo.getAttributeInfo(outgoingLinkName) instanceof IfcLinkInfo : outgoingLinkName;
 			IfcLinkInfo outgoingLinkInfo = (IfcLinkInfo)sourceEntityTypeInfo.getAttributeInfo(outgoingLinkName);
 			
 			IfcInverseLinkInfo inverseLinkInfo =

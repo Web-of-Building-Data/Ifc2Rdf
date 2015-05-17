@@ -3,18 +3,13 @@ package fi.hut.cs.drumbeat.ifc.convert.ifc2ld;
 import java.util.*;
 import java.util.regex.Matcher;
 
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.OWL;
-import com.hp.hpl.jena.vocabulary.RDFS;
-import com.hp.hpl.jena.vocabulary.XSD;
-
 import fi.hut.cs.drumbeat.common.config.ConfigurationItemEx;
 import fi.hut.cs.drumbeat.common.config.document.ConfigurationParserException;
 import fi.hut.cs.drumbeat.common.config.document.ConverterPoolConfigurationSection;
 import fi.hut.cs.drumbeat.rdf.*;
 
 
-public class Ifc2RdfConversionContext extends OwlProfile {
+public class Ifc2RdfConversionContext {
 	
 	/////////////////////////
 	// STATIC MEMBERS
@@ -53,6 +48,7 @@ public class Ifc2RdfConversionContext extends OwlProfile {
 	// NON-STATIC MEMBERS
 	/////////////////////////
 
+	private OwlProfile owlProfile;
 	private String name;
 	private String ontologyPrefix;
 	private String ontologyNamespaceFormat;
@@ -62,7 +58,9 @@ public class Ifc2RdfConversionContext extends OwlProfile {
 	private EnumSet<Ifc2RdfConversionOptionsEnum> conversionOptions;
 	
 	public Ifc2RdfConversionContext(ConfigurationItemEx configuration) {
-		super(OwlProfileEnum.valueOf(configuration.getProperties().getProperty(CONFIGURATION_PROPERTY_OWL_PROFILE)));
+		
+		OwlProfileEnum owlProfileEnum = OwlProfileEnum.valueOf(configuration.getProperties().getProperty(CONFIGURATION_PROPERTY_OWL_PROFILE));
+		owlProfile = new OwlProfile(owlProfileEnum);
 		
 		name = configuration.getName();
 		
@@ -86,6 +84,10 @@ public class Ifc2RdfConversionContext extends OwlProfile {
 		modelNamespaceFormat = properties.getProperty(CONFIGURATION_PROPERTY_MODEL_NAMESPACE_FORMAT, Ifc2RdfVocabulary.DEFAULT_MODEL_NAMESPACE_FORMAT)
 				.replaceAll(CONFIGURATION_NAMESPACE_FORMAT_VARIABLE_SCHEMA_VERSION, "%1s")
 				.replaceAll(CONFIGURATION_VARIABLE_CONVERTER_CONTEXT_NAME, "%2s");
+	}
+	
+	public OwlProfile getOwlProfile() {
+		return owlProfile;
 	}
 	
 	public String getName() {
@@ -166,38 +168,8 @@ public class Ifc2RdfConversionContext extends OwlProfile {
 		this.conversionOptions = conversionOptions;
 	}	
 	
-	public boolean allowPrintingPropertyDomainAndRangeAsUnion() {
-		return supportsRdfProperty(RDFS.domain, EnumSet.of(RdfTripleObjectTypeEnum.NonClassIdentifier)) &&
-				conversionOptions.contains(Ifc2RdfConversionOptionsEnum.PrintPropertyDomainAndRangeAsUnion);
-	}
-	
-	@Override
-	public boolean supportsRdfProperty(Resource property, EnumSet<RdfTripleObjectTypeEnum> tripleObjectType) {
-		if (!super.supportsRdfProperty(property, tripleObjectType)) {
-			return false;
-		}
-		
-		if (property.equals(RdfVocabulary.OLO.index)) {
-			return conversionOptions.contains(Ifc2RdfConversionOptionsEnum.ForceConvertRdfListToOloOrderedList);
-		}
-		
-		return true;
-	}
-	
 	public boolean isEnabledOption(Ifc2RdfConversionOptionsEnum conversionOption) {
-		if (conversionOptions.contains(conversionOption)) {
-			if (conversionOption == Ifc2RdfConversionOptionsEnum.PrintPropertyCardinality) {
-				return supportsRdfProperty(OWL.cardinality, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOne));
-			}
-			return true;
-		} else {
-			if (conversionOption == Ifc2RdfConversionOptionsEnum.ForceConvertEnumerationValuesToString) {
-				return !supportsRdfProperty(OWL.oneOf, RdfTripleObjectTypeEnum.ObjectList);
-			} else if (conversionOption == Ifc2RdfConversionOptionsEnum.ForceConvertBooleanValuesToString) {
-				return !supportXsdType(XSD.xboolean);
-			}
-			return false;
-		}
+		return conversionOptions.contains(conversionOption);
 	}
 	
 }

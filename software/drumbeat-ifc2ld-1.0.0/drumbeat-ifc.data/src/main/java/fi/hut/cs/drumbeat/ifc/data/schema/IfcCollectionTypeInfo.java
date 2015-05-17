@@ -7,7 +7,7 @@ import fi.hut.cs.drumbeat.ifc.common.IfcNotFoundException;
 import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
 import fi.hut.cs.drumbeat.ifc.data.Cardinality;
 
-public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
+public class IfcCollectionTypeInfo extends IfcNonEntityTypeInfo {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,6 @@ public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
 	private String itemTypeInfoName;
 	private IfcTypeInfo itemTypeInfo;
 	private Cardinality cardinality;
-	private IfcCollectionTypeInfo superCollectionTypeWithoutCardinalities;
 
 	public IfcCollectionTypeInfo(IfcSchema schema, String typeName,
 			IfcCollectionKindEnum collectionKind, IfcTypeInfo itemTypeInfo) {
@@ -44,7 +43,7 @@ public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
 	 * @return the itemsAreUnique
 	 */
 	public boolean allowsRepeatedItems() {
-		return collectionKind.allowsRepeatedItems();
+		return collectionKind.allowsDuplicatedItems();
 	}
 
 	public IfcTypeInfo getItemTypeInfo() {
@@ -63,10 +62,10 @@ public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
 		return true;
 	}
 
-	@Override
-	public boolean isEntityOrSelectType() {
-		return getItemTypeInfo().isEntityOrSelectType();
-	}
+//	@Override
+//	public boolean isEntityOrSelectType() {
+//		return getItemTypeInfo().isEntityOrSelectType();
+//	}
 
 	/**
 	 * @return the cardinality
@@ -86,28 +85,39 @@ public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
 	/**
 	 * @return the superTypeInfo
 	 */
-	public IfcCollectionTypeInfo getSuperCollectionTypeWithoutCardinalities() {
+	public IfcCollectionTypeInfo getSuperCollectionTypeWithItemTypeAndNoCardinalities() {
 		
-		IfcTypeInfo itemTypeInfo = getItemTypeInfo();
-		if (itemTypeInfo != null) {
-
-			String superTypeName = formatCollectionTypeName(collectionKind,
-					itemTypeInfo.getName(), null);
-	
-			return new IfcCollectionTypeInfo(
-					getSchema(), superTypeName, collectionKind, itemTypeInfo);
-		} else {
+		if (cardinality == null) {
 			return null;
 		}
 
-		// return superCollectionTypeWithoutCardinalities;
+		IfcTypeInfo itemTypeInfo = getItemTypeInfo();		
+		if (itemTypeInfo == null) {
+			return null; 
+		}
+
+		String superTypeName = formatCollectionTypeName(collectionKind,
+				itemTypeInfo.getName(), null);
+
+		return new IfcCollectionTypeInfo(
+				getSchema(), superTypeName, collectionKind, itemTypeInfo);
+		
 	}
 
 	/**
 	 * @return the superTypeInfo
 	 */
-	public IfcCollectionTypeInfo getSuperCollectionTypeWithoutItemType() {
+	public IfcCollectionTypeInfo getSuperCollectionTypeWithCardinalitiesAndNoItemType() {
+		
+		if (cardinality == null) {
+			return null;
+		}
 
+		IfcTypeInfo itemTypeInfo = getItemTypeInfo();		
+		if (itemTypeInfo == null) {
+			return null; 
+		}
+		
 		String superTypeName = formatCollectionTypeName(collectionKind, null,
 				cardinality);
 
@@ -117,18 +127,6 @@ public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
 		superType.setCardinality(cardinality);
 
 		return superType;
-
-		// return superCollectionTypeWithoutCardinalities;
-	}
-
-	// TODO: remove this method
-	/**
-	 * @param superTypeInfo
-	 *            the superTypeInfo to set
-	 */
-	public void setSuperCollectionTypeWithoutCardinalities(
-			IfcCollectionTypeInfo superCollectionTypeWithUnlimitedCardinality) {
-		this.superCollectionTypeWithoutCardinalities = superCollectionTypeWithUnlimitedCardinality;
 	}
 
 	/**
@@ -152,19 +150,26 @@ public class IfcCollectionTypeInfo extends IfcDefinedTypeInfo {
 				IfcVocabulary.ExpressFormat.OF, itemTypeInfo.getName());
 	}
 
-	public static String formatCollectionTypeName(
-			IfcCollectionKindEnum collectionKind, String itemTypeInfoName,
-			Cardinality cardinality) {
-		String collectionTypeName = String.format("%s_%s", collectionKind,
-				itemTypeInfoName);
-		if (cardinality == null) {
-			return collectionTypeName;
+	public static String formatCollectionTypeName(IfcCollectionKindEnum collectionKind, String itemTypeInfoName, Cardinality cardinality) {
+		if (itemTypeInfoName != null && cardinality != null) {
+			return String.format("%s_%s_%s_%s_%s",
+					collectionKind,
+					cardinality.getMinCardinality(),
+					cardinality.getMaxCardinality() == Cardinality.UNBOUNDED ? "UNBOUNDED" : cardinality.getMaxCardinality(),
+					IfcVocabulary.ExpressFormat.OF,
+					itemTypeInfoName); 
+		} else if (cardinality != null) {
+			return String.format("%s_%s_%s",
+					collectionKind,
+					cardinality.getMinCardinality(),
+					cardinality.getMaxCardinality() == Cardinality.UNBOUNDED ? "UNBOUNDED" : cardinality.getMaxCardinality()); 
+		} else { // itemTypeInfoName
+			return String.format("%s_%s_%s",
+					collectionKind,
+					IfcVocabulary.ExpressFormat.OF,
+					itemTypeInfoName);
 		}
 
-		return String.format("%s_%s_%s", collectionTypeName, cardinality
-				.getMin(),
-				cardinality.getMax() == Cardinality.UNBOUNDED ? "UNBOUNDED"
-						: cardinality.getMax());
 	}
 
 	@Override

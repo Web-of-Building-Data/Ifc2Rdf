@@ -13,7 +13,7 @@ public enum IfcCollectionKindEnum {
 		return this == List || this == Array; 
 	}
 	
-	public boolean allowsRepeatedItems() {
+	public boolean allowsDuplicatedItems() {
 		return this != Set;
 	}
 	

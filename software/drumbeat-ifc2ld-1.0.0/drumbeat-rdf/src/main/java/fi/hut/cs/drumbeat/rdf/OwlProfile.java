@@ -50,9 +50,17 @@ public class OwlProfile {
 	 */
 	public float getOwlVersion() {
 		return owlVersion;
-	}	
+	}
 	
 	public boolean supportsRdfProperty(Resource property, EnumSet<RdfTripleObjectTypeEnum> tripleObjectType) {
+		return internalSupportsRdfProperty(property, tripleObjectType);
+	}
+	
+	public boolean supportsRdfClass(Resource classResource) {
+		return internalSupportsRdfProperty(classResource, null);
+	}
+	
+	private boolean internalSupportsRdfProperty(Resource property, EnumSet<RdfTripleObjectTypeEnum> tripleObjectType) {
 		
 		if (owlProfileId == OwlProfileEnum.OWL1_Lite) {
 			

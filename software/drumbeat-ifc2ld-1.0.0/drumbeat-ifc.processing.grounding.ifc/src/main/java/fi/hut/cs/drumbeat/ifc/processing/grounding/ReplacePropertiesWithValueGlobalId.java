@@ -12,8 +12,8 @@ import fi.hut.cs.drumbeat.ifc.data.model.IfcEntity;
 import fi.hut.cs.drumbeat.ifc.data.model.IfcLink;
 import fi.hut.cs.drumbeat.ifc.data.model.IfcLiteralAttribute;
 import fi.hut.cs.drumbeat.ifc.data.model.IfcLiteralValue;
-import fi.hut.cs.drumbeat.ifc.data.model.IfcShortEntity;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcAttributeInfo;
+import fi.hut.cs.drumbeat.ifc.data.schema.IfcDefinedTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcEntityTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcLinkInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcSchema;
@@ -112,16 +112,18 @@ public class ReplacePropertiesWithValueGlobalId extends IfcGroundingProcessor {
 						throw new IfcAnalyserException("Expected link: " + valueAttributeInfo.getName());
 					}		
 					
-					IfcShortEntity oldValue = (IfcShortEntity)oldLink.getValue();
-					String oldGuid = oldValue.getValue().toString();
+					IfcLiteralValue value = (IfcLiteralValue)oldLink.getValue();
+					String oldGuid = (String)value.getValue();
 					String newGuid = GuidCompressor.uncompressGuidString(oldGuid);
 					
-					IfcShortEntity newValue = new IfcShortEntity(oldValue.getTypeInfo(),
-							new IfcLiteralValue(newGuid, IfcTypeEnum.STRING));
+					value.setValue(newGuid);
 					
-					IfcLink newLink = new IfcLink(oldLink.getLinkInfo(), oldLink.getIndex(), oldLink.getSource(), newValue);
-					
-					entity.getOutgoingLinks().set(0, newLink);
+//					IfcShortEntity newValue = new IfcShortEntity(oldValue.getTypeInfo(),
+//							new IfcLiteralValue(newGuid, IfcTypeEnum.STRING));
+//					
+//					IfcLink newLink = new IfcLink(oldLink.getLinkInfo(), oldLink.getIndex(), oldLink.getSource(), newValue);
+//					
+//					entity.getOutgoingLinks().set(0, newLink);
 					
 					logger.debug("Replaced");
 				}

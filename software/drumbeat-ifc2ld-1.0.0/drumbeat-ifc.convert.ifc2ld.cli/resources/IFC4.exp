@@ -3142,7 +3142,7 @@ END_TYPE;
 
 ENTITY IfcActionRequest
  SUBTYPE OF (IfcControl);
-	PredefinedType : OPTIONAL IfcActionRequestTypeEnum;
+	PrenonEntityType : OPTIONAL IfcActionRequestTypeEnum;
 	Status : OPTIONAL IfcLabel;
 	LongDescription : OPTIONAL IfcText;
 END_ENTITY;
@@ -3170,21 +3170,21 @@ END_ENTITY;
 
 ENTITY IfcActuator
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcActuatorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcActuatorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcActuatorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcActuatorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcActuatorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcActuatorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCACTUATORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcActuatorType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcActuatorTypeEnum;
+	PrenonEntityType : IfcActuatorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcActuatorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcActuatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcActuatorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcActuatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAddress
@@ -3256,78 +3256,78 @@ END_ENTITY;
 
 ENTITY IfcAirTerminal
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcAirTerminalTypeEnum;
+	PrenonEntityType : OPTIONAL IfcAirTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcAirTerminalTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcAirTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcAirTerminalTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcAirTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCAIRTERMINALTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcAirTerminalBox
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcAirTerminalBoxTypeEnum;
+	PrenonEntityType : OPTIONAL IfcAirTerminalBoxTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcAirTerminalBoxTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcAirTerminalBoxTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcAirTerminalBoxTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcAirTerminalBoxTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCAIRTERMINALBOXTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcAirTerminalBoxType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcAirTerminalBoxTypeEnum;
+	PrenonEntityType : IfcAirTerminalBoxTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcAirTerminalBoxTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcAirTerminalBoxTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcAirTerminalBoxTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcAirTerminalBoxTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAirTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcAirTerminalTypeEnum;
+	PrenonEntityType : IfcAirTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcAirTerminalTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcAirTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcAirTerminalTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcAirTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAirToAirHeatRecovery
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcAirToAirHeatRecoveryTypeEnum;
+	PrenonEntityType : OPTIONAL IfcAirToAirHeatRecoveryTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCAIRTOAIRHEATRECOVERYTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcAirToAirHeatRecoveryType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcAirToAirHeatRecoveryTypeEnum;
+	PrenonEntityType : IfcAirToAirHeatRecoveryTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAlarm
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcAlarmTypeEnum;
+	PrenonEntityType : OPTIONAL IfcAlarmTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcAlarmTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcAlarmTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcAlarmTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcAlarmTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCALARMTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcAlarmType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcAlarmTypeEnum;
+	PrenonEntityType : IfcAlarmTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcAlarmTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcAlarmTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcAlarmTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcAlarmTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAnnotation
@@ -3464,21 +3464,21 @@ END_ENTITY;
 
 ENTITY IfcAudioVisualAppliance
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcAudioVisualApplianceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcAudioVisualApplianceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcAudioVisualApplianceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcAudioVisualApplianceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcAudioVisualApplianceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcAudioVisualApplianceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCAUDIOVISUALAPPLIANCETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcAudioVisualApplianceType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcAudioVisualApplianceTypeEnum;
+	PrenonEntityType : IfcAudioVisualApplianceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcAudioVisualApplianceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcAudioVisualApplianceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcAudioVisualApplianceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcAudioVisualApplianceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAxis1Placement
@@ -3593,11 +3593,11 @@ ENTITY IfcBeam
  SUPERTYPE OF (ONEOF
 	(IfcBeamStandardCase))
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcBeamTypeEnum;
+	PrenonEntityType : OPTIONAL IfcBeamTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcBeamTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcBeamTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcBeamTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcBeamTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCBEAMTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -3613,10 +3613,10 @@ END_ENTITY;
 
 ENTITY IfcBeamType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcBeamTypeEnum;
+	PrenonEntityType : IfcBeamTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcBeamTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcBeamTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcBeamTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcBeamTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcBlobTexture
@@ -3637,21 +3637,21 @@ END_ENTITY;
 
 ENTITY IfcBoiler
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcBoilerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcBoilerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcBoilerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcBoilerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcBoilerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcBoilerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCBOILERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcBoilerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcBoilerTypeEnum;
+	PrenonEntityType : IfcBoilerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcBoilerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcBoilerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcBoilerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcBoilerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcBooleanClippingResult
@@ -3801,41 +3801,41 @@ END_ENTITY;
 
 ENTITY IfcBuildingElementPart
  SUBTYPE OF (IfcElementComponent);
-	PredefinedType : OPTIONAL IfcBuildingElementPartTypeEnum;
+	PrenonEntityType : OPTIONAL IfcBuildingElementPartTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                              (PredefinedType <> IfcBuildingElementPartTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcBuildingElementPartTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                              (PrenonEntityType <> IfcBuildingElementPartTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcBuildingElementPartTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCBUILDINGELEMENTPARTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcBuildingElementPartType
  SUBTYPE OF (IfcElementComponentType);
-	PredefinedType : IfcBuildingElementPartTypeEnum;
+	PrenonEntityType : IfcBuildingElementPartTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcBuildingElementPartTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcBuildingElementPartTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcBuildingElementPartTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcBuildingElementPartTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcBuildingElementProxy
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcBuildingElementProxyTypeEnum;
+	PrenonEntityType : OPTIONAL IfcBuildingElementProxyTypeEnum;
  WHERE
 	HasObjectName : EXISTS(SELF\IfcRoot.Name);
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcBuildingElementProxyTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcBuildingElementProxyTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcBuildingElementProxyTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcBuildingElementProxyTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCBUILDINGELEMENTPROXYTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcBuildingElementProxyType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcBuildingElementProxyTypeEnum;
+	PrenonEntityType : IfcBuildingElementProxyTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcBuildingElementProxyTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcBuildingElementProxyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcBuildingElementProxyTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcBuildingElementProxyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcBuildingElementType
@@ -3871,26 +3871,26 @@ END_ENTITY;
 
 ENTITY IfcBuildingSystem
  SUBTYPE OF (IfcSystem);
-	PredefinedType : OPTIONAL IfcBuildingSystemTypeEnum;
+	PrenonEntityType : OPTIONAL IfcBuildingSystemTypeEnum;
 END_ENTITY;
 
 ENTITY IfcBurner
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcBurnerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcBurnerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcBurnerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcBurnerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcBurnerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcBurnerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCBURNERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcBurnerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcBurnerTypeEnum;
+	PrenonEntityType : IfcBurnerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcBurnerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcBurnerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcBurnerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcBurnerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCShapeProfileDef
@@ -3909,78 +3909,78 @@ END_ENTITY;
 
 ENTITY IfcCableCarrierFitting
  SUBTYPE OF (IfcFlowFitting);
-	PredefinedType : OPTIONAL IfcCableCarrierFittingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCableCarrierFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCableCarrierFittingTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCableCarrierFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCableCarrierFittingTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCableCarrierFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCABLECARRIERFITTINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCableCarrierFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcCableCarrierFittingTypeEnum;
+	PrenonEntityType : IfcCableCarrierFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCableCarrierFittingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCableCarrierFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCableCarrierFittingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCableCarrierFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCableCarrierSegment
  SUBTYPE OF (IfcFlowSegment);
-	PredefinedType : OPTIONAL IfcCableCarrierSegmentTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCableCarrierSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCableCarrierSegmentTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCableCarrierSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCableCarrierSegmentTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCableCarrierSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCABLECARRIERSEGMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCableCarrierSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcCableCarrierSegmentTypeEnum;
+	PrenonEntityType : IfcCableCarrierSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCableCarrierSegmentTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCableCarrierSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCableCarrierSegmentTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCableCarrierSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCableFitting
  SUBTYPE OF (IfcFlowFitting);
-	PredefinedType : OPTIONAL IfcCableFittingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCableFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCableFittingTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCableFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCableFittingTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCableFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCABLEFITTINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCableFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcCableFittingTypeEnum;
+	PrenonEntityType : IfcCableFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCableFittingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCableFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCableFittingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCableFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCableSegment
  SUBTYPE OF (IfcFlowSegment);
-	PredefinedType : OPTIONAL IfcCableSegmentTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCableSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCableSegmentTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCableSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCableSegmentTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCableSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCABLESEGMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCableSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcCableSegmentTypeEnum;
+	PrenonEntityType : IfcCableSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCableSegmentTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCableSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCableSegmentTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCableSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCartesianPoint
@@ -4079,40 +4079,40 @@ END_ENTITY;
 
 ENTITY IfcChiller
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcChillerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcChillerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcChillerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcChillerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcChillerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcChillerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCHILLERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcChillerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcChillerTypeEnum;
+	PrenonEntityType : IfcChillerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcChillerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcChillerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcChillerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcChillerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcChimney
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcChimneyTypeEnum;
+	PrenonEntityType : OPTIONAL IfcChimneyTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcChimneyTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcChimneyTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcChimneyTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcChimneyTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCCHIMNEYTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcChimneyType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcChimneyTypeEnum;
+	PrenonEntityType : IfcChimneyTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcChimneyTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcChimneyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcChimneyTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcChimneyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCircle
@@ -4172,21 +4172,21 @@ END_ENTITY;
 
 ENTITY IfcCoil
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcCoilTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCoilTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCoilTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCoilTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCoilTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCoilTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCOILTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCoilType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCoilTypeEnum;
+	PrenonEntityType : IfcCoilTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCoilTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCoilTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCoilTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCoilTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcColourRgb
@@ -4212,11 +4212,11 @@ ENTITY IfcColumn
  SUPERTYPE OF (ONEOF
 	(IfcColumnStandardCase))
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcColumnTypeEnum;
+	PrenonEntityType : OPTIONAL IfcColumnTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcColumnTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcColumnTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcColumnTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcColumnTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCCOLUMNTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -4232,29 +4232,29 @@ END_ENTITY;
 
 ENTITY IfcColumnType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcColumnTypeEnum;
+	PrenonEntityType : IfcColumnTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcColumnTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcColumnTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcColumnTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcColumnTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCommunicationsAppliance
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcCommunicationsApplianceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCommunicationsApplianceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCommunicationsApplianceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCommunicationsApplianceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCommunicationsApplianceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCommunicationsApplianceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCOMMUNICATIONSAPPLIANCETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCommunicationsApplianceType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcCommunicationsApplianceTypeEnum;
+	PrenonEntityType : IfcCommunicationsApplianceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCommunicationsApplianceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCommunicationsApplianceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCommunicationsApplianceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCommunicationsApplianceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcComplexProperty
@@ -4326,40 +4326,40 @@ END_ENTITY;
 
 ENTITY IfcCompressor
  SUBTYPE OF (IfcFlowMovingDevice);
-	PredefinedType : OPTIONAL IfcCompressorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCompressorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCompressorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCompressorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCompressorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCompressorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCOMPRESSORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCompressorType
  SUBTYPE OF (IfcFlowMovingDeviceType);
-	PredefinedType : IfcCompressorTypeEnum;
+	PrenonEntityType : IfcCompressorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCompressorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCompressorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCompressorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCompressorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCondenser
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcCondenserTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCondenserTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCondenserTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCondenserTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCondenserTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCondenserTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCONDENSERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCondenserType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCondenserTypeEnum;
+	PrenonEntityType : IfcCondenserTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCondenserTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCondenserTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCondenserTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCondenserTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcConic
@@ -4440,53 +4440,53 @@ END_ENTITY;
 
 ENTITY IfcConstructionEquipmentResource
  SUBTYPE OF (IfcConstructionResource);
-	PredefinedType : OPTIONAL IfcConstructionEquipmentResourceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcConstructionEquipmentResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcConstructionEquipmentResourceType
  SUBTYPE OF (IfcConstructionResourceType);
-	PredefinedType : IfcConstructionEquipmentResourceTypeEnum;
+	PrenonEntityType : IfcConstructionEquipmentResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcConstructionEquipmentResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
 END_ENTITY;
 
 ENTITY IfcConstructionMaterialResource
  SUBTYPE OF (IfcConstructionResource);
-	PredefinedType : OPTIONAL IfcConstructionMaterialResourceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcConstructionMaterialResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcConstructionMaterialResourceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcConstructionMaterialResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcConstructionMaterialResourceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcConstructionMaterialResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcConstructionMaterialResourceType
  SUBTYPE OF (IfcConstructionResourceType);
-	PredefinedType : IfcConstructionMaterialResourceTypeEnum;
+	PrenonEntityType : IfcConstructionMaterialResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcConstructionMaterialResourceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcConstructionMaterialResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcConstructionMaterialResourceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcConstructionMaterialResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
 END_ENTITY;
 
 ENTITY IfcConstructionProductResource
  SUBTYPE OF (IfcConstructionResource);
-	PredefinedType : OPTIONAL IfcConstructionProductResourceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcConstructionProductResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcConstructionProductResourceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcConstructionProductResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcConstructionProductResourceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcConstructionProductResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcConstructionProductResourceType
  SUBTYPE OF (IfcConstructionResourceType);
-	PredefinedType : IfcConstructionProductResourceTypeEnum;
+	PrenonEntityType : IfcConstructionProductResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcConstructionProductResourceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcConstructionProductResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcConstructionProductResourceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcConstructionProductResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
 END_ENTITY;
 
 ENTITY IfcConstructionResource
@@ -4556,21 +4556,21 @@ END_ENTITY;
 
 ENTITY IfcController
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcControllerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcControllerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcControllerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcControllerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcControllerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcControllerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCCONTROLLERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcControllerType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcControllerTypeEnum;
+	PrenonEntityType : IfcControllerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcControllerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcControllerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcControllerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcControllerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcConversionBasedUnit
@@ -4590,40 +4590,40 @@ END_ENTITY;
 
 ENTITY IfcCooledBeam
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcCooledBeamTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCooledBeamTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCooledBeamTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCooledBeamTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCooledBeamTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCooledBeamTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCOOLEDBEAMTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCooledBeamType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCooledBeamTypeEnum;
+	PrenonEntityType : IfcCooledBeamTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCooledBeamTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCooledBeamTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCooledBeamTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCooledBeamTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCoolingTower
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcCoolingTowerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCoolingTowerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCoolingTowerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCoolingTowerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCoolingTowerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCoolingTowerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCCOOLINGTOWERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCoolingTowerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCoolingTowerTypeEnum;
+	PrenonEntityType : IfcCoolingTowerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCoolingTowerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCoolingTowerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCoolingTowerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCoolingTowerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCoordinateOperation
@@ -4644,14 +4644,14 @@ END_ENTITY;
 
 ENTITY IfcCostItem
  SUBTYPE OF (IfcControl);
-	PredefinedType : OPTIONAL IfcCostItemTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCostItemTypeEnum;
 	CostValues : OPTIONAL LIST [1:?] OF IfcCostValue;
 	CostQuantities : OPTIONAL LIST [1:?] OF IfcPhysicalQuantity;
 END_ENTITY;
 
 ENTITY IfcCostSchedule
  SUBTYPE OF (IfcControl);
-	PredefinedType : OPTIONAL IfcCostScheduleTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCostScheduleTypeEnum;
 	Status : OPTIONAL IfcLabel;
 	SubmittedOn : OPTIONAL IfcDateTime;
 	UpdateDate : OPTIONAL IfcDateTime;
@@ -4663,41 +4663,41 @@ END_ENTITY;
 
 ENTITY IfcCovering
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcCoveringTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCoveringTypeEnum;
  INVERSE
 	CoversSpaces : SET [0:1] OF IfcRelCoversSpaces FOR RelatedCoverings;
 	CoversElements : SET [0:1] OF IfcRelCoversBldgElements FOR RelatedCoverings;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCoveringTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCoveringTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCoveringTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCoveringTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCCOVERINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCoveringType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcCoveringTypeEnum;
+	PrenonEntityType : IfcCoveringTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCoveringTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCoveringTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCoveringTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCoveringTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCrewResource
  SUBTYPE OF (IfcConstructionResource);
-	PredefinedType : OPTIONAL IfcCrewResourceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCrewResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcCrewResourceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcCrewResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcCrewResourceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcCrewResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcCrewResourceType
  SUBTYPE OF (IfcConstructionResourceType);
-	PredefinedType : IfcCrewResourceTypeEnum;
+	PrenonEntityType : IfcCrewResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCrewResourceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCrewResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCrewResourceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCrewResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
 END_ENTITY;
 
 ENTITY IfcCsgPrimitive3D
@@ -4729,21 +4729,21 @@ END_ENTITY;
 
 ENTITY IfcCurtainWall
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcCurtainWallTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCurtainWallTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcCurtainWallTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcCurtainWallTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcCurtainWallTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcCurtainWallTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCCURTAINWALLTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcCurtainWallType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcCurtainWallTypeEnum;
+	PrenonEntityType : IfcCurtainWallTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcCurtainWallTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcCurtainWallTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcCurtainWallTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcCurtainWallTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCurve
@@ -4815,21 +4815,21 @@ END_ENTITY;
 
 ENTITY IfcDamper
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcDamperTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDamperTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcDamperTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcDamperTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcDamperTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcDamperTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCDAMPERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcDamperType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcDamperTypeEnum;
+	PrenonEntityType : IfcDamperTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDamperTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDamperTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDamperTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDamperTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDerivedProfileDef
@@ -4846,14 +4846,14 @@ END_ENTITY;
 ENTITY IfcDerivedUnit;
 	Elements : SET [1:?] OF IfcDerivedUnitElement;
 	UnitType : IfcDerivedUnitEnum;
-	UserDefinedType : OPTIONAL IfcLabel;
+	UserNonEntityType : OPTIONAL IfcLabel;
  DERIVE
 	Dimensions : IfcDimensionalExponents := IfcDeriveDimensionalExponents(Elements);
  WHERE
 	WR1 : (SIZEOF (Elements) > 1) OR ((SIZEOF (Elements) = 1) AND (Elements[1].Exponent <> 1 ));
 	WR2 : (UnitType <> IfcDerivedUnitEnum.USERDEFINED) OR
             ((UnitType = IfcDerivedUnitEnum.USERDEFINED) AND 
-             (EXISTS(SELF.UserDefinedType)));
+             (EXISTS(SELF.UserNonEntityType)));
 END_ENTITY;
 
 ENTITY IfcDerivedUnitElement;
@@ -4882,40 +4882,40 @@ END_ENTITY;
 
 ENTITY IfcDiscreteAccessory
  SUBTYPE OF (IfcElementComponent);
-	PredefinedType : OPTIONAL IfcDiscreteAccessoryTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDiscreteAccessoryTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                              (PredefinedType <> IfcDiscreteAccessoryTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDiscreteAccessoryTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                              (PrenonEntityType <> IfcDiscreteAccessoryTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDiscreteAccessoryTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCDISCRETEACCESSORYTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcDiscreteAccessoryType
  SUBTYPE OF (IfcElementComponentType);
-	PredefinedType : IfcDiscreteAccessoryTypeEnum;
+	PrenonEntityType : IfcDiscreteAccessoryTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDiscreteAccessoryTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDiscreteAccessoryTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDiscreteAccessoryTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDiscreteAccessoryTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDistributionChamberElement
  SUBTYPE OF (IfcDistributionFlowElement);
-	PredefinedType : OPTIONAL IfcDistributionChamberElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDistributionChamberElementTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcDistributionChamberElementTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcDistributionChamberElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcDistributionChamberElementTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcDistributionChamberElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCDISTRIBUTIONCHAMBERELEMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcDistributionChamberElementType
  SUBTYPE OF (IfcDistributionFlowElementType);
-	PredefinedType : IfcDistributionChamberElementTypeEnum;
+	PrenonEntityType : IfcDistributionChamberElementTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDistributionChamberElementTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDistributionChamberElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDistributionChamberElementTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDistributionChamberElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDistributionCircuit
@@ -4997,7 +4997,7 @@ END_ENTITY;
 ENTITY IfcDistributionPort
  SUBTYPE OF (IfcPort);
 	FlowDirection : OPTIONAL IfcFlowDirectionEnum;
-	PredefinedType : OPTIONAL IfcDistributionPortTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDistributionPortTypeEnum;
 	SystemType : OPTIONAL IfcDistributionSystemEnum;
 END_ENTITY;
 
@@ -5006,7 +5006,7 @@ ENTITY IfcDistributionSystem
 	(IfcDistributionCircuit))
  SUBTYPE OF (IfcSystem);
 	LongName : OPTIONAL IfcLabel;
-	PredefinedType : OPTIONAL IfcDistributionSystemEnum;
+	PrenonEntityType : OPTIONAL IfcDistributionSystemEnum;
 END_ENTITY;
 
 ENTITY IfcDocumentInformation
@@ -5058,7 +5058,7 @@ ENTITY IfcDoor
  SUBTYPE OF (IfcBuildingElement);
 	OverallHeight : OPTIONAL IfcPositiveLengthMeasure;
 	OverallWidth : OPTIONAL IfcPositiveLengthMeasure;
-	PredefinedType : OPTIONAL IfcDoorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDoorTypeEnum;
 	OperationType : OPTIONAL IfcDoorTypeOperationEnum;
 	UserDefinedOperationType : OPTIONAL IfcLabel;
  WHERE
@@ -5128,13 +5128,13 @@ END_ENTITY;
 
 ENTITY IfcDoorType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcDoorTypeEnum;
+	PrenonEntityType : IfcDoorTypeEnum;
 	OperationType : IfcDoorTypeOperationEnum;
 	ParameterTakesPrecedence : OPTIONAL BOOLEAN;
 	UserDefinedOperationType : OPTIONAL IfcLabel;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDoorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDoorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDoorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDoorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDraughtingPreDefinedColour
@@ -5158,59 +5158,59 @@ END_ENTITY;
 
 ENTITY IfcDuctFitting
  SUBTYPE OF (IfcFlowFitting);
-	PredefinedType : OPTIONAL IfcDuctFittingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDuctFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcDuctFittingTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcDuctFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcDuctFittingTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcDuctFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCDUCTFITTINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcDuctFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcDuctFittingTypeEnum;
+	PrenonEntityType : IfcDuctFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDuctFittingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDuctFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDuctFittingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDuctFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDuctSegment
  SUBTYPE OF (IfcFlowSegment);
-	PredefinedType : OPTIONAL IfcDuctSegmentTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDuctSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcDuctSegmentTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcDuctSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcDuctSegmentTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcDuctSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCDUCTSEGMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcDuctSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcDuctSegmentTypeEnum;
+	PrenonEntityType : IfcDuctSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDuctSegmentTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDuctSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDuctSegmentTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDuctSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDuctSilencer
  SUBTYPE OF (IfcFlowTreatmentDevice);
-	PredefinedType : OPTIONAL IfcDuctSilencerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcDuctSilencerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcDuctSilencerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcDuctSilencerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcDuctSilencerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcDuctSilencerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCDUCTSILENCERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcDuctSilencerType
  SUBTYPE OF (IfcFlowTreatmentDeviceType);
-	PredefinedType : IfcDuctSilencerTypeEnum;
+	PrenonEntityType : IfcDuctSilencerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcDuctSilencerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcDuctSilencerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcDuctSilencerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcDuctSilencerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcEdge
@@ -5241,116 +5241,116 @@ END_ENTITY;
 
 ENTITY IfcElectricAppliance
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcElectricApplianceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElectricApplianceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcElectricApplianceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcElectricApplianceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcElectricApplianceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcElectricApplianceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCELECTRICAPPLIANCETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElectricApplianceType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcElectricApplianceTypeEnum;
+	PrenonEntityType : IfcElectricApplianceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElectricApplianceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcElectricApplianceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElectricApplianceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcElectricApplianceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElectricDistributionBoard
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcElectricDistributionBoardTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElectricDistributionBoardTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcElectricDistributionBoardTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcElectricDistributionBoardTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcElectricDistributionBoardTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcElectricDistributionBoardTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCELECTRICDISTRIBUTIONBOARDTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElectricDistributionBoardType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcElectricDistributionBoardTypeEnum;
+	PrenonEntityType : IfcElectricDistributionBoardTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElectricDistributionBoardTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcElectricDistributionBoardTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElectricDistributionBoardTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcElectricDistributionBoardTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElectricFlowStorageDevice
  SUBTYPE OF (IfcFlowStorageDevice);
-	PredefinedType : OPTIONAL IfcElectricFlowStorageDeviceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElectricFlowStorageDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCELECTRICFLOWSTORAGEDEVICETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElectricFlowStorageDeviceType
  SUBTYPE OF (IfcFlowStorageDeviceType);
-	PredefinedType : IfcElectricFlowStorageDeviceTypeEnum;
+	PrenonEntityType : IfcElectricFlowStorageDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcElectricFlowStorageDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElectricGenerator
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcElectricGeneratorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElectricGeneratorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcElectricGeneratorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcElectricGeneratorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcElectricGeneratorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcElectricGeneratorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCELECTRICGENERATORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElectricGeneratorType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcElectricGeneratorTypeEnum;
+	PrenonEntityType : IfcElectricGeneratorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElectricGeneratorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcElectricGeneratorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElectricGeneratorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcElectricGeneratorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElectricMotor
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcElectricMotorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElectricMotorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcElectricMotorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcElectricMotorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcElectricMotorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcElectricMotorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCELECTRICMOTORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElectricMotorType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcElectricMotorTypeEnum;
+	PrenonEntityType : IfcElectricMotorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElectricMotorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcElectricMotorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElectricMotorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcElectricMotorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElectricTimeControl
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcElectricTimeControlTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElectricTimeControlTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcElectricTimeControlTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcElectricTimeControlTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcElectricTimeControlTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcElectricTimeControlTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCELECTRICTIMECONTROLTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElectricTimeControlType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcElectricTimeControlTypeEnum;
+	PrenonEntityType : IfcElectricTimeControlTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElectricTimeControlTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcElectricTimeControlTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElectricTimeControlTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcElectricTimeControlTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElement
@@ -5384,21 +5384,21 @@ END_ENTITY;
 ENTITY IfcElementAssembly
  SUBTYPE OF (IfcElement);
 	AssemblyPlace : OPTIONAL IfcAssemblyPlaceEnum;
-	PredefinedType : OPTIONAL IfcElementAssemblyTypeEnum;
+	PrenonEntityType : OPTIONAL IfcElementAssemblyTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcElementAssemblyTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcElementAssemblyTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcElementAssemblyTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcElementAssemblyTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCELEMENTASSEMBLYTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcElementAssemblyType
  SUBTYPE OF (IfcElementType);
-	PredefinedType : IfcElementAssemblyTypeEnum;
+	PrenonEntityType : IfcElementAssemblyTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcElementAssemblyTypeEnum.USERDEFINED) OR 
-                              ((PredefinedType = IfcElementAssemblyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcElementAssemblyTypeEnum.USERDEFINED) OR 
+                              ((PrenonEntityType = IfcElementAssemblyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcElementComponent
@@ -5517,69 +5517,69 @@ END_ENTITY;
 
 ENTITY IfcEngine
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcEngineTypeEnum;
+	PrenonEntityType : OPTIONAL IfcEngineTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcEngineTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcEngineTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcEngineTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcEngineTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCENGINETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcEngineType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcEngineTypeEnum;
+	PrenonEntityType : IfcEngineTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcEngineTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcEngineTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcEngineTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcEngineTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcEvaporativeCooler
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcEvaporativeCoolerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcEvaporativeCoolerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcEvaporativeCoolerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcEvaporativeCoolerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcEvaporativeCoolerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcEvaporativeCoolerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCEVAPORATIVECOOLERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcEvaporativeCoolerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcEvaporativeCoolerTypeEnum;
+	PrenonEntityType : IfcEvaporativeCoolerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcEvaporativeCoolerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcEvaporativeCoolerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcEvaporativeCoolerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcEvaporativeCoolerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcEvaporator
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcEvaporatorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcEvaporatorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcEvaporatorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcEvaporatorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcEvaporatorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcEvaporatorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCEVAPORATORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcEvaporatorType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcEvaporatorTypeEnum;
+	PrenonEntityType : IfcEvaporatorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcEvaporatorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcEvaporatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcEvaporatorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcEvaporatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcEvent
  SUBTYPE OF (IfcProcess);
-	PredefinedType : OPTIONAL IfcEventTypeEnum;
+	PrenonEntityType : OPTIONAL IfcEventTypeEnum;
 	EventTriggerType : OPTIONAL IfcEventTriggerTypeEnum;
 	UserDefinedEventTriggerType : OPTIONAL IfcLabel;
 	EventOccurenceTime : OPTIONAL IfcEventTime;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR (PredefinedType <> IfcEventTypeEnum.USERDEFINED) OR ((PredefinedType = IfcEventTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR (PrenonEntityType <> IfcEventTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcEventTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : NOT(EXISTS(EventTriggerType)) OR (EventTriggerType <> IfcEventTriggerTypeEnum.USERDEFINED) OR ((EventTriggerType = IfcEventTriggerTypeEnum.USERDEFINED) AND EXISTS(UserDefinedEventTriggerType));
 END_ENTITY;
 
@@ -5593,11 +5593,11 @@ END_ENTITY;
 
 ENTITY IfcEventType
  SUBTYPE OF (IfcTypeProcess);
-	PredefinedType : IfcEventTypeEnum;
+	PrenonEntityType : IfcEventTypeEnum;
 	EventTriggerType : IfcEventTriggerTypeEnum;
 	UserDefinedEventTriggerType : OPTIONAL IfcLabel;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcEventTypeEnum.USERDEFINED) OR ((PredefinedType = IfcEventTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeProcess.ProcessType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcEventTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcEventTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeProcess.ProcessType));
 	CorrectEventTriggerType : (EventTriggerType <> IfcEventTriggerTypeEnum.USERDEFINED) OR ((EventTriggerType = IfcEventTriggerTypeEnum.USERDEFINED) AND EXISTS(UserDefinedEventTriggerType));
 END_ENTITY;
 
@@ -5643,7 +5643,7 @@ END_ENTITY;
 
 ENTITY IfcExternalSpatialElement
  SUBTYPE OF (IfcExternalSpatialStructureElement);
-	PredefinedType : OPTIONAL IfcExternalSpatialElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcExternalSpatialElementTypeEnum;
  INVERSE
 	BoundedBy : SET [0:?] OF IfcRelSpaceBoundary FOR RelatingSpace;
 END_ENTITY;
@@ -5744,40 +5744,40 @@ END_ENTITY;
 
 ENTITY IfcFan
  SUBTYPE OF (IfcFlowMovingDevice);
-	PredefinedType : OPTIONAL IfcFanTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFanTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcFanTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcFanTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcFanTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcFanTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCFANTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFanType
  SUBTYPE OF (IfcFlowMovingDeviceType);
-	PredefinedType : IfcFanTypeEnum;
+	PrenonEntityType : IfcFanTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFanTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFanTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFanTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFanTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFastener
  SUBTYPE OF (IfcElementComponent);
-	PredefinedType : OPTIONAL IfcFastenerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFastenerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                              (PredefinedType <> IfcFastenerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFastenerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                              (PrenonEntityType <> IfcFastenerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFastenerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCFASTENERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFastenerType
  SUBTYPE OF (IfcElementComponentType);
-	PredefinedType : IfcFastenerTypeEnum;
+	PrenonEntityType : IfcFastenerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFastenerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFastenerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFastenerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFastenerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFeatureElement
@@ -5845,40 +5845,40 @@ END_ENTITY;
 
 ENTITY IfcFilter
  SUBTYPE OF (IfcFlowTreatmentDevice);
-	PredefinedType : OPTIONAL IfcFilterTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFilterTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcFilterTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcFilterTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcFilterTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcFilterTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCFILTERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFilterType
  SUBTYPE OF (IfcFlowTreatmentDeviceType);
-	PredefinedType : IfcFilterTypeEnum;
+	PrenonEntityType : IfcFilterTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFilterTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFilterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFilterTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFilterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFireSuppressionTerminal
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcFireSuppressionTerminalTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFireSuppressionTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcFireSuppressionTerminalTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcFireSuppressionTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcFireSuppressionTerminalTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcFireSuppressionTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCFIRESUPPRESSIONTERMINALTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFireSuppressionTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcFireSuppressionTerminalTypeEnum;
+	PrenonEntityType : IfcFireSuppressionTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFireSuppressionTerminalTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFireSuppressionTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFireSuppressionTerminalTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFireSuppressionTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFixedReferenceSweptAreaSolid
@@ -5940,40 +5940,40 @@ END_ENTITY;
 
 ENTITY IfcFlowInstrument
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcFlowInstrumentTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFlowInstrumentTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcFlowInstrumentTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcFlowInstrumentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcFlowInstrumentTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcFlowInstrumentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCFLOWINSTRUMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFlowInstrumentType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcFlowInstrumentTypeEnum;
+	PrenonEntityType : IfcFlowInstrumentTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFlowInstrumentTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFlowInstrumentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFlowInstrumentTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFlowInstrumentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFlowMeter
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcFlowMeterTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFlowMeterTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcFlowMeterTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcFlowMeterTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcFlowMeterTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcFlowMeterTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCFLOWMETERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFlowMeterType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcFlowMeterTypeEnum;
+	PrenonEntityType : IfcFlowMeterTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFlowMeterTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFlowMeterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFlowMeterTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFlowMeterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFlowMovingDevice
@@ -6078,21 +6078,21 @@ END_ENTITY;
 
 ENTITY IfcFooting
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcFootingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFootingTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT EXISTS(PredefinedType) OR
-                              (PredefinedType <> IfcFootingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFootingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT EXISTS(PrenonEntityType) OR
+                              (PrenonEntityType <> IfcFootingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFootingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCFOOTINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcFootingType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcFootingTypeEnum;
+	PrenonEntityType : IfcFootingTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFootingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFootingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFootingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFootingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFurnishingElement
@@ -6111,11 +6111,11 @@ END_ENTITY;
 
 ENTITY IfcFurniture
  SUBTYPE OF (IfcFurnishingElement);
-	PredefinedType : OPTIONAL IfcFurnitureTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFurnitureTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcFurnitureTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcFurnitureTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcFurnitureTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcFurnitureTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                  ('IFC4.IFCFURNITURETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -6123,29 +6123,29 @@ END_ENTITY;
 ENTITY IfcFurnitureType
  SUBTYPE OF (IfcFurnishingElementType);
 	AssemblyPlace : IfcAssemblyPlaceEnum;
-	PredefinedType : OPTIONAL IfcFurnitureTypeEnum;
+	PrenonEntityType : OPTIONAL IfcFurnitureTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcFurnitureTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcFurnitureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcFurnitureTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcFurnitureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcGeographicElement
  SUBTYPE OF (IfcElement);
-	PredefinedType : OPTIONAL IfcGeographicElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcGeographicElementTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcGeographicElementTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcGeographicElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcGeographicElementTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcGeographicElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCGEOGRAPHICELEMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcGeographicElementType
  SUBTYPE OF (IfcElementType);
-	PredefinedType : IfcGeographicElementTypeEnum;
+	PrenonEntityType : IfcGeographicElementTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcGeographicElementTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcGeographicElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcGeographicElementTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcGeographicElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcGeometricCurveSet
@@ -6235,7 +6235,7 @@ ENTITY IfcGrid
 	UAxes : LIST [1:?] OF UNIQUE IfcGridAxis;
 	VAxes : LIST [1:?] OF UNIQUE IfcGridAxis;
 	WAxes : OPTIONAL LIST [1:?] OF UNIQUE IfcGridAxis;
-	PredefinedType : OPTIONAL IfcGridTypeEnum;
+	PrenonEntityType : OPTIONAL IfcGridTypeEnum;
  INVERSE
 	ContainedInStructure : SET [0:1] OF IfcRelContainedInSpatialStructure FOR RelatedElements;
  WHERE
@@ -6287,40 +6287,40 @@ END_ENTITY;
 
 ENTITY IfcHeatExchanger
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcHeatExchangerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcHeatExchangerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcHeatExchangerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcHeatExchangerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcHeatExchangerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcHeatExchangerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCHEATEXCHANGERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcHeatExchangerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcHeatExchangerTypeEnum;
+	PrenonEntityType : IfcHeatExchangerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcHeatExchangerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcHeatExchangerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcHeatExchangerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcHeatExchangerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcHumidifier
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcHumidifierTypeEnum;
+	PrenonEntityType : OPTIONAL IfcHumidifierTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcHumidifierTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcHumidifierTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcHumidifierTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcHumidifierTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCHUMIDIFIERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcHumidifierType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcHumidifierTypeEnum;
+	PrenonEntityType : IfcHumidifierTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcHumidifierTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcHumidifierTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcHumidifierTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcHumidifierTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcIShapeProfileDef
@@ -6368,26 +6368,26 @@ END_ENTITY;
 
 ENTITY IfcInterceptor
  SUBTYPE OF (IfcFlowTreatmentDevice);
-	PredefinedType : OPTIONAL IfcInterceptorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcInterceptorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcInterceptorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcInterceptorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcInterceptorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcInterceptorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCINTERCEPTORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcInterceptorType
  SUBTYPE OF (IfcFlowTreatmentDeviceType);
-	PredefinedType : IfcInterceptorTypeEnum;
+	PrenonEntityType : IfcInterceptorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcInterceptorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcInterceptorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcInterceptorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcInterceptorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcInventory
  SUBTYPE OF (IfcGroup);
-	PredefinedType : OPTIONAL IfcInventoryTypeEnum;
+	PrenonEntityType : OPTIONAL IfcInventoryTypeEnum;
 	Jurisdiction : OPTIONAL IfcActorSelect;
 	ResponsiblePersons : OPTIONAL SET [1:?] OF IfcPerson;
 	LastUpdateDate : OPTIONAL IfcDate;
@@ -6407,21 +6407,21 @@ END_ENTITY;
 
 ENTITY IfcJunctionBox
  SUBTYPE OF (IfcFlowFitting);
-	PredefinedType : OPTIONAL IfcJunctionBoxTypeEnum;
+	PrenonEntityType : OPTIONAL IfcJunctionBoxTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcJunctionBoxTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcJunctionBoxTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcJunctionBoxTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcJunctionBoxTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCJUNCTIONBOXTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcJunctionBoxType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcJunctionBoxTypeEnum;
+	PrenonEntityType : IfcJunctionBoxTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcJunctionBoxTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcJunctionBoxTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcJunctionBoxTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcJunctionBoxTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcLShapeProfileDef
@@ -6438,19 +6438,19 @@ END_ENTITY;
 
 ENTITY IfcLaborResource
  SUBTYPE OF (IfcConstructionResource);
-	PredefinedType : OPTIONAL IfcLaborResourceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcLaborResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcLaborResourceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcLaborResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcLaborResourceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcLaborResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcLaborResourceType
  SUBTYPE OF (IfcConstructionResourceType);
-	PredefinedType : IfcLaborResourceTypeEnum;
+	PrenonEntityType : IfcLaborResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcLaborResourceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcLaborResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcLaborResourceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcLaborResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
 END_ENTITY;
 
 ENTITY IfcLagTime
@@ -6461,21 +6461,21 @@ END_ENTITY;
 
 ENTITY IfcLamp
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcLampTypeEnum;
+	PrenonEntityType : OPTIONAL IfcLampTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcLampTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcLampTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcLampTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcLampTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCLAMPTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcLampType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcLampTypeEnum;
+	PrenonEntityType : IfcLampTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcLampTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcLampTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcLampTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcLampTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcLibraryInformation
@@ -6508,21 +6508,21 @@ END_ENTITY;
 
 ENTITY IfcLightFixture
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcLightFixtureTypeEnum;
+	PrenonEntityType : OPTIONAL IfcLightFixtureTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcLightFixtureTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcLightFixtureTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcLightFixtureTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcLightFixtureTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCLIGHTFIXTURETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcLightFixtureType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcLightFixtureTypeEnum;
+	PrenonEntityType : IfcLightFixtureTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcLightFixtureTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcLightFixtureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcLightFixtureTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcLightFixtureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcLightIntensityDistribution;
@@ -6801,53 +6801,53 @@ ENTITY IfcMechanicalFastener
  SUBTYPE OF (IfcElementComponent);
 	NominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
 	NominalLength : OPTIONAL IfcPositiveLengthMeasure;
-	PredefinedType : OPTIONAL IfcMechanicalFastenerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcMechanicalFastenerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                              (PredefinedType <> IfcMechanicalFastenerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcMechanicalFastenerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                              (PrenonEntityType <> IfcMechanicalFastenerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcMechanicalFastenerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCMECHANICALFASTENERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcMechanicalFastenerType
  SUBTYPE OF (IfcElementComponentType);
-	PredefinedType : IfcMechanicalFastenerTypeEnum;
+	PrenonEntityType : IfcMechanicalFastenerTypeEnum;
 	NominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
 	NominalLength : OPTIONAL IfcPositiveLengthMeasure;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcMechanicalFastenerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcMechanicalFastenerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcMechanicalFastenerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcMechanicalFastenerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcMedicalDevice
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcMedicalDeviceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcMedicalDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcMedicalDeviceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcMedicalDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcMedicalDeviceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcMedicalDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCMEDICALDEVICETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcMedicalDeviceType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcMedicalDeviceTypeEnum;
+	PrenonEntityType : IfcMedicalDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcMedicalDeviceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcMedicalDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcMedicalDeviceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcMedicalDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcMember
  SUPERTYPE OF (ONEOF
 	(IfcMemberStandardCase))
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcMemberTypeEnum;
+	PrenonEntityType : OPTIONAL IfcMemberTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcMemberTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcMemberTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcMemberTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcMemberTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCMEMBERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -6863,10 +6863,10 @@ END_ENTITY;
 
 ENTITY IfcMemberType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcMemberTypeEnum;
+	PrenonEntityType : IfcMemberTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcMemberTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcMemberTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcMemberTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcMemberTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcMetric
@@ -6902,21 +6902,21 @@ END_ENTITY;
 
 ENTITY IfcMotorConnection
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcMotorConnectionTypeEnum;
+	PrenonEntityType : OPTIONAL IfcMotorConnectionTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcMotorConnectionTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcMotorConnectionTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcMotorConnectionTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcMotorConnectionTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCMOTORCONNECTIONTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcMotorConnectionType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcMotorConnectionTypeEnum;
+	PrenonEntityType : IfcMotorConnectionTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcMotorConnectionTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcMotorConnectionTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcMotorConnectionTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcMotorConnectionTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcNamedUnit
@@ -6985,9 +6985,9 @@ END_ENTITY;
 
 ENTITY IfcOccupant
  SUBTYPE OF (IfcActor);
-	PredefinedType : OPTIONAL IfcOccupantTypeEnum;
+	PrenonEntityType : OPTIONAL IfcOccupantTypeEnum;
  WHERE
-	WR31 : NOT(PredefinedType = IfcOccupantTypeEnum.USERDEFINED) 
+	WR31 : NOT(PrenonEntityType = IfcOccupantTypeEnum.USERDEFINED) 
              OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
@@ -7018,7 +7018,7 @@ ENTITY IfcOpeningElement
  SUPERTYPE OF (ONEOF
 	(IfcOpeningStandardCase))
  SUBTYPE OF (IfcFeatureElementSubtraction);
-	PredefinedType : OPTIONAL IfcOpeningElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcOpeningElementTypeEnum;
  INVERSE
 	HasFillings : SET [0:?] OF IfcRelFillsElement FOR RelatingOpeningElement;
 END_ENTITY;
@@ -7064,21 +7064,21 @@ END_ENTITY;
 
 ENTITY IfcOutlet
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcOutletTypeEnum;
+	PrenonEntityType : OPTIONAL IfcOutletTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcOutletTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcOutletTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcOutletTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcOutletTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCOUTLETTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcOutletType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcOutletTypeEnum;
+	PrenonEntityType : IfcOutletTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcOutletTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcOutletTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcOutletTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcOutletTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcOwnerHistory;
@@ -7131,7 +7131,7 @@ END_ENTITY;
 ENTITY IfcPerformanceHistory
  SUBTYPE OF (IfcControl);
 	LifeCyclePhase : IfcLabel;
-	PredefinedType : OPTIONAL IfcPerformanceHistoryTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPerformanceHistoryTypeEnum;
 END_ENTITY;
 
 ENTITY IfcPermeableCoveringProperties
@@ -7145,7 +7145,7 @@ END_ENTITY;
 
 ENTITY IfcPermit
  SUBTYPE OF (IfcControl);
-	PredefinedType : OPTIONAL IfcPermitTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPermitTypeEnum;
 	Status : OPTIONAL IfcLabel;
 	LongDescription : OPTIONAL IfcText;
 END_ENTITY;
@@ -7208,60 +7208,60 @@ END_ENTITY;
 
 ENTITY IfcPile
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcPileTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPileTypeEnum;
 	ConstructionType : OPTIONAL IfcPileConstructionEnum;
  WHERE
-	CorrectPredefinedType : NOT EXISTS(PredefinedType) OR
-                              (PredefinedType <> IfcPileTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcPileTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT EXISTS(PrenonEntityType) OR
+                              (PrenonEntityType <> IfcPileTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcPileTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCPILETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcPileType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcPileTypeEnum;
+	PrenonEntityType : IfcPileTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcPileTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcPileTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcPileTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcPileTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcPipeFitting
  SUBTYPE OF (IfcFlowFitting);
-	PredefinedType : OPTIONAL IfcPipeFittingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPipeFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcPipeFittingTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcPipeFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcPipeFittingTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcPipeFittingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCPIPEFITTINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcPipeFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcPipeFittingTypeEnum;
+	PrenonEntityType : IfcPipeFittingTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcPipeFittingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcPipeFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcPipeFittingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcPipeFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcPipeSegment
  SUBTYPE OF (IfcFlowSegment);
-	PredefinedType : OPTIONAL IfcPipeSegmentTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPipeSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcPipeSegmentTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcPipeSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcPipeSegmentTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcPipeSegmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCPIPESEGMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcPipeSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcPipeSegmentTypeEnum;
+	PrenonEntityType : IfcPipeSegmentTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcPipeSegmentTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcPipeSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcPipeSegmentTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcPipeSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcPixelTexture
@@ -7313,11 +7313,11 @@ ENTITY IfcPlate
  SUPERTYPE OF (ONEOF
 	(IfcPlateStandardCase))
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcPlateTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPlateTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcPlateTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcPlateTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcPlateTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcPlateTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCPLATETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -7333,10 +7333,10 @@ END_ENTITY;
 
 ENTITY IfcPlateType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcPlateTypeEnum;
+	PrenonEntityType : IfcPlateTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcPlateTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcPlateTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcPlateTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcPlateTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcPoint
@@ -7531,18 +7531,18 @@ END_ENTITY;
 
 ENTITY IfcProcedure
  SUBTYPE OF (IfcProcess);
-	PredefinedType : OPTIONAL IfcProcedureTypeEnum;
+	PrenonEntityType : OPTIONAL IfcProcedureTypeEnum;
  WHERE
 	HasName : EXISTS(SELF\IfcRoot.Name);
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR (PredefinedType <> IfcProcedureTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcProcedureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR (PrenonEntityType <> IfcProcedureTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcProcedureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcProcedureType
  SUBTYPE OF (IfcTypeProcess);
-	PredefinedType : IfcProcedureTypeEnum;
+	PrenonEntityType : IfcProcedureTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcProcedureTypeEnum.USERDEFINED) OR ((PredefinedType = IfcProcedureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeProcess.ProcessType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcProcedureTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcProcedureTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeProcess.ProcessType));
 END_ENTITY;
 
 ENTITY IfcProcess
@@ -7638,7 +7638,7 @@ END_ENTITY;
 
 ENTITY IfcProjectOrder
  SUBTYPE OF (IfcControl);
-	PredefinedType : OPTIONAL IfcProjectOrderTypeEnum;
+	PrenonEntityType : OPTIONAL IfcProjectOrderTypeEnum;
 	Status : OPTIONAL IfcLabel;
 	LongDescription : OPTIONAL IfcText;
 END_ENTITY;
@@ -7654,7 +7654,7 @@ END_ENTITY;
 
 ENTITY IfcProjectionElement
  SUBTYPE OF (IfcFeatureElementAddition);
-	PredefinedType : OPTIONAL IfcProjectionElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcProjectionElementTypeEnum;
 END_ENTITY;
 
 ENTITY IfcProperty
@@ -7832,40 +7832,40 @@ END_ENTITY;
 
 ENTITY IfcProtectiveDevice
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcProtectiveDeviceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcProtectiveDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcProtectiveDeviceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcProtectiveDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcProtectiveDeviceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcProtectiveDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCPROTECTIVEDEVICETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcProtectiveDeviceTrippingUnit
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcProtectiveDeviceTrippingUnitTypeEnum;
+	PrenonEntityType : OPTIONAL IfcProtectiveDeviceTrippingUnitTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCPROTECTIVEDEVICETRIPPINGUNITTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcProtectiveDeviceTrippingUnitType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcProtectiveDeviceTrippingUnitTypeEnum;
+	PrenonEntityType : IfcProtectiveDeviceTrippingUnitTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcProtectiveDeviceTrippingUnitTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcProtectiveDeviceType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcProtectiveDeviceTypeEnum;
+	PrenonEntityType : IfcProtectiveDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcProtectiveDeviceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcProtectiveDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcProtectiveDeviceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcProtectiveDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcProxy
@@ -7878,21 +7878,21 @@ END_ENTITY;
 
 ENTITY IfcPump
  SUBTYPE OF (IfcFlowMovingDevice);
-	PredefinedType : OPTIONAL IfcPumpTypeEnum;
+	PrenonEntityType : OPTIONAL IfcPumpTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcPumpTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcPumpTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcPumpTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcPumpTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCPUMPTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcPumpType
  SUBTYPE OF (IfcFlowMovingDeviceType);
-	PredefinedType : IfcPumpTypeEnum;
+	PrenonEntityType : IfcPumpTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcPumpTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcPumpTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcPumpTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcPumpTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcQuantityArea
@@ -7961,26 +7961,26 @@ END_ENTITY;
 
 ENTITY IfcRailing
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcRailingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcRailingTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcRailingTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcRailingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcRailingTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcRailingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCRAILINGTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcRailingType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcRailingTypeEnum;
+	PrenonEntityType : IfcRailingTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcRailingTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcRailingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcRailingTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcRailingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcRamp
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcRampTypeEnum;
+	PrenonEntityType : OPTIONAL IfcRampTypeEnum;
  WHERE
 	CorrectShapeDecomposition : (HIINDEX(SELF\IfcObjectDefinition.IsDecomposedBy) = 0) 
                                    OR 
@@ -7996,38 +7996,38 @@ ENTITY IfcRamp
                                       )
                                     )
                                   );
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                                   (PredefinedType <> IfcRampTypeEnum.USERDEFINED) OR
-                                   ((PredefinedType = IfcRampTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                                   (PrenonEntityType <> IfcRampTypeEnum.USERDEFINED) OR
+                                   ((PrenonEntityType = IfcRampTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                     ('IFC4.IFCRAMPTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcRampFlight
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcRampFlightTypeEnum;
+	PrenonEntityType : OPTIONAL IfcRampFlightTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcRampFlightTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcRampFlightTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcRampFlightTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcRampFlightTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCRAMPFLIGHTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcRampFlightType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcRampFlightTypeEnum;
+	PrenonEntityType : IfcRampFlightTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcRampFlightTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcRampFlightTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcRampFlightTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcRampFlightTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcRampType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcRampTypeEnum;
+	PrenonEntityType : IfcRampTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcRampTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcRampTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcRampTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcRampTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcRationalBSplineCurveWithKnots
@@ -8149,19 +8149,19 @@ ENTITY IfcReinforcingBar
 	NominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
 	CrossSectionArea : OPTIONAL IfcAreaMeasure;
 	BarLength : OPTIONAL IfcPositiveLengthMeasure;
-	PredefinedType : OPTIONAL IfcReinforcingBarTypeEnum;
+	PrenonEntityType : OPTIONAL IfcReinforcingBarTypeEnum;
 	BarSurface : OPTIONAL IfcReinforcingBarSurfaceEnum;
  WHERE
-	CorrectPredefinedType : NOT EXISTS(PredefinedType) OR
-                              (PredefinedType <> IfcReinforcingBarTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcReinforcingBarTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT EXISTS(PrenonEntityType) OR
+                              (PrenonEntityType <> IfcReinforcingBarTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcReinforcingBarTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCREINFORCINGBARTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcReinforcingBarType
  SUBTYPE OF (IfcReinforcingElementType);
-	PredefinedType : IfcReinforcingBarTypeEnum;
+	PrenonEntityType : IfcReinforcingBarTypeEnum;
 	NominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
 	CrossSectionArea : OPTIONAL IfcAreaMeasure;
 	BarLength : OPTIONAL IfcPositiveLengthMeasure;
@@ -8169,8 +8169,8 @@ ENTITY IfcReinforcingBarType
 	BendingShapeCode : OPTIONAL IfcLabel;
 	BendingParameters : OPTIONAL LIST [1:?] OF IfcBendingParameterSelect;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcReinforcingBarTypeEnum.USERDEFINED) OR
-                                 ((PredefinedType = IfcReinforcingBarTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcReinforcingBarTypeEnum.USERDEFINED) OR
+                                 ((PrenonEntityType = IfcReinforcingBarTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 	BendingShapeCodeProvided : NOT EXISTS(BendingParameters) OR EXISTS(BendingShapeCode);
 END_ENTITY;
 
@@ -8203,18 +8203,18 @@ ENTITY IfcReinforcingMesh
 	TransverseBarCrossSectionArea : OPTIONAL IfcAreaMeasure;
 	LongitudinalBarSpacing : OPTIONAL IfcPositiveLengthMeasure;
 	TransverseBarSpacing : OPTIONAL IfcPositiveLengthMeasure;
-	PredefinedType : OPTIONAL IfcReinforcingMeshTypeEnum;
+	PrenonEntityType : OPTIONAL IfcReinforcingMeshTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT EXISTS(PredefinedType) OR
-                              (PredefinedType <> IfcReinforcingMeshTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcReinforcingMeshTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT EXISTS(PrenonEntityType) OR
+                              (PrenonEntityType <> IfcReinforcingMeshTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcReinforcingMeshTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCREINFORCINGMESHTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcReinforcingMeshType
  SUBTYPE OF (IfcReinforcingElementType);
-	PredefinedType : IfcReinforcingMeshTypeEnum;
+	PrenonEntityType : IfcReinforcingMeshTypeEnum;
 	MeshLength : OPTIONAL IfcPositiveLengthMeasure;
 	MeshWidth : OPTIONAL IfcPositiveLengthMeasure;
 	LongitudinalBarNominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
@@ -8226,8 +8226,8 @@ ENTITY IfcReinforcingMeshType
 	BendingShapeCode : OPTIONAL IfcLabel;
 	BendingParameters : OPTIONAL LIST [1:?] OF IfcBendingParameterSelect;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcReinforcingMeshTypeEnum.USERDEFINED) OR
-                                 ((PredefinedType = IfcReinforcingMeshTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcReinforcingMeshTypeEnum.USERDEFINED) OR
+                                 ((PrenonEntityType = IfcReinforcingMeshTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 	BendingShapeCodeProvided : NOT EXISTS(BendingParameters) OR EXISTS(BendingShapeCode);
 END_ENTITY;
 
@@ -8785,7 +8785,7 @@ END_ENTITY;
 
 ENTITY IfcRoof
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcRoofTypeEnum;
+	PrenonEntityType : OPTIONAL IfcRoofTypeEnum;
  WHERE
 	CorrectShapeDecomposition : (HIINDEX(SELF\IfcObjectDefinition.IsDecomposedBy) = 0) 
                                    OR 
@@ -8801,19 +8801,19 @@ ENTITY IfcRoof
                                       )
                                     )
                                   );
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                                   (PredefinedType <> IfcRoofTypeEnum.USERDEFINED) OR
-                                   ((PredefinedType = IfcRoofTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                                   (PrenonEntityType <> IfcRoofTypeEnum.USERDEFINED) OR
+                                   ((PrenonEntityType = IfcRoofTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                     ('IFC4.IFCROOFTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcRoofType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcRoofTypeEnum;
+	PrenonEntityType : IfcRoofTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcRoofTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcRoofTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcRoofTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcRoofTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcRoot
@@ -8847,21 +8847,21 @@ END_ENTITY;
 
 ENTITY IfcSanitaryTerminal
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcSanitaryTerminalTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSanitaryTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSanitaryTerminalTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSanitaryTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSanitaryTerminalTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSanitaryTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCSANITARYTERMINALTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSanitaryTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcSanitaryTerminalTypeEnum;
+	PrenonEntityType : IfcSanitaryTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSanitaryTerminalTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSanitaryTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSanitaryTerminalTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSanitaryTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSchedulingTime
@@ -8908,40 +8908,40 @@ END_ENTITY;
 
 ENTITY IfcSensor
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcSensorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSensorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSensorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSensorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSensorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSensorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCSENSORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSensorType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcSensorTypeEnum;
+	PrenonEntityType : IfcSensorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSensorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSensorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSensorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSensorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcShadingDevice
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcShadingDeviceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcShadingDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcShadingDeviceTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcShadingDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcShadingDeviceTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcShadingDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCSHADINGDEVICETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcShadingDeviceType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcShadingDeviceTypeEnum;
+	PrenonEntityType : IfcShadingDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcShadingDeviceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcShadingDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcShadingDeviceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcShadingDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcShapeAspect;
@@ -9025,11 +9025,11 @@ ENTITY IfcSlab
 	(IfcSlabElementedCase
 	,IfcSlabStandardCase))
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcSlabTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSlabTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcSlabTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcSlabTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcSlabTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcSlabTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCSLABTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -9051,10 +9051,10 @@ END_ENTITY;
 
 ENTITY IfcSlabType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcSlabTypeEnum;
+	PrenonEntityType : IfcSlabTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSlabTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSlabTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSlabTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSlabTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSlippageConnectionCondition
@@ -9066,21 +9066,21 @@ END_ENTITY;
 
 ENTITY IfcSolarDevice
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcSolarDeviceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSolarDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSolarDeviceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSolarDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSolarDeviceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSolarDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCSOLARDEVICETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSolarDeviceType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcSolarDeviceTypeEnum;
+	PrenonEntityType : IfcSolarDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSolarDeviceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSolarDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSolarDeviceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSolarDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSolidModel
@@ -9096,45 +9096,45 @@ END_ENTITY;
 
 ENTITY IfcSpace
  SUBTYPE OF (IfcSpatialStructureElement);
-	PredefinedType : OPTIONAL IfcSpaceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSpaceTypeEnum;
 	ElevationWithFlooring : OPTIONAL IfcLengthMeasure;
  INVERSE
 	HasCoverings : SET [0:?] OF IfcRelCoversSpaces FOR RelatingSpace;
 	BoundedBy : SET [0:?] OF IfcRelSpaceBoundary FOR RelatingSpace;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcSpaceTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcSpaceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcSpaceTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcSpaceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCSPACETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSpaceHeater
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcSpaceHeaterTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSpaceHeaterTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSpaceHeaterTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSpaceHeaterTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSpaceHeaterTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSpaceHeaterTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCSPACEHEATERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSpaceHeaterType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcSpaceHeaterTypeEnum;
+	PrenonEntityType : IfcSpaceHeaterTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSpaceHeaterTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSpaceHeaterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSpaceHeaterTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSpaceHeaterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSpaceType
  SUBTYPE OF (IfcSpatialStructureElementType);
-	PredefinedType : IfcSpaceTypeEnum;
+	PrenonEntityType : IfcSpaceTypeEnum;
 	LongName : OPTIONAL IfcLabel;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSpaceTypeEnum.USERDEFINED) OR 
-                              ((PredefinedType = IfcSpaceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcSpatialElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSpaceTypeEnum.USERDEFINED) OR 
+                              ((PrenonEntityType = IfcSpaceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcSpatialElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSpatialElement
@@ -9184,22 +9184,22 @@ END_ENTITY;
 
 ENTITY IfcSpatialZone
  SUBTYPE OF (IfcSpatialElement);
-	PredefinedType : OPTIONAL IfcSpatialZoneTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSpatialZoneTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcSpatialZoneTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcSpatialZoneTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcSpatialZoneTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcSpatialZoneTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCSPATIALZONETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSpatialZoneType
  SUBTYPE OF (IfcSpatialElementType);
-	PredefinedType : IfcSpatialZoneTypeEnum;
+	PrenonEntityType : IfcSpatialZoneTypeEnum;
 	LongName : OPTIONAL IfcLabel;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSpatialZoneTypeEnum.USERDEFINED) OR 
-                              ((PredefinedType = IfcSpatialZoneTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcSpatialElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSpatialZoneTypeEnum.USERDEFINED) OR 
+                              ((PrenonEntityType = IfcSpatialZoneTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcSpatialElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSphere
@@ -9209,26 +9209,26 @@ END_ENTITY;
 
 ENTITY IfcStackTerminal
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcStackTerminalTypeEnum;
+	PrenonEntityType : OPTIONAL IfcStackTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcStackTerminalTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcStackTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcStackTerminalTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcStackTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCSTACKTERMINALTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcStackTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcStackTerminalTypeEnum;
+	PrenonEntityType : IfcStackTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcStackTerminalTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcStackTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcStackTerminalTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcStackTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcStair
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcStairTypeEnum;
+	PrenonEntityType : OPTIONAL IfcStairTypeEnum;
  WHERE
 	CorrectShapeDecomposition : (HIINDEX(SELF\IfcObjectDefinition.IsDecomposedBy) = 0) 
                                    OR 
@@ -9244,9 +9244,9 @@ ENTITY IfcStair
                                       )
                                     )
                                   );
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                                   (PredefinedType <> IfcStairTypeEnum.USERDEFINED) OR
-                                   ((PredefinedType = IfcStairTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                                   (PrenonEntityType <> IfcStairTypeEnum.USERDEFINED) OR
+                                   ((PrenonEntityType = IfcStairTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                     ('IFC4.IFCSTAIRTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -9257,29 +9257,29 @@ ENTITY IfcStairFlight
 	NumberOfTreads : OPTIONAL INTEGER;
 	RiserHeight : OPTIONAL IfcPositiveLengthMeasure;
 	TreadLength : OPTIONAL IfcPositiveLengthMeasure;
-	PredefinedType : OPTIONAL IfcStairFlightTypeEnum;
+	PrenonEntityType : OPTIONAL IfcStairFlightTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcStairFlightTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcStairFlightTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcStairFlightTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcStairFlightTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCSTAIRFLIGHTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcStairFlightType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcStairFlightTypeEnum;
+	PrenonEntityType : IfcStairFlightTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcStairFlightTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcStairFlightTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcStairFlightTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcStairFlightTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcStairType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcStairTypeEnum;
+	PrenonEntityType : IfcStairTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcStairTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcStairTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcStairTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcStairTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcStructuralAction
@@ -9304,13 +9304,13 @@ END_ENTITY;
 
 ENTITY IfcStructuralAnalysisModel
  SUBTYPE OF (IfcSystem);
-	PredefinedType : IfcAnalysisModelTypeEnum;
+	PrenonEntityType : IfcAnalysisModelTypeEnum;
 	OrientationOf2DPlane : OPTIONAL IfcAxis2Placement3D;
 	LoadedBy : OPTIONAL SET [1:?] OF IfcStructuralLoadGroup;
 	HasResults : OPTIONAL SET [1:?] OF IfcStructuralResultGroup;
 	SharedPlacement : OPTIONAL IfcObjectPlacement;
  WHERE
-	HasObjectType : (PredefinedType <> IfcAnalysisModelTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasObjectType : (PrenonEntityType <> IfcAnalysisModelTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcStructuralConnection
@@ -9336,13 +9336,13 @@ ENTITY IfcStructuralCurveAction
 	(IfcStructuralLinearAction))
  SUBTYPE OF (IfcStructuralAction);
 	ProjectedOrTrue : OPTIONAL IfcProjectedOrTrueLengthEnum;
-	PredefinedType : IfcStructuralCurveActivityTypeEnum;
+	PrenonEntityType : IfcStructuralCurveActivityTypeEnum;
  WHERE
 	ProjectedIsGlobal : (NOT EXISTS(ProjectedOrTrue)) OR
                                ((ProjectedOrTrue <> PROJECTED_LENGTH) OR
                                 (SELF\IfcStructuralActivity.GlobalOrLocal = GLOBAL_COORDS));
-	HasObjectType : (PredefinedType <> IfcStructuralCurveActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
-	SuitablePredefinedType : PredefinedType <> IfcStructuralCurveActivityTypeEnum.EQUIDISTANT;
+	HasObjectType : (PrenonEntityType <> IfcStructuralCurveActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	SuitablePrenonEntityType : PrenonEntityType <> IfcStructuralCurveActivityTypeEnum.EQUIDISTANT;
 END_ENTITY;
 
 ENTITY IfcStructuralCurveConnection
@@ -9354,10 +9354,10 @@ ENTITY IfcStructuralCurveMember
  SUPERTYPE OF (ONEOF
 	(IfcStructuralCurveMemberVarying))
  SUBTYPE OF (IfcStructuralMember);
-	PredefinedType : IfcStructuralCurveMemberTypeEnum;
+	PrenonEntityType : IfcStructuralCurveMemberTypeEnum;
 	Axis : IfcDirection;
  WHERE
-	HasObjectType : (PredefinedType <> IfcStructuralCurveMemberTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasObjectType : (PrenonEntityType <> IfcStructuralCurveMemberTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcStructuralCurveMemberVarying
@@ -9366,10 +9366,10 @@ END_ENTITY;
 
 ENTITY IfcStructuralCurveReaction
  SUBTYPE OF (IfcStructuralReaction);
-	PredefinedType : IfcStructuralCurveActivityTypeEnum;
+	PrenonEntityType : IfcStructuralCurveActivityTypeEnum;
  WHERE
-	HasObjectType : (PredefinedType <> IfcStructuralCurveActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
-	SuitablePredefinedType : (PredefinedType <> IfcStructuralCurveActivityTypeEnum.SINUS) AND (PredefinedType <> IfcStructuralCurveActivityTypeEnum.PARABOLA);
+	HasObjectType : (PrenonEntityType <> IfcStructuralCurveActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	SuitablePrenonEntityType : (PrenonEntityType <> IfcStructuralCurveActivityTypeEnum.SINUS) AND (PrenonEntityType <> IfcStructuralCurveActivityTypeEnum.PARABOLA);
 END_ENTITY;
 
 ENTITY IfcStructuralItem
@@ -9385,7 +9385,7 @@ ENTITY IfcStructuralLinearAction
  SUBTYPE OF (IfcStructuralCurveAction);
  WHERE
 	SuitableLoadType : SIZEOF(['IFC4.IFCSTRUCTURALLOADLINEARFORCE', 'IFC4.IFCSTRUCTURALLOADTEMPERATURE'] * TYPEOF(SELF\IfcStructuralActivity.AppliedLoad)) = 1;
-	ConstPredefinedType : SELF\IfcStructuralCurveAction.PredefinedType = IfcStructuralCurveActivityTypeEnum.CONST;
+	ConstPrenonEntityType : SELF\IfcStructuralCurveAction.PrenonEntityType = IfcStructuralCurveActivityTypeEnum.CONST;
 END_ENTITY;
 
 ENTITY IfcStructuralLoad
@@ -9399,7 +9399,7 @@ ENTITY IfcStructuralLoadCase
  SUBTYPE OF (IfcStructuralLoadGroup);
 	SelfWeightCoefficients : OPTIONAL LIST [3:3] OF IfcRatioMeasure;
  WHERE
-	IsLoadCasePredefinedType : SELF\IfcStructuralLoadGroup.PredefinedType = IfcLoadGroupTypeEnum.LOAD_CASE;
+	IsLoadCasePrenonEntityType : SELF\IfcStructuralLoadGroup.PrenonEntityType = IfcLoadGroupTypeEnum.LOAD_CASE;
 END_ENTITY;
 
 ENTITY IfcStructuralLoadConfiguration
@@ -9414,7 +9414,7 @@ ENTITY IfcStructuralLoadGroup
  SUPERTYPE OF (ONEOF
 	(IfcStructuralLoadCase))
  SUBTYPE OF (IfcGroup);
-	PredefinedType : IfcLoadGroupTypeEnum;
+	PrenonEntityType : IfcLoadGroupTypeEnum;
 	ActionType : IfcActionTypeEnum;
 	ActionSource : IfcActionSourceTypeEnum;
 	Coefficient : OPTIONAL IfcRatioMeasure;
@@ -9424,7 +9424,7 @@ ENTITY IfcStructuralLoadGroup
 	LoadGroupFor : SET [0:?] OF IfcStructuralAnalysisModel FOR LoadedBy;
  WHERE
 	HasObjectType : (
-                        (PredefinedType <> IfcLoadGroupTypeEnum.USERDEFINED) AND
+                        (PrenonEntityType <> IfcLoadGroupTypeEnum.USERDEFINED) AND
                         (ActionType <> IfcActionTypeEnum.USERDEFINED) AND
                         (ActionSource <> IfcActionSourceTypeEnum.USERDEFINED)
                       ) OR EXISTS(SELF\IfcObject.ObjectType);
@@ -9518,7 +9518,7 @@ ENTITY IfcStructuralPlanarAction
  SUBTYPE OF (IfcStructuralSurfaceAction);
  WHERE
 	SuitableLoadType : SIZEOF(['IFC4.IFCSTRUCTURALLOADPLANARFORCE', 'IFC4.IFCSTRUCTURALLOADTEMPERATURE'] * TYPEOF(SELF\IfcStructuralActivity.AppliedLoad)) = 1;
-	ConstPredefinedType : SELF\IfcStructuralSurfaceAction.PredefinedType = IfcStructuralSurfaceActivityTypeEnum.CONST;
+	ConstPrenonEntityType : SELF\IfcStructuralSurfaceAction.PrenonEntityType = IfcStructuralSurfaceActivityTypeEnum.CONST;
 END_ENTITY;
 
 ENTITY IfcStructuralPointAction
@@ -9562,12 +9562,12 @@ ENTITY IfcStructuralSurfaceAction
 	(IfcStructuralPlanarAction))
  SUBTYPE OF (IfcStructuralAction);
 	ProjectedOrTrue : OPTIONAL IfcProjectedOrTrueLengthEnum;
-	PredefinedType : IfcStructuralSurfaceActivityTypeEnum;
+	PrenonEntityType : IfcStructuralSurfaceActivityTypeEnum;
  WHERE
 	ProjectedIsGlobal : (NOT EXISTS(ProjectedOrTrue)) OR
                           ((ProjectedOrTrue <> PROJECTED_LENGTH) OR
                            (SELF\IfcStructuralActivity.GlobalOrLocal = GLOBAL_COORDS));
-	HasObjectType : (PredefinedType <> IfcStructuralSurfaceActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasObjectType : (PrenonEntityType <> IfcStructuralSurfaceActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcStructuralSurfaceConnection
@@ -9578,10 +9578,10 @@ ENTITY IfcStructuralSurfaceMember
  SUPERTYPE OF (ONEOF
 	(IfcStructuralSurfaceMemberVarying))
  SUBTYPE OF (IfcStructuralMember);
-	PredefinedType : IfcStructuralSurfaceMemberTypeEnum;
+	PrenonEntityType : IfcStructuralSurfaceMemberTypeEnum;
 	Thickness : OPTIONAL IfcPositiveLengthMeasure;
  WHERE
-	HasObjectType : (PredefinedType <> IfcStructuralSurfaceMemberTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasObjectType : (PrenonEntityType <> IfcStructuralSurfaceMemberTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcStructuralSurfaceMemberVarying
@@ -9590,9 +9590,9 @@ END_ENTITY;
 
 ENTITY IfcStructuralSurfaceReaction
  SUBTYPE OF (IfcStructuralReaction);
-	PredefinedType : IfcStructuralSurfaceActivityTypeEnum;
+	PrenonEntityType : IfcStructuralSurfaceActivityTypeEnum;
  WHERE
-	HasPredefinedType : (PredefinedType <> IfcStructuralSurfaceActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasPrenonEntityType : (PrenonEntityType <> IfcStructuralSurfaceActivityTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcStyleModel
@@ -9620,19 +9620,19 @@ END_ENTITY;
 
 ENTITY IfcSubContractResource
  SUBTYPE OF (IfcConstructionResource);
-	PredefinedType : OPTIONAL IfcSubContractResourceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSubContractResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSubContractResourceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSubContractResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSubContractResourceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSubContractResourceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcSubContractResourceType
  SUBTYPE OF (IfcConstructionResourceType);
-	PredefinedType : IfcSubContractResourceTypeEnum;
+	PrenonEntityType : IfcSubContractResourceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSubContractResourceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSubContractResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSubContractResourceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSubContractResourceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeResource.ResourceType));
 END_ENTITY;
 
 ENTITY IfcSubedge
@@ -9663,9 +9663,9 @@ END_ENTITY;
 
 ENTITY IfcSurfaceFeature
  SUBTYPE OF (IfcFeatureElement);
-	PredefinedType : OPTIONAL IfcSurfaceFeatureTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSurfaceFeatureTypeEnum;
  WHERE
-	HasObjectType : NOT EXISTS(PredefinedType) OR (PredefinedType <> IfcSurfaceFeatureTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasObjectType : NOT EXISTS(PrenonEntityType) OR (PrenonEntityType <> IfcSurfaceFeatureTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcSurfaceOfLinearExtrusion
@@ -9837,21 +9837,21 @@ END_ENTITY;
 
 ENTITY IfcSwitchingDevice
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcSwitchingDeviceTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSwitchingDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSwitchingDeviceTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSwitchingDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSwitchingDeviceTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSwitchingDeviceTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCSWITCHINGDEVICETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSwitchingDeviceType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcSwitchingDeviceTypeEnum;
+	PrenonEntityType : IfcSwitchingDeviceTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSwitchingDeviceTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSwitchingDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSwitchingDeviceTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSwitchingDeviceTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSystem
@@ -9867,21 +9867,21 @@ END_ENTITY;
 
 ENTITY IfcSystemFurnitureElement
  SUBTYPE OF (IfcFurnishingElement);
-	PredefinedType : OPTIONAL IfcSystemFurnitureElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSystemFurnitureElementTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcSystemFurnitureElementTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcSystemFurnitureElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcSystemFurnitureElementTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcSystemFurnitureElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                  ('IFC4.IFCSYSTEMFURNITUREELEMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcSystemFurnitureElementType
  SUBTYPE OF (IfcFurnishingElementType);
-	PredefinedType : OPTIONAL IfcSystemFurnitureElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSystemFurnitureElementTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcSystemFurnitureElementTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcSystemFurnitureElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcSystemFurnitureElementTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcSystemFurnitureElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTShapeProfileDef
@@ -9930,21 +9930,21 @@ END_ENTITY;
 
 ENTITY IfcTank
  SUBTYPE OF (IfcFlowStorageDevice);
-	PredefinedType : OPTIONAL IfcTankTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTankTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcTankTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcTankTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcTankTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcTankTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCTANKTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcTankType
  SUBTYPE OF (IfcFlowStorageDeviceType);
-	PredefinedType : IfcTankTypeEnum;
+	PrenonEntityType : IfcTankTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTankTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTankTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTankTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTankTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTask
@@ -9954,10 +9954,10 @@ ENTITY IfcTask
 	IsMilestone : BOOLEAN;
 	Priority : OPTIONAL INTEGER;
 	TaskTime : OPTIONAL IfcTaskTime;
-	PredefinedType : OPTIONAL IfcTaskTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTaskTypeEnum;
  WHERE
 	HasName : EXISTS(SELF\IfcRoot.Name);
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR (PredefinedType <> IfcTaskTypeEnum.USERDEFINED) OR ((PredefinedType = IfcTaskTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR (PrenonEntityType <> IfcTaskTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcTaskTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcTaskTime
@@ -9990,10 +9990,10 @@ END_ENTITY;
 
 ENTITY IfcTaskType
  SUBTYPE OF (IfcTypeProcess);
-	PredefinedType : IfcTaskTypeEnum;
+	PrenonEntityType : IfcTaskTypeEnum;
 	WorkMethod : OPTIONAL IfcLabel;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTaskTypeEnum.USERDEFINED) OR ((PredefinedType = IfcTaskTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeProcess.ProcessType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTaskTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcTaskTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcTypeProcess.ProcessType));
 END_ENTITY;
 
 ENTITY IfcTelecomAddress
@@ -10015,7 +10015,7 @@ END_ENTITY;
 
 ENTITY IfcTendon
  SUBTYPE OF (IfcReinforcingElement);
-	PredefinedType : OPTIONAL IfcTendonTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTendonTypeEnum;
 	NominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
 	CrossSectionArea : OPTIONAL IfcAreaMeasure;
 	TensionForce : OPTIONAL IfcForceMeasure;
@@ -10024,41 +10024,41 @@ ENTITY IfcTendon
 	AnchorageSlip : OPTIONAL IfcPositiveLengthMeasure;
 	MinCurvatureRadius : OPTIONAL IfcPositiveLengthMeasure;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                              (PredefinedType <> IfcTendonTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTendonTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                              (PrenonEntityType <> IfcTendonTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTendonTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCTENDONTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcTendonAnchor
  SUBTYPE OF (IfcReinforcingElement);
-	PredefinedType : OPTIONAL IfcTendonAnchorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTendonAnchorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                              (PredefinedType <> IfcTendonAnchorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTendonAnchorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                              (PrenonEntityType <> IfcTendonAnchorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTendonAnchorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                               ('IFC4.IFCTENDONANCHORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcTendonAnchorType
  SUBTYPE OF (IfcReinforcingElementType);
-	PredefinedType : IfcTendonAnchorTypeEnum;
+	PrenonEntityType : IfcTendonAnchorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTendonAnchorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTendonAnchorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTendonAnchorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTendonAnchorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTendonType
  SUBTYPE OF (IfcReinforcingElementType);
-	PredefinedType : IfcTendonTypeEnum;
+	PrenonEntityType : IfcTendonTypeEnum;
 	NominalDiameter : OPTIONAL IfcPositiveLengthMeasure;
 	CrossSectionArea : OPTIONAL IfcAreaMeasure;
 	SheethDiameter : OPTIONAL IfcPositiveLengthMeasure;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTendonTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTendonTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTendonTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTendonTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTessellatedFaceSet
@@ -10213,40 +10213,40 @@ END_ENTITY;
 
 ENTITY IfcTransformer
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcTransformerTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTransformerTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcTransformerTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcTransformerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcTransformerTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcTransformerTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCTRANFORMERTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcTransformerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcTransformerTypeEnum;
+	PrenonEntityType : IfcTransformerTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTransformerTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTransformerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTransformerTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTransformerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTransportElement
  SUBTYPE OF (IfcElement);
-	PredefinedType : OPTIONAL IfcTransportElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTransportElementTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcTransportElementTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcTransportElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcTransportElementTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcTransportElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCTRANSPORTELEMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcTransportElementType
  SUBTYPE OF (IfcElementType);
-	PredefinedType : IfcTransportElementTypeEnum;
+	PrenonEntityType : IfcTransportElementTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTransportElementTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTransportElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTransportElementTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTransportElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTrapeziumProfileDef
@@ -10280,21 +10280,21 @@ END_ENTITY;
 
 ENTITY IfcTubeBundle
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcTubeBundleTypeEnum;
+	PrenonEntityType : OPTIONAL IfcTubeBundleTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcTubeBundleTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcTubeBundleTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcTubeBundleTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcTubeBundleTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCTUBEBUNDLETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcTubeBundleType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcTubeBundleTypeEnum;
+	PrenonEntityType : IfcTubeBundleTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcTubeBundleTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcTubeBundleTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcTubeBundleTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcTubeBundleTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTypeObject
@@ -10375,59 +10375,59 @@ END_ENTITY;
 
 ENTITY IfcUnitaryControlElement
  SUBTYPE OF (IfcDistributionControlElement);
-	PredefinedType : OPTIONAL IfcUnitaryControlElementTypeEnum;
+	PrenonEntityType : OPTIONAL IfcUnitaryControlElementTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcUnitaryControlElementTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcUnitaryControlElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcUnitaryControlElementTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcUnitaryControlElementTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                               ('IFC4.IFCUNITARYCONTROLELEMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcUnitaryControlElementType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcUnitaryControlElementTypeEnum;
+	PrenonEntityType : IfcUnitaryControlElementTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcUnitaryControlElementTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcUnitaryControlElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcUnitaryControlElementTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcUnitaryControlElementTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcUnitaryEquipment
  SUBTYPE OF (IfcEnergyConversionDevice);
-	PredefinedType : OPTIONAL IfcUnitaryEquipmentTypeEnum;
+	PrenonEntityType : OPTIONAL IfcUnitaryEquipmentTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcUnitaryEquipmentTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcUnitaryEquipmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcUnitaryEquipmentTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcUnitaryEquipmentTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCUNITARYEQUIPMENTTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcUnitaryEquipmentType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcUnitaryEquipmentTypeEnum;
+	PrenonEntityType : IfcUnitaryEquipmentTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcUnitaryEquipmentTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcUnitaryEquipmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcUnitaryEquipmentTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcUnitaryEquipmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcValve
  SUBTYPE OF (IfcFlowController);
-	PredefinedType : OPTIONAL IfcValveTypeEnum;
+	PrenonEntityType : OPTIONAL IfcValveTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcValveTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcValveTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcValveTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcValveTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCVALVETYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcValveType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcValveTypeEnum;
+	PrenonEntityType : IfcValveTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcValveTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcValveTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcValveTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcValveTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcVector
@@ -10458,21 +10458,21 @@ END_ENTITY;
 
 ENTITY IfcVibrationIsolator
  SUBTYPE OF (IfcElementComponent);
-	PredefinedType : OPTIONAL IfcVibrationIsolatorTypeEnum;
+	PrenonEntityType : OPTIONAL IfcVibrationIsolatorTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcVibrationIsolatorTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcVibrationIsolatorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcVibrationIsolatorTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcVibrationIsolatorTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCVIBRATIONISOLATORTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcVibrationIsolatorType
  SUBTYPE OF (IfcElementComponentType);
-	PredefinedType : IfcVibrationIsolatorTypeEnum;
+	PrenonEntityType : IfcVibrationIsolatorTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcVibrationIsolatorTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcVibrationIsolatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcVibrationIsolatorTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcVibrationIsolatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcVirtualElement
@@ -10486,9 +10486,9 @@ END_ENTITY;
 
 ENTITY IfcVoidingFeature
  SUBTYPE OF (IfcFeatureElementSubtraction);
-	PredefinedType : OPTIONAL IfcVoidingFeatureTypeEnum;
+	PrenonEntityType : OPTIONAL IfcVoidingFeatureTypeEnum;
  WHERE
-	HasObjectType : NOT EXISTS(PredefinedType) OR (PredefinedType <> IfcVoidingFeatureTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
+	HasObjectType : NOT EXISTS(PrenonEntityType) OR (PrenonEntityType <> IfcVoidingFeatureTypeEnum.USERDEFINED) OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
 ENTITY IfcWall
@@ -10496,11 +10496,11 @@ ENTITY IfcWall
 	(IfcWallElementedCase
 	,IfcWallStandardCase))
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcWallTypeEnum;
+	PrenonEntityType : OPTIONAL IfcWallTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR
-                               (PredefinedType <> IfcWallTypeEnum.USERDEFINED) OR
-                               ((PredefinedType = IfcWallTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR
+                               (PrenonEntityType <> IfcWallTypeEnum.USERDEFINED) OR
+                               ((PrenonEntityType = IfcWallTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR
                                 ('IFC4.IFCWALLTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
@@ -10522,29 +10522,29 @@ END_ENTITY;
 
 ENTITY IfcWallType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcWallTypeEnum;
+	PrenonEntityType : IfcWallTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcWallTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcWallTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcWallTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcWallTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcWasteTerminal
  SUBTYPE OF (IfcFlowTerminal);
-	PredefinedType : OPTIONAL IfcWasteTerminalTypeEnum;
+	PrenonEntityType : OPTIONAL IfcWasteTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR 
-                               (PredefinedType <> IfcWasteTerminalTypeEnum.USERDEFINED) OR 
-                               ((PredefinedType = IfcWasteTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR 
+                               (PrenonEntityType <> IfcWasteTerminalTypeEnum.USERDEFINED) OR 
+                               ((PrenonEntityType = IfcWasteTerminalTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 	CorrectTypeAssigned : (SIZEOF(IsTypedBy) = 0) OR 
                                 ('IFC4.IFCWASTETERMINALTYPE' IN TYPEOF(SELF\IfcObject.IsTypedBy[1].RelatingType));
 END_ENTITY;
 
 ENTITY IfcWasteTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcWasteTerminalTypeEnum;
+	PrenonEntityType : IfcWasteTerminalTypeEnum;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcWasteTerminalTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcWasteTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcWasteTerminalTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcWasteTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcWindow
@@ -10553,7 +10553,7 @@ ENTITY IfcWindow
  SUBTYPE OF (IfcBuildingElement);
 	OverallHeight : OPTIONAL IfcPositiveLengthMeasure;
 	OverallWidth : OPTIONAL IfcPositiveLengthMeasure;
-	PredefinedType : OPTIONAL IfcWindowTypeEnum;
+	PrenonEntityType : OPTIONAL IfcWindowTypeEnum;
 	PartitioningType : OPTIONAL IfcWindowTypePartitioningEnum;
 	UserDefinedPartitioningType : OPTIONAL IfcLabel;
  WHERE
@@ -10619,23 +10619,23 @@ END_ENTITY;
 
 ENTITY IfcWindowType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcWindowTypeEnum;
+	PrenonEntityType : IfcWindowTypeEnum;
 	PartitioningType : IfcWindowTypePartitioningEnum;
 	ParameterTakesPrecedence : OPTIONAL BOOLEAN;
 	UserDefinedPartitioningType : OPTIONAL IfcLabel;
  WHERE
-	CorrectPredefinedType : (PredefinedType <> IfcWindowTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcWindowTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	CorrectPrenonEntityType : (PrenonEntityType <> IfcWindowTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcWindowTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcWorkCalendar
  SUBTYPE OF (IfcControl);
 	WorkingTimes : OPTIONAL SET [1:?] OF IfcWorkTime;
 	ExceptionTimes : OPTIONAL SET [1:?] OF IfcWorkTime;
-	PredefinedType : OPTIONAL IfcWorkCalendarTypeEnum;
+	PrenonEntityType : OPTIONAL IfcWorkCalendarTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR (PredefinedType <> IfcWorkCalendarTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcWorkCalendarTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR (PrenonEntityType <> IfcWorkCalendarTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcWorkCalendarTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcWorkControl
@@ -10654,18 +10654,18 @@ END_ENTITY;
 
 ENTITY IfcWorkPlan
  SUBTYPE OF (IfcWorkControl);
-	PredefinedType : OPTIONAL IfcWorkPlanTypeEnum;
+	PrenonEntityType : OPTIONAL IfcWorkPlanTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR (PredefinedType <> IfcWorkPlanTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcWorkPlanTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR (PrenonEntityType <> IfcWorkPlanTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcWorkPlanTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcWorkSchedule
  SUBTYPE OF (IfcWorkControl);
-	PredefinedType : OPTIONAL IfcWorkScheduleTypeEnum;
+	PrenonEntityType : OPTIONAL IfcWorkScheduleTypeEnum;
  WHERE
-	CorrectPredefinedType : NOT(EXISTS(PredefinedType)) OR (PredefinedType <> IfcWorkScheduleTypeEnum.USERDEFINED) OR
-                              ((PredefinedType = IfcWorkScheduleTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	CorrectPrenonEntityType : NOT(EXISTS(PrenonEntityType)) OR (PrenonEntityType <> IfcWorkScheduleTypeEnum.USERDEFINED) OR
+                              ((PrenonEntityType = IfcWorkScheduleTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcWorkTime

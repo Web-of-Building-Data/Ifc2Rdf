@@ -7,7 +7,7 @@ import java.util.List;
 import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
 
 
-public class IfcEnumerationTypeInfo extends IfcDefinedTypeInfo {
+public class IfcEnumerationTypeInfo extends IfcNonEntityTypeInfo {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -30,10 +30,10 @@ public class IfcEnumerationTypeInfo extends IfcDefinedTypeInfo {
 		return false;
 	}
 
-	@Override
-	public boolean isEntityOrSelectType() {
-		return false;
-	}
+//	@Override
+//	public boolean isEntityOrSelectType() {
+//		return false;
+//	}
 	
 	/**
 	 * Gets the basic type of literal values involved inside the type (if there is only one) 

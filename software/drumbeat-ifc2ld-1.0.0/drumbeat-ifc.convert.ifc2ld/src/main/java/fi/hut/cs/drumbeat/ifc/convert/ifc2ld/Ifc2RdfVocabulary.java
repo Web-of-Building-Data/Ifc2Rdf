@@ -5,11 +5,11 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 import fi.hut.cs.drumbeat.common.config.document.ConfigurationDocument;
 import fi.hut.cs.drumbeat.common.config.document.ConfigurationParserException;
+import fi.hut.cs.drumbeat.ifc.data.schema.IfcCollectionKindEnum;
 import fi.hut.cs.drumbeat.rdf.RdfVocabulary;
 
 /**
@@ -29,6 +29,8 @@ public class Ifc2RdfVocabulary {
 
 	public static class IFC {
 		
+		public static final String BASE_PREFIX = "ifc";
+
 		public static final String EMPTY_LIST = "EMPTY_LIST";		
 		
 		public static final String BLANK_NODE_ENTITY_URI_FORMAT = "_LINE_%d";
@@ -74,8 +76,24 @@ public class Ifc2RdfVocabulary {
 		public static final Resource BagClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "BagClass");		
 		public static final Resource CollectionSlotClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "CollectionSlotClass");
 
+		public static final Property index = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "index");
 		public static final Property item = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "item");
+		public static final Property itemType = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "itemType");
 		public static final Property slot = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "slot");
+		public static final Property size = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "size");
+		
+		public static Resource getCollectionClass(IfcCollectionKindEnum collectionKind) {
+			if (collectionKind == IfcCollectionKindEnum.List) {
+				return Ifc2RdfVocabulary.EXPRESS.ListClass;				
+			} else if (collectionKind == IfcCollectionKindEnum.Set) {
+				return Ifc2RdfVocabulary.EXPRESS.SetClass;				
+			} else if (collectionKind == IfcCollectionKindEnum.Array) {
+				return Ifc2RdfVocabulary.EXPRESS.ArrayClass;				
+			} else {
+				return Ifc2RdfVocabulary.EXPRESS.BagClass;				
+			}	
+			
+		}
 		
 //		public static final String CLASS_DEFINED = "DefinedClass";		
 //		public static final String CLASS_ENUMERATION = "EnumerationClass";
@@ -108,11 +126,33 @@ public class Ifc2RdfVocabulary {
 				baseUri = properties.getProperty("step.baseuri", DEFAULT_ONTOLOGY_BASE + "STEP#");
 			}
 			return baseUri;
+		}		
+		
+		public static final Property fileDescription = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "fileDescription");		
+		public static final Property fileName = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "fileName");		
+		public static final Property fileSchema = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "fileSchema");
+		
+		public static class FileDescription {
+			public static final Resource FileDescriptionClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "FileDescription");
+			public static final Property description = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "description");
+			public static final Property implementation_level = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "implementation_level");
 		}
 		
+		public static class FileName {
+			public static final Resource FileNameClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "FileName");
+			public static final Property name = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "name");
+			public static final Property time_stamp = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "time_stamp");
+			public static final Property author = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "author");
+			public static final Property organization = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "organization");
+			public static final Property preprocessor_version = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "preprocessor_version");
+			public static final Property originating_system = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "originating_system");
+			public static final Property authorization = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "authorization");
+		}
 		
-		
-		
+		public static class FileSchema {
+			public static final Resource FileSchemaClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "FileSchema");
+			public static final Property schema_identifiers = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "schema_identifiers");
+		}
 	}
 
 }

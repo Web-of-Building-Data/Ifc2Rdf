@@ -2,26 +2,10 @@ package fi.hut.cs.drumbeat.ifc.data.schema;
 
 import java.util.EnumSet;
 
-import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
 
-
-public class IfcLiteralTypeInfo extends IfcDefinedTypeInfo {
+public class IfcLiteralTypeInfo extends IfcNonEntityTypeInfo {
 	
 	private static final long serialVersionUID = 1L;
-	
-	public static void addPredefinedTypesToSchema(IfcSchema schema) {
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.REAL, IfcTypeEnum.REAL));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.NUMBER, IfcTypeEnum.REAL));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.INTEGER, IfcTypeEnum.INTEGER));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.BINARY, IfcTypeEnum.INTEGER));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.BINARY32, IfcTypeEnum.INTEGER));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.GUID, IfcTypeEnum.GUID));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.STRING, IfcTypeEnum.STRING));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.STRING255, IfcTypeEnum.STRING));
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.LOGICAL, IfcTypeEnum.LOGICAL)); // true, false or null
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.BOOLEAN, IfcTypeEnum.LOGICAL)); // true or false
-		schema.addDefinedTypeInfo(new IfcLiteralTypeInfo(schema, IfcVocabulary.TypeNames.DATETIME, IfcTypeEnum.DATETIME));
-	}	
 	
 	private IfcTypeEnum valueType;
 
@@ -35,10 +19,10 @@ public class IfcLiteralTypeInfo extends IfcDefinedTypeInfo {
 		return false;
 	}
 
-	@Override
-	public boolean isEntityOrSelectType() {
-		return false;
-	}
+//	@Override
+//	public boolean isEntityOrSelectType() {
+//		return false;
+//	}
 	
 	
 	public IfcTypeEnum getValueType() {

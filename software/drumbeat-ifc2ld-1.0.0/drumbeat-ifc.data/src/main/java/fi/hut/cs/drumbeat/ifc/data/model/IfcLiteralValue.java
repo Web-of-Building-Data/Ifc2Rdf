@@ -1,22 +1,29 @@
 package fi.hut.cs.drumbeat.ifc.data.model;
 
+import fi.hut.cs.drumbeat.ifc.data.schema.IfcTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcTypeEnum;
 
 public class IfcLiteralValue extends IfcSingleValue {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final Object value;
+	private final IfcTypeInfo typeInfo;
 	private final IfcTypeEnum type;
+	private Object value;
 	
-	public IfcLiteralValue(Object value, IfcTypeEnum type) {
+	public IfcLiteralValue(Object value, IfcTypeInfo typeInfo, IfcTypeEnum type) {
 		this.value = value;
+		this.typeInfo = typeInfo;
 		this.type = type;
+	}
+	
+	public IfcTypeInfo getType() {
+		return typeInfo;
 	}
 	
 	@Override
 	public String toString() {
-		return value.toString();
+		return value != null ? value.toString() : "null";
 	}
 
 	@Override
@@ -26,6 +33,10 @@ public class IfcLiteralValue extends IfcSingleValue {
 	
 	public Object getValue() {
 		return value;
+	}
+	
+	public void setValue(Object value) {
+		this.value = value;
 	}
 	
 	public IfcTypeEnum getValueType() {

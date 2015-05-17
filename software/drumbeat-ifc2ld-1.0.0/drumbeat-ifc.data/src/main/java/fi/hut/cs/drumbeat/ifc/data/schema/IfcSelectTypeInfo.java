@@ -9,7 +9,7 @@ import fi.hut.cs.drumbeat.ifc.common.IfcNotFoundException;
 import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
 
 
-public class IfcSelectTypeInfo extends IfcDefinedTypeInfo {
+public class IfcSelectTypeInfo extends IfcNonEntityTypeInfo {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -55,10 +55,10 @@ public class IfcSelectTypeInfo extends IfcDefinedTypeInfo {
 	}
 	
 
-	@Override
-	public boolean isEntityOrSelectType() {
-		return true;
-	}
+//	@Override
+//	public boolean isEntityOrSelectType() {
+//		return true;
+//	}
 
 
 	/**

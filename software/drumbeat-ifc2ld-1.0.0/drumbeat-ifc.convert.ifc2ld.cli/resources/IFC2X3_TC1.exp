@@ -2616,7 +2616,7 @@ END_ENTITY;
 
 ENTITY IfcActuatorType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcActuatorTypeEnum;
+	PrenonEntityType : IfcActuatorTypeEnum;
 END_ENTITY;
 
 ENTITY IfcAddress
@@ -2638,31 +2638,31 @@ END_ENTITY;
 
 ENTITY IfcAirTerminalBoxType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcAirTerminalBoxTypeEnum;
+	PrenonEntityType : IfcAirTerminalBoxTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcAirTerminalBoxTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcAirTerminalBoxTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcAirTerminalBoxTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcAirTerminalBoxTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAirTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcAirTerminalTypeEnum;
+	PrenonEntityType : IfcAirTerminalTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcAirTerminalTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcAirTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcAirTerminalTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcAirTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAirToAirHeatRecoveryType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcAirToAirHeatRecoveryTypeEnum;
+	PrenonEntityType : IfcAirToAirHeatRecoveryTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcAirToAirHeatRecoveryTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcAlarmType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcAlarmTypeEnum;
+	PrenonEntityType : IfcAlarmTypeEnum;
 END_ENTITY;
 
 ENTITY IfcAngularDimension
@@ -2935,7 +2935,7 @@ END_ENTITY;
 
 ENTITY IfcBeamType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcBeamTypeEnum;
+	PrenonEntityType : IfcBeamTypeEnum;
 END_ENTITY;
 
 ENTITY IfcBezierCurve
@@ -2961,10 +2961,10 @@ END_ENTITY;
 
 ENTITY IfcBoilerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcBoilerTypeEnum;
+	PrenonEntityType : IfcBoilerTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcBoilerTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcBoilerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcBoilerTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcBoilerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcBooleanClippingResult
@@ -3115,7 +3115,7 @@ END_ENTITY;
 
 ENTITY IfcBuildingElementProxyType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcBuildingElementProxyTypeEnum;
+	PrenonEntityType : IfcBuildingElementProxyTypeEnum;
 END_ENTITY;
 
 ENTITY IfcBuildingElementType
@@ -3157,20 +3157,20 @@ END_ENTITY;
 
 ENTITY IfcCableCarrierFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcCableCarrierFittingTypeEnum;
+	PrenonEntityType : IfcCableCarrierFittingTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcCableCarrierFittingTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcCableCarrierFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcCableCarrierFittingTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcCableCarrierFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCableCarrierSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcCableCarrierSegmentTypeEnum;
+	PrenonEntityType : IfcCableCarrierSegmentTypeEnum;
 END_ENTITY;
 
 ENTITY IfcCableSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcCableSegmentTypeEnum;
+	PrenonEntityType : IfcCableSegmentTypeEnum;
 END_ENTITY;
 
 ENTITY IfcCalendarDate;
@@ -3272,10 +3272,10 @@ END_ENTITY;
 
 ENTITY IfcChillerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcChillerTypeEnum;
+	PrenonEntityType : IfcChillerTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcChillerTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcChillerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcChillerTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcChillerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCircle
@@ -3339,10 +3339,10 @@ END_ENTITY;
 
 ENTITY IfcCoilType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCoilTypeEnum;
+	PrenonEntityType : IfcCoilTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcCoilTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcCoilTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcCoilTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcCoilTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcColourRgb
@@ -3364,7 +3364,7 @@ END_ENTITY;
 
 ENTITY IfcColumnType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcColumnTypeEnum;
+	PrenonEntityType : IfcColumnTypeEnum;
 END_ENTITY;
 
 ENTITY IfcComplexProperty
@@ -3414,18 +3414,18 @@ END_ENTITY;
 
 ENTITY IfcCompressorType
  SUBTYPE OF (IfcFlowMovingDeviceType);
-	PredefinedType : IfcCompressorTypeEnum;
+	PrenonEntityType : IfcCompressorTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcCompressorTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcCompressorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcCompressorTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcCompressorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCondenserType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCondenserTypeEnum;
+	PrenonEntityType : IfcCondenserTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcCondenserTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcCondenserTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcCondenserTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcCondenserTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCondition
@@ -3613,7 +3613,7 @@ END_ENTITY;
 
 ENTITY IfcControllerType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcControllerTypeEnum;
+	PrenonEntityType : IfcControllerTypeEnum;
 END_ENTITY;
 
 ENTITY IfcConversionBasedUnit
@@ -3624,18 +3624,18 @@ END_ENTITY;
 
 ENTITY IfcCooledBeamType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCooledBeamTypeEnum;
+	PrenonEntityType : IfcCooledBeamTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcCooledBeamTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcCooledBeamTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcCooledBeamTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcCooledBeamTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCoolingTowerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcCoolingTowerTypeEnum;
+	PrenonEntityType : IfcCoolingTowerTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcCoolingTowerTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcCoolingTowerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcCoolingTowerTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcCoolingTowerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcCoordinatedUniversalTimeOffset;
@@ -3657,7 +3657,7 @@ ENTITY IfcCostSchedule
 	TargetUsers : OPTIONAL SET [1:?] OF IfcActorSelect;
 	UpdateDate : OPTIONAL IfcDateTimeSelect;
 	ID : IfcIdentifier;
-	PredefinedType : IfcCostScheduleTypeEnum;
+	PrenonEntityType : IfcCostScheduleTypeEnum;
  UNIQUE
 	UR2 : ID;
 END_ENTITY;
@@ -3670,19 +3670,19 @@ END_ENTITY;
 
 ENTITY IfcCovering
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcCoveringTypeEnum;
+	PrenonEntityType : OPTIONAL IfcCoveringTypeEnum;
  INVERSE
 	CoversSpaces : SET [0:1] OF IfcRelCoversSpaces FOR RelatedCoverings;
 	Covers : SET [0:1] OF IfcRelCoversBldgElements FOR RelatedCoverings;
  WHERE
-	WR61 : NOT(EXISTS(PredefinedType)) OR 
-              (PredefinedType <> IfcCoveringTypeEnum.USERDEFINED) OR 
-              ((PredefinedType = IfcCoveringTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	WR61 : NOT(EXISTS(PrenonEntityType)) OR 
+              (PrenonEntityType <> IfcCoveringTypeEnum.USERDEFINED) OR 
+              ((PrenonEntityType = IfcCoveringTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcCoveringType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcCoveringTypeEnum;
+	PrenonEntityType : IfcCoveringTypeEnum;
 END_ENTITY;
 
 ENTITY IfcCraneRailAShapeProfileDef
@@ -3750,7 +3750,7 @@ END_ENTITY;
 
 ENTITY IfcCurtainWallType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcCurtainWallTypeEnum;
+	PrenonEntityType : IfcCurtainWallTypeEnum;
 END_ENTITY;
 
 ENTITY IfcCurve
@@ -3806,10 +3806,10 @@ END_ENTITY;
 
 ENTITY IfcDamperType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcDamperTypeEnum;
+	PrenonEntityType : IfcDamperTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcDamperTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcDamperTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcDamperTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcDamperTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDateAndTime;
@@ -3835,14 +3835,14 @@ END_ENTITY;
 ENTITY IfcDerivedUnit;
 	Elements : SET [1:?] OF IfcDerivedUnitElement;
 	UnitType : IfcDerivedUnitEnum;
-	UserDefinedType : OPTIONAL IfcLabel;
+	UserNonEntityType : OPTIONAL IfcLabel;
  DERIVE
 	Dimensions : IfcDimensionalExponents := IfcDeriveDimensionalExponents(Elements);
  WHERE
 	WR1 : (SIZEOF (Elements) > 1) OR ((SIZEOF (Elements) = 1) AND (Elements[1].Exponent <> 1 ));
 	WR2 : (UnitType <> IfcDerivedUnitEnum.USERDEFINED) OR
             ((UnitType = IfcDerivedUnitEnum.USERDEFINED) AND 
-             (EXISTS(SELF.UserDefinedType)));
+             (EXISTS(SELF.UserNonEntityType)));
 END_ENTITY;
 
 ENTITY IfcDerivedUnitElement;
@@ -3957,7 +3957,7 @@ END_ENTITY;
 
 ENTITY IfcDistributionChamberElementType
  SUBTYPE OF (IfcDistributionFlowElementType);
-	PredefinedType : IfcDistributionChamberElementTypeEnum;
+	PrenonEntityType : IfcDistributionChamberElementTypeEnum;
 END_ENTITY;
 
 ENTITY IfcDistributionControlElement
@@ -4169,26 +4169,26 @@ END_ENTITY;
 
 ENTITY IfcDuctFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcDuctFittingTypeEnum;
+	PrenonEntityType : IfcDuctFittingTypeEnum;
  WHERE
-	WR2 : (PredefinedType <> IfcDuctFittingTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcDuctFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR2 : (PrenonEntityType <> IfcDuctFittingTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcDuctFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDuctSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcDuctSegmentTypeEnum;
+	PrenonEntityType : IfcDuctSegmentTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcDuctSegmentTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcDuctSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcDuctSegmentTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcDuctSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcDuctSilencerType
  SUBTYPE OF (IfcFlowTreatmentDeviceType);
-	PredefinedType : IfcDuctSilencerTypeEnum;
+	PrenonEntityType : IfcDuctSilencerTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcDuctSilencerTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcDuctSilencerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcDuctSilencerTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcDuctSilencerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcEdge
@@ -4227,7 +4227,7 @@ END_ENTITY;
 
 ENTITY IfcElectricApplianceType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcElectricApplianceTypeEnum;
+	PrenonEntityType : IfcElectricApplianceTypeEnum;
 END_ENTITY;
 
 ENTITY IfcElectricDistributionPoint
@@ -4241,27 +4241,27 @@ END_ENTITY;
 
 ENTITY IfcElectricFlowStorageDeviceType
  SUBTYPE OF (IfcFlowStorageDeviceType);
-	PredefinedType : IfcElectricFlowStorageDeviceTypeEnum;
+	PrenonEntityType : IfcElectricFlowStorageDeviceTypeEnum;
 END_ENTITY;
 
 ENTITY IfcElectricGeneratorType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcElectricGeneratorTypeEnum;
+	PrenonEntityType : IfcElectricGeneratorTypeEnum;
 END_ENTITY;
 
 ENTITY IfcElectricHeaterType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcElectricHeaterTypeEnum;
+	PrenonEntityType : IfcElectricHeaterTypeEnum;
 END_ENTITY;
 
 ENTITY IfcElectricMotorType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcElectricMotorTypeEnum;
+	PrenonEntityType : IfcElectricMotorTypeEnum;
 END_ENTITY;
 
 ENTITY IfcElectricTimeControlType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcElectricTimeControlTypeEnum;
+	PrenonEntityType : IfcElectricTimeControlTypeEnum;
 END_ENTITY;
 
 ENTITY IfcElectricalBaseProperties
@@ -4316,9 +4316,9 @@ END_ENTITY;
 ENTITY IfcElementAssembly
  SUBTYPE OF (IfcElement);
 	AssemblyPlace : OPTIONAL IfcAssemblyPlaceEnum;
-	PredefinedType : IfcElementAssemblyTypeEnum;
+	PrenonEntityType : IfcElementAssemblyTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcElementAssemblyTypeEnum.USERDEFINED) OR ((PredefinedType = IfcElementAssemblyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	WR1 : (PrenonEntityType <> IfcElementAssemblyTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcElementAssemblyTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcElementComponent
@@ -4429,18 +4429,18 @@ END_ENTITY;
 
 ENTITY IfcEvaporativeCoolerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcEvaporativeCoolerTypeEnum;
+	PrenonEntityType : IfcEvaporativeCoolerTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcEvaporativeCoolerTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcEvaporativeCoolerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcEvaporativeCoolerTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcEvaporativeCoolerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcEvaporatorType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcEvaporatorTypeEnum;
+	PrenonEntityType : IfcEvaporatorTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcEvaporatorTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcEvaporatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcEvaporatorTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcEvaporatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcExtendedMaterialProperties
@@ -4545,10 +4545,10 @@ END_ENTITY;
 
 ENTITY IfcFanType
  SUBTYPE OF (IfcFlowMovingDeviceType);
-	PredefinedType : IfcFanTypeEnum;
+	PrenonEntityType : IfcFanTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcFanTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcFanTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcFanTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcFanTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFastener
@@ -4634,15 +4634,15 @@ END_ENTITY;
 
 ENTITY IfcFilterType
  SUBTYPE OF (IfcFlowTreatmentDeviceType);
-	PredefinedType : IfcFilterTypeEnum;
+	PrenonEntityType : IfcFilterTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcFilterTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcFilterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcFilterTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcFilterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFireSuppressionTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcFireSuppressionTerminalTypeEnum;
+	PrenonEntityType : IfcFireSuppressionTerminalTypeEnum;
 END_ENTITY;
 
 ENTITY IfcFlowController
@@ -4678,15 +4678,15 @@ END_ENTITY;
 
 ENTITY IfcFlowInstrumentType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcFlowInstrumentTypeEnum;
+	PrenonEntityType : IfcFlowInstrumentTypeEnum;
 END_ENTITY;
 
 ENTITY IfcFlowMeterType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcFlowMeterTypeEnum;
+	PrenonEntityType : IfcFlowMeterTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcFlowMeterTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcFlowMeterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcFlowMeterTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcFlowMeterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcFlowMovingDevice
@@ -4777,9 +4777,9 @@ END_ENTITY;
 
 ENTITY IfcFooting
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : IfcFootingTypeEnum;
+	PrenonEntityType : IfcFootingTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcFootingTypeEnum.USERDEFINED) OR ((PredefinedType = IfcFootingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	WR1 : (PrenonEntityType <> IfcFootingTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcFootingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcFuelProperties
@@ -4814,10 +4814,10 @@ END_ENTITY;
 
 ENTITY IfcGasTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcGasTerminalTypeEnum;
+	PrenonEntityType : IfcGasTerminalTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcGasTerminalTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcGasTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcGasTerminalTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcGasTerminalTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcGeneralMaterialProperties
@@ -4983,18 +4983,18 @@ END_ENTITY;
 
 ENTITY IfcHeatExchangerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcHeatExchangerTypeEnum;
+	PrenonEntityType : IfcHeatExchangerTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcHeatExchangerTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcHeatExchangerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcHeatExchangerTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcHeatExchangerTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcHumidifierType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcHumidifierTypeEnum;
+	PrenonEntityType : IfcHumidifierTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcHumidifierTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcHumidifierTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcHumidifierTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcHumidifierTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcHygroscopicMaterialProperties
@@ -5058,7 +5058,7 @@ END_ENTITY;
 
 ENTITY IfcJunctionBoxType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcJunctionBoxTypeEnum;
+	PrenonEntityType : IfcJunctionBoxTypeEnum;
 END_ENTITY;
 
 ENTITY IfcLShapeProfileDef
@@ -5083,7 +5083,7 @@ END_ENTITY;
 
 ENTITY IfcLampType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcLampTypeEnum;
+	PrenonEntityType : IfcLampTypeEnum;
 END_ENTITY;
 
 ENTITY IfcLibraryInformation;
@@ -5108,7 +5108,7 @@ END_ENTITY;
 
 ENTITY IfcLightFixtureType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcLightFixtureTypeEnum;
+	PrenonEntityType : IfcLightFixtureTypeEnum;
 END_ENTITY;
 
 ENTITY IfcLightIntensityDistribution;
@@ -5344,7 +5344,7 @@ END_ENTITY;
 
 ENTITY IfcMemberType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcMemberTypeEnum;
+	PrenonEntityType : IfcMemberTypeEnum;
 END_ENTITY;
 
 ENTITY IfcMetric
@@ -5360,7 +5360,7 @@ END_ENTITY;
 
 ENTITY IfcMotorConnectionType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcMotorConnectionTypeEnum;
+	PrenonEntityType : IfcMotorConnectionTypeEnum;
 END_ENTITY;
 
 ENTITY IfcMove
@@ -5441,9 +5441,9 @@ END_ENTITY;
 
 ENTITY IfcOccupant
  SUBTYPE OF (IfcActor);
-	PredefinedType : IfcOccupantTypeEnum;
+	PrenonEntityType : IfcOccupantTypeEnum;
  WHERE
-	WR31 : NOT(PredefinedType = IfcOccupantTypeEnum.USERDEFINED) 
+	WR31 : NOT(PrenonEntityType = IfcOccupantTypeEnum.USERDEFINED) 
              OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
@@ -5539,7 +5539,7 @@ END_ENTITY;
 
 ENTITY IfcOutletType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcOutletTypeEnum;
+	PrenonEntityType : IfcOutletTypeEnum;
 END_ENTITY;
 
 ENTITY IfcOwnerHistory;
@@ -5655,26 +5655,26 @@ END_ENTITY;
 
 ENTITY IfcPile
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : IfcPileTypeEnum;
+	PrenonEntityType : IfcPileTypeEnum;
 	ConstructionType : OPTIONAL IfcPileConstructionEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcPileTypeEnum.USERDEFINED) OR ((PredefinedType = IfcPileTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	WR1 : (PrenonEntityType <> IfcPileTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcPileTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcPipeFittingType
  SUBTYPE OF (IfcFlowFittingType);
-	PredefinedType : IfcPipeFittingTypeEnum;
+	PrenonEntityType : IfcPipeFittingTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcPipeFittingTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcPipeFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcPipeFittingTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcPipeFittingTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcPipeSegmentType
  SUBTYPE OF (IfcFlowSegmentType);
-	PredefinedType : IfcPipeSegmentTypeEnum;
+	PrenonEntityType : IfcPipeSegmentTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcPipeSegmentTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcPipeSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcPipeSegmentTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcPipeSegmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcPixelTexture
@@ -5724,7 +5724,7 @@ END_ENTITY;
 
 ENTITY IfcPlateType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcPlateTypeEnum;
+	PrenonEntityType : IfcPlateTypeEnum;
 END_ENTITY;
 
 ENTITY IfcPoint
@@ -6008,7 +6008,7 @@ END_ENTITY;
 ENTITY IfcProjectOrder
  SUBTYPE OF (IfcControl);
 	ID : IfcIdentifier;
-	PredefinedType : IfcProjectOrderTypeEnum;
+	PrenonEntityType : IfcProjectOrderTypeEnum;
 	Status : OPTIONAL IfcLabel;
  UNIQUE
 	UR2 : ID;
@@ -6017,7 +6017,7 @@ END_ENTITY;
 ENTITY IfcProjectOrderRecord
  SUBTYPE OF (IfcControl);
 	Records : LIST [1:?] OF UNIQUE IfcRelAssignsToProjectOrder;
-	PredefinedType : IfcProjectOrderRecordTypeEnum;
+	PrenonEntityType : IfcProjectOrderRecordTypeEnum;
 END_ENTITY;
 
 ENTITY IfcProjectionCurve
@@ -6166,7 +6166,7 @@ END_ENTITY;
 
 ENTITY IfcProtectiveDeviceType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcProtectiveDeviceTypeEnum;
+	PrenonEntityType : IfcProtectiveDeviceTypeEnum;
 END_ENTITY;
 
 ENTITY IfcProxy
@@ -6179,10 +6179,10 @@ END_ENTITY;
 
 ENTITY IfcPumpType
  SUBTYPE OF (IfcFlowMovingDeviceType);
-	PredefinedType : IfcPumpTypeEnum;
+	PrenonEntityType : IfcPumpTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcPumpTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcPumpTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcPumpTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcPumpTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcQuantityArea
@@ -6243,16 +6243,16 @@ END_ENTITY;
 
 ENTITY IfcRailing
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcRailingTypeEnum;
+	PrenonEntityType : OPTIONAL IfcRailingTypeEnum;
  WHERE
-	WR61 : NOT(EXISTS(PredefinedType)) OR
-              (PredefinedType <> IfcRailingTypeEnum.USERDEFINED) OR
-              ((PredefinedType = IfcRailingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	WR61 : NOT(EXISTS(PrenonEntityType)) OR
+              (PrenonEntityType <> IfcRailingTypeEnum.USERDEFINED) OR
+              ((PrenonEntityType = IfcRailingTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcRailingType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcRailingTypeEnum;
+	PrenonEntityType : IfcRailingTypeEnum;
 END_ENTITY;
 
 ENTITY IfcRamp
@@ -6269,7 +6269,7 @@ END_ENTITY;
 
 ENTITY IfcRampFlightType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcRampFlightTypeEnum;
+	PrenonEntityType : IfcRampFlightTypeEnum;
 END_ENTITY;
 
 ENTITY IfcRationalBezierCurve
@@ -6933,7 +6933,7 @@ END_ENTITY;
 
 ENTITY IfcSanitaryTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcSanitaryTerminalTypeEnum;
+	PrenonEntityType : IfcSanitaryTerminalTypeEnum;
 END_ENTITY;
 
 ENTITY IfcScheduleTimeControl
@@ -6990,7 +6990,7 @@ END_ENTITY;
 
 ENTITY IfcSensorType
  SUBTYPE OF (IfcDistributionControlElementType);
-	PredefinedType : IfcSensorTypeEnum;
+	PrenonEntityType : IfcSensorTypeEnum;
 END_ENTITY;
 
 ENTITY IfcServiceLife
@@ -7001,12 +7001,12 @@ END_ENTITY;
 
 ENTITY IfcServiceLifeFactor
  SUBTYPE OF (IfcPropertySetDefinition);
-	PredefinedType : IfcServiceLifeFactorTypeEnum;
+	PrenonEntityType : IfcServiceLifeFactorTypeEnum;
 	UpperValue : OPTIONAL IfcMeasureValue;
 	MostUsedValue : IfcMeasureValue;
 	LowerValue : OPTIONAL IfcMeasureValue;
  WHERE
-	WR31 : NOT(PredefinedType = IfcServiceLifeFactorTypeEnum.USERDEFINED)
+	WR31 : NOT(PrenonEntityType = IfcServiceLifeFactorTypeEnum.USERDEFINED)
              OR EXISTS(SELF\IfcObject.ObjectType);
 END_ENTITY;
 
@@ -7076,16 +7076,16 @@ END_ENTITY;
 
 ENTITY IfcSlab
  SUBTYPE OF (IfcBuildingElement);
-	PredefinedType : OPTIONAL IfcSlabTypeEnum;
+	PrenonEntityType : OPTIONAL IfcSlabTypeEnum;
  WHERE
-	WR61 : NOT(EXISTS(PredefinedType)) OR
-              (PredefinedType <> IfcSlabTypeEnum.USERDEFINED) OR
-              ((PredefinedType = IfcSlabTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
+	WR61 : NOT(EXISTS(PrenonEntityType)) OR
+              (PrenonEntityType <> IfcSlabTypeEnum.USERDEFINED) OR
+              ((PrenonEntityType = IfcSlabTypeEnum.USERDEFINED) AND EXISTS (SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcSlabType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcSlabTypeEnum;
+	PrenonEntityType : IfcSlabTypeEnum;
 END_ENTITY;
 
 ENTITY IfcSlippageConnectionCondition
@@ -7131,10 +7131,10 @@ END_ENTITY;
 
 ENTITY IfcSpaceHeaterType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcSpaceHeaterTypeEnum;
+	PrenonEntityType : IfcSpaceHeaterTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcSpaceHeaterTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcSpaceHeaterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcSpaceHeaterTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcSpaceHeaterTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcSpaceProgram
@@ -7165,7 +7165,7 @@ END_ENTITY;
 
 ENTITY IfcSpaceType
  SUBTYPE OF (IfcSpatialStructureElementType);
-	PredefinedType : IfcSpaceTypeEnum;
+	PrenonEntityType : IfcSpaceTypeEnum;
 END_ENTITY;
 
 ENTITY IfcSpatialStructureElement
@@ -7204,7 +7204,7 @@ END_ENTITY;
 
 ENTITY IfcStackTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcStackTerminalTypeEnum;
+	PrenonEntityType : IfcStackTerminalTypeEnum;
 END_ENTITY;
 
 ENTITY IfcStair
@@ -7225,7 +7225,7 @@ END_ENTITY;
 
 ENTITY IfcStairFlightType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcStairFlightTypeEnum;
+	PrenonEntityType : IfcStairFlightTypeEnum;
 END_ENTITY;
 
 ENTITY IfcStructuralAction
@@ -7251,7 +7251,7 @@ END_ENTITY;
 
 ENTITY IfcStructuralAnalysisModel
  SUBTYPE OF (IfcSystem);
-	PredefinedType : IfcAnalysisModelTypeEnum;
+	PrenonEntityType : IfcAnalysisModelTypeEnum;
 	OrientationOf2DPlane : OPTIONAL IfcAxis2Placement3D;
 	LoadedBy : OPTIONAL SET [1:?] OF IfcStructuralLoadGroup;
 	HasResults : OPTIONAL SET [1:?] OF IfcStructuralResultGroup;
@@ -7283,7 +7283,7 @@ ENTITY IfcStructuralCurveMember
  SUPERTYPE OF (ONEOF
 	(IfcStructuralCurveMemberVarying))
  SUBTYPE OF (IfcStructuralMember);
-	PredefinedType : IfcStructuralCurveTypeEnum;
+	PrenonEntityType : IfcStructuralCurveTypeEnum;
 END_ENTITY;
 
 ENTITY IfcStructuralCurveMemberVarying
@@ -7326,7 +7326,7 @@ END_ENTITY;
 
 ENTITY IfcStructuralLoadGroup
  SUBTYPE OF (IfcGroup);
-	PredefinedType : IfcLoadGroupTypeEnum;
+	PrenonEntityType : IfcLoadGroupTypeEnum;
 	ActionType : IfcActionTypeEnum;
 	ActionSource : IfcActionSourceTypeEnum;
 	Coefficient : OPTIONAL IfcRatioMeasure;
@@ -7514,7 +7514,7 @@ ENTITY IfcStructuralSurfaceMember
  SUPERTYPE OF (ONEOF
 	(IfcStructuralSurfaceMemberVarying))
  SUBTYPE OF (IfcStructuralMember);
-	PredefinedType : IfcStructuralSurfaceTypeEnum;
+	PrenonEntityType : IfcStructuralSurfaceTypeEnum;
 	Thickness : OPTIONAL IfcPositiveLengthMeasure;
 END_ENTITY;
 
@@ -7729,7 +7729,7 @@ END_ENTITY;
 
 ENTITY IfcSwitchingDeviceType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcSwitchingDeviceTypeEnum;
+	PrenonEntityType : IfcSwitchingDeviceTypeEnum;
 END_ENTITY;
 
 ENTITY IfcSymbolStyle
@@ -7789,10 +7789,10 @@ END_ENTITY;
 
 ENTITY IfcTankType
  SUBTYPE OF (IfcFlowStorageDeviceType);
-	PredefinedType : IfcTankTypeEnum;
+	PrenonEntityType : IfcTankTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcTankTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcTankTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcTankTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcTankTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTask
@@ -7828,7 +7828,7 @@ END_ENTITY;
 
 ENTITY IfcTendon
  SUBTYPE OF (IfcReinforcingElement);
-	PredefinedType : IfcTendonTypeEnum;
+	PrenonEntityType : IfcTendonTypeEnum;
 	NominalDiameter : IfcPositiveLengthMeasure;
 	CrossSectionArea : IfcAreaMeasure;
 	TensionForce : OPTIONAL IfcForceMeasure;
@@ -7837,7 +7837,7 @@ ENTITY IfcTendon
 	AnchorageSlip : OPTIONAL IfcPositiveLengthMeasure;
 	MinCurvatureRadius : OPTIONAL IfcPositiveLengthMeasure;
  WHERE
-	WR1 : (PredefinedType <> IfcTendonTypeEnum.USERDEFINED) OR ((PredefinedType = IfcTendonTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
+	WR1 : (PrenonEntityType <> IfcTendonTypeEnum.USERDEFINED) OR ((PrenonEntityType = IfcTendonTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcObject.ObjectType));
 END_ENTITY;
 
 ENTITY IfcTendonAnchor
@@ -8009,7 +8009,7 @@ END_ENTITY;
 
 ENTITY IfcTransformerType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcTransformerTypeEnum;
+	PrenonEntityType : IfcTransformerTypeEnum;
 END_ENTITY;
 
 ENTITY IfcTransportElement
@@ -8021,7 +8021,7 @@ END_ENTITY;
 
 ENTITY IfcTransportElementType
  SUBTYPE OF (IfcElementType);
-	PredefinedType : IfcTransportElementTypeEnum;
+	PrenonEntityType : IfcTransportElementTypeEnum;
 END_ENTITY;
 
 ENTITY IfcTrapeziumProfileDef
@@ -8047,10 +8047,10 @@ END_ENTITY;
 
 ENTITY IfcTubeBundleType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcTubeBundleTypeEnum;
+	PrenonEntityType : IfcTubeBundleTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcTubeBundleTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcTubeBundleTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcTubeBundleTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcTubeBundleTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcTwoDirectionRepeatFactor
@@ -8108,18 +8108,18 @@ END_ENTITY;
 
 ENTITY IfcUnitaryEquipmentType
  SUBTYPE OF (IfcEnergyConversionDeviceType);
-	PredefinedType : IfcUnitaryEquipmentTypeEnum;
+	PrenonEntityType : IfcUnitaryEquipmentTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcUnitaryEquipmentTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcUnitaryEquipmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcUnitaryEquipmentTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcUnitaryEquipmentTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcValveType
  SUBTYPE OF (IfcFlowControllerType);
-	PredefinedType : IfcValveTypeEnum;
+	PrenonEntityType : IfcValveTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcValveTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcValveTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcValveTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcValveTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcVector
@@ -8155,10 +8155,10 @@ END_ENTITY;
 
 ENTITY IfcVibrationIsolatorType
  SUBTYPE OF (IfcDiscreteAccessoryType);
-	PredefinedType : IfcVibrationIsolatorTypeEnum;
+	PrenonEntityType : IfcVibrationIsolatorTypeEnum;
  WHERE
-	WR1 : (PredefinedType <> IfcVibrationIsolatorTypeEnum.USERDEFINED) OR
-            ((PredefinedType = IfcVibrationIsolatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
+	WR1 : (PrenonEntityType <> IfcVibrationIsolatorTypeEnum.USERDEFINED) OR
+            ((PrenonEntityType = IfcVibrationIsolatorTypeEnum.USERDEFINED) AND EXISTS(SELF\IfcElementType.ElementType));
 END_ENTITY;
 
 ENTITY IfcVirtualElement
@@ -8191,12 +8191,12 @@ END_ENTITY;
 
 ENTITY IfcWallType
  SUBTYPE OF (IfcBuildingElementType);
-	PredefinedType : IfcWallTypeEnum;
+	PrenonEntityType : IfcWallTypeEnum;
 END_ENTITY;
 
 ENTITY IfcWasteTerminalType
  SUBTYPE OF (IfcFlowTerminalType);
-	PredefinedType : IfcWasteTerminalTypeEnum;
+	PrenonEntityType : IfcWasteTerminalTypeEnum;
 END_ENTITY;
 
 ENTITY IfcWaterProperties

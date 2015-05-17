@@ -94,8 +94,8 @@ public class IfcModelParser  {
 //			typeInfo = ((IfcCollectionTypeInfo)typeInfo).getItemTypeInfo();
 //		}
 //		
-//		while (typeInfo instanceof IfcRedirectTypeInfo) {
-//			typeInfo = ((IfcRedirectTypeInfo)typeInfo).getRedirectTypeInfo();
+//		while (typeInfo instanceof IfcDefinedTypeInfo) {
+//			typeInfo = ((IfcDefinedTypeInfo)typeInfo).getDefinedTypeInfo();
 //		}
 //		
 //		if (typeInfo instanceof IfcLiteralTypeInfo) {

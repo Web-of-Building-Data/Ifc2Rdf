@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.EnumSet;
 
 /**
- * Represents type information for IFC types (Defined Type, Enumeration, Select Type and Entity) 
- * An abstract class for IfcRedirectTypeInfo, IfcEnumeration
+ * Represents type information for IFC types (Defined Type, Enumeration, Select Type and Entity).
+ *  
+ * Abstract class for {@link IfcNonEntityTypeInfo}, {@link IfcEntityTypeInfo}
+ * 
  * @author Nam
  *
  */
@@ -51,7 +53,7 @@ public abstract class IfcTypeInfo implements Comparable<IfcTypeInfo>, Serializab
 	 * Checks if the value type is entity or literal.
 	 * @return True if the value is entity, False if the value is literal.
 	 */
-	public abstract boolean isEntityOrSelectType();
+//	public abstract boolean isEntityOrSelectType();
 	
 	
 	/**
