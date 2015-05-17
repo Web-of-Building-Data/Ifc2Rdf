@@ -66,6 +66,7 @@ class IfcModelSectionParser {
 	private static final Logger logger = Logger.getLogger(IfcModelParser.class);	
 
 	private IfcSchema schema;
+	private IfcLineReader reader;
 
 	private Map<Long, IfcEntity> entityMap = new HashMap<>(); 	// map of entities indexed by line numbers
 	
@@ -79,6 +80,7 @@ class IfcModelSectionParser {
 	public List<IfcEntity> parseEntities(IfcLineReader reader, IfcSchema schema, boolean isHeaderSection, boolean ignoreUnknownTypes) throws IOException, IfcNotFoundException, IfcParserException {		
 		
 		this.schema = schema;
+		this.reader = reader;
 		
 		List<IfcEntity> entities = new ArrayList<>();
 		
@@ -232,6 +234,7 @@ class IfcModelSectionParser {
 //					attributeValues.add(new IfcGuidValue(s));
 //					break;
 //				}
+				break;
 
 			case IfcVocabulary.StepFormat.ENUMERATION_VALUE_SYMBOL:
 
@@ -428,7 +431,7 @@ class IfcModelSectionParser {
 			}
 
 		} catch (Exception e) {
-			throw new IfcParserException(String.format("Error parsing entity %s: %s", entity.toString(),
+			throw new IfcParserException(String.format("Error parsing entity %s (line %d): %s", entity.toString(), entity.getLineNumber(),
 					e.getMessage()), e);
 		}
 	}	

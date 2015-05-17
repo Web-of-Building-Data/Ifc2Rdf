@@ -13,10 +13,10 @@ import fi.hut.cs.drumbeat.ifc.data.schema.*;
 
 public class IfcModelParser  {
 	
-	IfcLineReader reader;
+	IfcLineReader lineReader;
 
 	protected IfcModelParser(InputStream input) {
-		reader = new IfcLineReader(input);		
+		lineReader = new IfcLineReader(input);		
 	}
 
 	public static IfcModel parse(InputStream input) throws IfcParserException {
@@ -33,11 +33,11 @@ public class IfcModelParser  {
 			//
 			IfcMetaModel metaModel;
 			
-			String statement = reader.getNextStatement();
-			statement = reader.getNextStatement();
+			String statement = lineReader.getNextStatement();
+			statement = lineReader.getNextStatement();
 			if (statement != null && statement.startsWith(IfcVocabulary.StepFormat.HEADER)) {
 				StringBuilder headerStringBuilder = new StringBuilder(256);
-				while ((statement = reader.getNextStatement()) != null && !statement.startsWith(IfcVocabulary.StepFormat.ENDSEC)) {
+				while ((statement = lineReader.getNextStatement()) != null && !statement.startsWith(IfcVocabulary.StepFormat.ENDSEC)) {
 					headerStringBuilder.append(statement);
 					headerStringBuilder.append(StringUtils.SEMICOLON_CHAR);
 				}
@@ -49,7 +49,7 @@ public class IfcModelParser  {
 				metaModel = new IfcMetaModel(stepSchema);
 				metaModel.addEntities(entities);
 			} else {
-				throw new IfcFormatException(String.format("Expected '%s'", IfcVocabulary.StepFormat.HEADER));
+				throw new IfcFormatException(lineReader.getCurrentLineNumber(), String.format("Expected '%s'", IfcVocabulary.StepFormat.HEADER));
 			}
 			
 			IfcSchema schema = null;
@@ -73,7 +73,7 @@ public class IfcModelParser  {
 			//
 			// parse entities
 			//
-			List<IfcEntity> entities = new IfcModelSectionParser().parseEntities(reader, schema, false, false);
+			List<IfcEntity> entities = new IfcModelSectionParser().parseEntities(lineReader, schema, false, false);
 			model.addEntities(entities);
 
 			return model;
@@ -120,7 +120,7 @@ public class IfcModelParser  {
 //			if (line.endsWith(StringUtils.SEMICOLON)) {
 //				return line.substring(0, line.length()-1);
 //			} else if (!line.isEmpty()) {
-//				throw new IfcFormatException(String.format("Line is not ended with '%s'", StringUtils.SEMICOLON));
+//				throw new IfcFormatException(reader.getCurrentLineNumber(), String.format("Line is not ended with '%s'", StringUtils.SEMICOLON));
 //			}
 //		}
 //		return line;		

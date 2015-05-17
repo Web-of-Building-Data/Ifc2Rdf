@@ -90,7 +90,7 @@ public class IfcSchemaParser {
 			String tokens[] = RegexUtils.split2(statement, RegexUtils.WHITE_SPACE);
 			
 			if (tokens.length != 2 || !tokens[0].equals(IfcVocabulary.ExpressFormat.SCHEMA)) {
-				throw new IfcFormatException("Invalid schema");			
+				throw new IfcFormatException(lineReader.getCurrentLineNumber(), "Invalid schema");			
 			}
 			
 			//
@@ -107,7 +107,7 @@ public class IfcSchemaParser {
 			for (;;) {
 				statement = lineReader.getNextStatement();				
 				if (statement == null) {
-					throw new IfcFormatException(String.format("Expected '%s'", IfcVocabulary.ExpressFormat.END_SCHEMA));
+					throw new IfcFormatException(lineReader.getCurrentLineNumber(), String.format("Expected '%s'", IfcVocabulary.ExpressFormat.END_SCHEMA));
 				}
 					
 				tokens = RegexUtils.split2(statement, RegexUtils.WHITE_SPACE);
@@ -192,7 +192,7 @@ public class IfcSchemaParser {
 				}
 				
 			} else {
-				throw new IfcFormatException(String.format("Expected '%s'", IfcVocabulary.ExpressFormat.END_TYPE));
+				throw new IfcFormatException(lineReader.getCurrentLineNumber(), String.format("Expected '%s'", IfcVocabulary.ExpressFormat.END_TYPE));
 			}
 		}		
 	}
@@ -333,7 +333,7 @@ public class IfcSchemaParser {
 	private IfcEntityTypeInfoText parseEntityTypeInfoText(String[] tokens) throws IfcFormatException, IOException {
 		
 		if (tokens.length != 2) {
-			throw new IfcFormatException("Invalid format");		
+			throw new IfcFormatException(lineReader.getCurrentLineNumber(), "Invalid format");		
 		}
 			
 		// get entity type name
@@ -384,7 +384,7 @@ public class IfcSchemaParser {
 			String statement = lineReader.getNextStatement();				
 			
 			if (statement == null) {
-				throw new IfcFormatException(String.format("Expected '%s'", IfcVocabulary.ExpressFormat.END_ENTITY));
+				throw new IfcFormatException(lineReader.getCurrentLineNumber(), String.format("Expected '%s'", IfcVocabulary.ExpressFormat.END_ENTITY));
 			}
 				
 			tokens = RegexUtils.split2(statement, RegexUtils.WHITE_SPACE);
@@ -448,7 +448,7 @@ public class IfcSchemaParser {
 			
 			IfcCollectionKindEnum collectionKind2 = IfcCollectionKindEnum.parse(tokens[0]);			
 			if (collectionKind == null) {
-				throw new IfcFormatException(String.format("Expected one of %s", IfcCollectionKindEnum.values().toString()));				
+				throw new IfcFormatException(lineReader.getCurrentLineNumber(), String.format("Expected one of %s", IfcCollectionKindEnum.values().toString()));				
 			}
 			
 			// case SET/LIST/ARRAY/BAG OF LIST OF ... 

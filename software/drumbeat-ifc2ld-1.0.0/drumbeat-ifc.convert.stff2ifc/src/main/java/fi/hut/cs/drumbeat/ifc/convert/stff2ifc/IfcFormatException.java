@@ -4,23 +4,28 @@ public class IfcFormatException extends IfcParserException {
 
 	private static final long serialVersionUID = 1L;
 
-	public IfcFormatException() {
+	public IfcFormatException(long lineNumber) {
 	}
 
-	public IfcFormatException(String arg0) {
-		super(arg0);
+	public IfcFormatException(long lineNumber, String message) {
+		super(formatMessage(lineNumber, message));
 	}
 
-	public IfcFormatException(Throwable arg0) {
-		super(arg0);
+	public IfcFormatException(long lineNumber, Throwable cause) {
+		super(cause);
 	}
 
-	public IfcFormatException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
+	public IfcFormatException(long lineNumber, String message, Throwable cause) {
+		super(formatMessage(lineNumber, message), cause);
 	}
 
-	public IfcFormatException(String arg0, Throwable arg1, boolean arg2, boolean arg3) {
-		super(arg0, arg1, arg2, arg3);
+	public IfcFormatException(long lineNumber, String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(formatMessage(lineNumber, message), cause, enableSuppression, writableStackTrace);
 	}
+	
+	private static String formatMessage(long lineNumber, String message) {
+		return String.format("%s [LINE %d]", message, lineNumber);
+	}
+	
 
 }
