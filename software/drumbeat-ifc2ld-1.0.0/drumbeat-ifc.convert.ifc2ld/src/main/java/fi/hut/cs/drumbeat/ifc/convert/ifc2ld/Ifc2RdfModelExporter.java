@@ -23,6 +23,7 @@ import fi.hut.cs.drumbeat.ifc.data.schema.IfcCollectionTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcDefinedTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcEntityTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcEnumerationTypeInfo;
+import fi.hut.cs.drumbeat.ifc.data.schema.IfcLiteralTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcNonEntityTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcSchema;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcTypeEnum;
@@ -206,7 +207,7 @@ public class Ifc2RdfModelExporter extends Ifc2RdfExporterBase {
 		Resource typeResource = super.createUriResource(super.formatTypeName(typeInfo)); 
 		listResource.addProperty(RDF.type, typeResource);
 		listResource.addProperty(Ifc2RdfVocabulary.EXPRESS.size, jenaModel.createTypedLiteral(length));
-		listResource.addProperty(Ifc2RdfVocabulary.EXPRESS.itemType, super.createUriResource(super.formatTypeName(itemTypeInfo)));
+//		listResource.addProperty(Ifc2RdfVocabulary.EXPRESS.itemType, super.createUriResource(super.formatTypeName(itemTypeInfo)));
 		
 		for (int i = 0; i < nodeList.size(); ++i) {
 			Resource slotResource = super.createAnonResource();
@@ -236,10 +237,11 @@ public class Ifc2RdfModelExporter extends Ifc2RdfExporterBase {
 		Resource resource = super.createAnonResource();
 
 		IfcTypeInfo type = literalValue.getType();
-		if (type instanceof IfcDefinedTypeInfo) {			
+		assert(type != null) : literalValue;
+		if (type instanceof IfcDefinedTypeInfo || type instanceof IfcLiteralTypeInfo) {
 			
 			RDFNode valueNode;			
-			IfcTypeEnum valueType = literalValue.getValueType();
+			IfcTypeEnum valueType = type.getValueTypes().iterator().next();
 			if (valueType == IfcTypeEnum.STRING) {
 				valueNode = jenaModel.createTypedLiteral((String)literalValue.getValue());				
 			} else if (valueType == IfcTypeEnum.GUID) {				
@@ -248,13 +250,15 @@ public class Ifc2RdfModelExporter extends Ifc2RdfExporterBase {
 				valueNode = jenaModel.createTypedLiteral((double)literalValue.getValue());				
 			} else if (valueType == IfcTypeEnum.INTEGER) {				
 				valueNode = jenaModel.createTypedLiteral((long)literalValue.getValue());				
+			} else if (valueType == IfcTypeEnum.LOGICAL) {				
+				valueNode = super.createUriResource(super.formatOntologyName((String)literalValue.getValue()));				
 			} else {				
-				assert (valueType == IfcTypeEnum.DATETIME) : "Expected: (valueType == IfcTypeEnum.DATETIME)";
+				assert (valueType == IfcTypeEnum.DATETIME) : "Expected: valueType == IfcTypeEnum.DATETIME. Actual: valueType = " + valueType + ", " + type;
 				valueNode = jenaModel.createTypedLiteral((Calendar)literalValue.getValue());				
 			}
 
 			adapter.exportTriple(resource, RDF.type, super.createUriResource(super.formatTypeName(type)));
-			adapter.exportTriple(resource, RDF.value, valueNode);
+			adapter.exportTriple(resource, RDF.value, valueNode);			
 			
 		} else if (type instanceof IfcEnumerationTypeInfo) {
 			
@@ -262,7 +266,7 @@ public class Ifc2RdfModelExporter extends Ifc2RdfExporterBase {
 			adapter.exportTriple(resource, RDF.value, super.createUriResource(super.formatOntologyName((String)literalValue.getValue())));
 			
 		} else {			
-			throw new RuntimeException(String.format("Invalid literal value type: %s", type));			
+			throw new RuntimeException(String.format("Invalid literal value type: %s (%s)", type, type.getClass()));			
 		}
 		
 		return resource;			

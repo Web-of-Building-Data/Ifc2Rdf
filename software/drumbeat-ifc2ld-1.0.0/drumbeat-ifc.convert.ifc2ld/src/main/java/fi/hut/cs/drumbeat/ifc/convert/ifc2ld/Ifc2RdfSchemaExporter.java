@@ -110,6 +110,8 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 			}
 			adapter.endSection();
 		}
+		
+		
 
 		// select types
 		if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.IgnoreSelectTypes)) {

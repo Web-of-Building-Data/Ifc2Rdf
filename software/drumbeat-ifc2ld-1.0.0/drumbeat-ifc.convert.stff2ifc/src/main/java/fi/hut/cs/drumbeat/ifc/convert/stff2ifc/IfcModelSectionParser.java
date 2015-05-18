@@ -142,7 +142,7 @@ class IfcModelSectionParser {
 			//
 			// parse attribute string to get attribute values
 			//
-			List<IfcValue> attributeValues = parseAttributeValues(new StrBuilderWrapper(entityAttributesString), entity, attributeInfos, null);
+			List<IfcValue> attributeValues = parseAttributeValues(new StrBuilderWrapper(entityAttributesString), entity, attributeInfos, null, null);
 
 			setEntityAttributeValues(entity, attributeInfos, attributeValues);
 			
@@ -188,7 +188,7 @@ class IfcModelSectionParser {
 	 * @throws IfcValueTypeConflictException 
 	 */
 	private List<IfcValue> parseAttributeValues(StrBuilderWrapper attributeStrBuilderWrapper, IfcEntity entity,
-			List<IfcAttributeInfo> entityAttributeInfos, EnumSet<IfcTypeEnum> commonValueTypes) throws IfcFormatException, IfcNotFoundException {
+			List<IfcAttributeInfo> entityAttributeInfos, IfcTypeInfo commonAttributeTypeInfo, EnumSet<IfcTypeEnum> commonValueTypes) throws IfcFormatException, IfcNotFoundException {
 
 		logger.debug(String.format("Parsing entity '%s'", entity));			
 
@@ -198,16 +198,23 @@ class IfcModelSectionParser {
 
 			EnumSet<IfcTypeEnum> attributeValueTypes;
 			IfcAttributeInfo attributeInfo;
+			IfcTypeInfo attributeTypeInfo;
 			if (commonValueTypes == null) {
+				assert(attributeIndex < entityAttributeInfos.size()) :
+					String.format("attributeIndex=%d, entityAttributeInfos.size=%s, attributeStrBuilderWrapper='%s'",
+							attributeIndex,
+							entityAttributeInfos,
+							attributeStrBuilderWrapper);
 				attributeInfo = entityAttributeInfos.get(attributeIndex);
-				IfcTypeInfo attributeTypeInfo = attributeInfo.getAttributeTypeInfo();
-				attributeValueTypes = attributeTypeInfo.getValueTypes();
+				attributeTypeInfo = attributeInfo.getAttributeTypeInfo();
+				attributeValueTypes = attributeTypeInfo.getValueTypes();				
 			} else {
+				assert(commonAttributeTypeInfo != null);
 				attributeInfo = entityAttributeInfos.get(0);
+				attributeTypeInfo = commonAttributeTypeInfo;
 				attributeValueTypes = commonValueTypes;
 			}
 			
-			IfcTypeInfo attributeTypeInfo = attributeInfo.getAttributeTypeInfo();
 			if (attributeTypeInfo instanceof IfcCollectionTypeInfo) {
 				attributeTypeInfo = ((IfcCollectionTypeInfo)attributeTypeInfo).getItemTypeInfo();
 			}
@@ -228,7 +235,7 @@ class IfcModelSectionParser {
 				String s = attributeStrBuilderWrapper.getStringBetweenSingleQuotes();
 				assert attributeValueTypes.size() == 1 : "Expect attributeValueTypes.size() == 1"; 
 //				if (!attributeValueTypes.contains(IfcTypeEnum.GUID)) {
-					attributeValues.add(new IfcLiteralValue(s, (IfcNonEntityTypeInfo)attributeInfo.getAttributeTypeInfo(), IfcTypeEnum.STRING));
+					attributeValues.add(new IfcLiteralValue(s, attributeTypeInfo, IfcTypeEnum.STRING));
 //					break;
 //				} else {
 //					attributeValues.add(new IfcGuidValue(s));
@@ -247,14 +254,14 @@ class IfcModelSectionParser {
 					switch (s) {
 					case "T":
 					case "TRUE":
-						attributeValues.add(new IfcLiteralValue(LogicalEnum.TRUE, attributeTypeInfo, IfcTypeEnum.LOGICAL));
+						attributeValues.add(new IfcLiteralValue(LogicalEnum.TRUE.toString(), attributeTypeInfo, IfcTypeEnum.LOGICAL));
 						break;
 					case "F":
 					case "FALSE":
-						attributeValues.add(new IfcLiteralValue(LogicalEnum.FALSE, attributeTypeInfo, IfcTypeEnum.LOGICAL));
+						attributeValues.add(new IfcLiteralValue(LogicalEnum.FALSE.toString(), attributeTypeInfo, IfcTypeEnum.LOGICAL));
 						break;
 					default:
-						attributeValues.add(new IfcLiteralValue(LogicalEnum.UNKNOWN, attributeTypeInfo, IfcTypeEnum.LOGICAL));
+						attributeValues.add(new IfcLiteralValue(LogicalEnum.UNKNOWN.toString(), attributeTypeInfo, IfcTypeEnum.LOGICAL));
 						break;
 
 					}
@@ -280,7 +287,7 @@ class IfcModelSectionParser {
 				List<IfcAttributeInfo> attributeInfos = new ArrayList<>(1);
 				attributeInfos.add(attributeInfo);
 
-				List<IfcValue> values = parseAttributeValues(sbWrapper, null, attributeInfos, attributeValueTypes);
+				List<IfcValue> values = parseAttributeValues(sbWrapper, null, attributeInfos, attributeTypeInfo, attributeValueTypes);
 				attributeValues.add(new IfcTemporaryCollectionValueWrapper(values));
 				break;
 
@@ -301,10 +308,10 @@ class IfcModelSectionParser {
 					attributeInfos = new ArrayList<>(1);
 					attributeInfos.add(attributeInfo);
 
-					values = parseAttributeValues(new StrBuilderWrapper(s), null, attributeInfos, attributeValueTypes);
+					values = parseAttributeValues(new StrBuilderWrapper(s), null, attributeInfos, subNonEntityTypeInfo, attributeValueTypes);
 					assert values.size() == 1 : "Expect only 1 argument: " + entity + ":" + values.toString();
 					//attributeValues.add(new IfcShortEntity(subNonEntityTypeInfo, (IfcLiteralValue)values.get(0)));
-					attributeValues.add(new IfcLiteralValue((IfcLiteralValue)values.get(0), subNonEntityTypeInfo, null));
+					attributeValues.add((IfcLiteralValue)values.get(0));
 				} else {
 					
 					//
@@ -324,7 +331,7 @@ class IfcModelSectionParser {
 						((Calendar)value).setTimeInMillis(timeStamp * 1000);
 					}
 					
-					attributeValues.add(new IfcLiteralValue(value, (IfcDefinedTypeInfo)attributeInfo.getAttributeTypeInfo(), attributeValueType));						
+					attributeValues.add(new IfcLiteralValue(value, (IfcNonEntityTypeInfo)attributeTypeInfo, attributeValueType));						
 				}
 
 				break;

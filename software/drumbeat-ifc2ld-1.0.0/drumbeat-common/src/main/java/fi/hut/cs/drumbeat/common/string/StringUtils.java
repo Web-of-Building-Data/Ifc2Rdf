@@ -20,6 +20,7 @@ public class StringUtils {
 	public static final char QUESTION_CHAR = '?';
 	public static final char TABULAR_CHAR = '\t';
 	
+	public static final String APOSTROPHE = "\'"; 
 	public static final String CLOSING_CURLY_BRACKET = "}";	
 	public static final String CLOSING_ROUND_BRACKET = ")"; 
 	public static final String CLOSING_SQUARE_BRACKET = "]"; 

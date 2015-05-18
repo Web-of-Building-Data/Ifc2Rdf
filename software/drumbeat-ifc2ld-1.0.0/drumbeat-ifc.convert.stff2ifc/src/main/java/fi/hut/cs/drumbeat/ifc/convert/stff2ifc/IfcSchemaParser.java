@@ -521,7 +521,7 @@ public class IfcSchemaParser {
 //				attributeTypeInfo = schema.getEquivalentDefinedType((IfcLiteralTypeInfo)attributeTypeInfo);
 //			}
 
-				if (!attributeName.equals(IfcVocabulary.TypeNames.IFC_TIME_STAMP)) {
+				if (attributeName.equals(IfcVocabulary.TypeNames.IFC_TIME_STAMP)) {
 					attributeTypeInfo = schema.IFC_TIME_STAMP;
 				}
 				attributeInfo = new IfcAttributeInfo(entityTypeInfo, attributeName, attributeTypeInfo);				

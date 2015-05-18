@@ -5,6 +5,7 @@ import java.util.*;
 
 import fi.hut.cs.drumbeat.ifc.common.IfcNotFoundException;
 import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
+import fi.hut.cs.drumbeat.ifc.data.LogicalEnum;
 
 
 /**
@@ -34,11 +35,11 @@ public class IfcSchema implements Serializable {
 	 */
 	public final IfcLiteralTypeInfo BINARY = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BINARY, IfcTypeEnum.INTEGER);
 	public final IfcLiteralTypeInfo BINARY32 = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BINARY32, IfcTypeEnum.INTEGER);
-	public final IfcLiteralTypeInfo BOOLEAN = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BOOLEAN, IfcTypeEnum.LOGICAL); // true or false
+//	public final IfcLiteralTypeInfo BOOLEAN = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BOOLEAN, IfcTypeEnum.LOGICAL); // true or false
 	public final IfcLiteralTypeInfo DATETIME = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.DATETIME, IfcTypeEnum.DATETIME);
 	public final IfcLiteralTypeInfo GUID = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.GUID, IfcTypeEnum.GUID);
 	public final IfcLiteralTypeInfo INTEGER = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.INTEGER, IfcTypeEnum.INTEGER);
-	public final IfcLiteralTypeInfo LOGICAL = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.LOGICAL, IfcTypeEnum.LOGICAL); // true, false or null
+//	public final IfcLiteralTypeInfo LOGICAL = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.LOGICAL, IfcTypeEnum.LOGICAL); // true, false or null
 	public final IfcLiteralTypeInfo NUMBER = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.NUMBER, IfcTypeEnum.REAL);
 	public final IfcLiteralTypeInfo REAL = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.REAL, IfcTypeEnum.REAL);
 	public final IfcLiteralTypeInfo STRING = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.STRING, IfcTypeEnum.STRING);
@@ -50,6 +51,9 @@ public class IfcSchema implements Serializable {
 	public final IfcDefinedTypeInfo IFC_REAL = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_REAL, IfcVocabulary.TypeNames.REAL);
 	public final IfcDefinedTypeInfo IFC_TIME_STAMP = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_TIME_STAMP, IfcVocabulary.TypeNames.DATETIME);
 	public final IfcDefinedTypeInfo IFC_TEXT = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_TEXT, IfcVocabulary.TypeNames.STRING);
+	
+	public final IfcEnumerationTypeInfo BOOLEAN = new IfcLogicalTypeInfo(this, IfcVocabulary.TypeNames.BOOLEAN, Arrays.asList(LogicalEnum.TRUE, LogicalEnum.FALSE));
+	public final IfcEnumerationTypeInfo LOGICAL = new IfcLogicalTypeInfo(this, IfcVocabulary.TypeNames.LOGICAL, Arrays.asList(LogicalEnum.TRUE, LogicalEnum.FALSE, LogicalEnum.UNKNOWN));
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -82,11 +86,9 @@ public class IfcSchema implements Serializable {
 		
 		addNonEntityTypeInfo(BINARY);
 		addNonEntityTypeInfo(BINARY32);
-		addNonEntityTypeInfo(BOOLEAN); // true or false
 		addNonEntityTypeInfo(DATETIME);
 		addNonEntityTypeInfo(GUID);
 		addNonEntityTypeInfo(INTEGER);
-		addNonEntityTypeInfo(LOGICAL); // true, false or null
 		addNonEntityTypeInfo(NUMBER);
 		addNonEntityTypeInfo(REAL);
 		addNonEntityTypeInfo(STRING);
@@ -99,6 +101,8 @@ public class IfcSchema implements Serializable {
 		addNonEntityTypeInfo(IFC_TEXT);
 		addNonEntityTypeInfo(IFC_TIME_STAMP);
 		
+		addNonEntityTypeInfo(BOOLEAN); // true or false
+		addNonEntityTypeInfo(LOGICAL); // true, false or null
 	}
 	
 	

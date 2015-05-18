@@ -9,6 +9,7 @@ import fi.hut.cs.drumbeat.ifc.common.guid.GuidCompressor;
 import fi.hut.cs.drumbeat.ifc.data.model.IfcEntity;
 import fi.hut.cs.drumbeat.ifc.data.model.IfcGuidValue;
 import fi.hut.cs.drumbeat.ifc.data.model.IfcLiteralAttribute;
+import fi.hut.cs.drumbeat.ifc.data.model.IfcLiteralValue;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcAttributeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcEntityTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcSchema;
@@ -66,11 +67,12 @@ public class SetNameByGlobalId extends IfcGroundingProcessor {
 	boolean process(IfcEntity entity) throws IfcAnalyserException {
 		if (entity.isInstanceOf(ifcRootEntityTypeInfo)) {			
 			IfcLiteralAttribute guidAttribute = entity.getLiteralAttributes().selectFirst(globalIdAttributeInfo);
-			IfcGuidValue guidValue = (IfcGuidValue)guidAttribute.getValue();
+			IfcLiteralValue guidValue = (IfcLiteralValue)guidAttribute.getValue();
 			
-			String rawName = String.format(entityNamePattern,
-					guidValue.getShortGuidId(),
-					GuidCompressor.uncompressGuidString(guidValue.getShortGuidId()));
+			String shortGuid = (String)guidValue.getValue();
+			String longGuid = GuidCompressor.uncompressGuidString(shortGuid);
+			
+			String rawName = String.format(entityNamePattern, shortGuid, longGuid);
 //			entity.setGlobalId(rawName);
 			trySetEntityName(entity, rawName);
 			return true;

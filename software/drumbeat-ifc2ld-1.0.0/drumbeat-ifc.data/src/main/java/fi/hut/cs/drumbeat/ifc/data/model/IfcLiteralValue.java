@@ -1,5 +1,6 @@
 package fi.hut.cs.drumbeat.ifc.data.model;
 
+import fi.hut.cs.drumbeat.ifc.data.schema.IfcSelectTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcTypeEnum;
 
@@ -12,6 +13,11 @@ public class IfcLiteralValue extends IfcSingleValue {
 	private Object value;
 	
 	public IfcLiteralValue(Object value, IfcTypeInfo typeInfo, IfcTypeEnum type) {
+		assert(typeInfo != null);
+		assert(!(typeInfo instanceof IfcSelectTypeInfo));
+		assert(!(value instanceof IfcLiteralValue));
+		assert(!value.toString().equals("T"));
+		
 		this.value = value;
 		this.typeInfo = typeInfo;
 		this.type = type;

@@ -49,6 +49,9 @@ public class IfcVocabulary {
 		public static final String ENDSEC = "ENDSEC";
 		public static final String EQUAL = StringUtils.EQUAL;
 		
+		public static final String END_LINE = StringUtils.SEMICOLON;
+		public static final String STRING_VALUE = StringUtils.APOSTROPHE;
+		
 		public static final char LINE_NUMBER_SYMBOL = StringUtils.SHARP_CHAR;
 		public static final char STRING_VALUE_SYMBOL = StringUtils.APOSTROPHE_CHAR;
 		public static final char ENUMERATION_VALUE_SYMBOL = StringUtils.DOT_CHAR; 

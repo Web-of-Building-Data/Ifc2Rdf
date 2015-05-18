@@ -41,7 +41,7 @@ public class IfcEnumerationTypeInfo extends IfcNonEntityTypeInfo {
 	 */
 	@Override
 	public EnumSet<IfcTypeEnum> getValueTypes() {
-		return EnumSet.of(IfcTypeEnum.STRING);
+		return EnumSet.of(IfcTypeEnum.ENUM);
 	}	
 	
 	

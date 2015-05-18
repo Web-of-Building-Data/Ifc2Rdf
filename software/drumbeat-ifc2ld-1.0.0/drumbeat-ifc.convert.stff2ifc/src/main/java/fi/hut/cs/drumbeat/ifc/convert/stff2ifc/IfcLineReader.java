@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fi.hut.cs.drumbeat.common.string.StringUtils;
+import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
 
 
 public class IfcLineReader {
@@ -156,41 +157,49 @@ public class IfcLineReader {
 	
 	public String getNextStatement() throws IOException, IfcFormatException {
 		
-		Matcher matcher;
 		int length;
 		
 		for (;;) {			
 			
-			if ((length = cache.length()) > 0 &&
-					cache.lastIndexOf(StringUtils.SEMICOLON) >= 0 &&
-					(matcher = STATEMENT.matcher(cache)).find(0)) {
+			if ((length = cache.length()) > 0) {
+				int indexOfEndLine = cache.indexOf(IfcVocabulary.StepFormat.END_LINE);
 				
-				// end is index of semicolon
-				int end = matcher.end();
-				
-				// return statement without semicolon 
-				String statement = cache.substring(0, end - 1).trim();
-				
-				if (end == length) {
-					cache = new StringBuilder();
-				} else {
-					cache = new StringBuilder(cache.substring(end));
-				}
-								
-				return statement;
-			} else {
-				String line = getNextLine();
-				
-				if (line == null) {
-					if (cache.length() == 0) {
-						return null;
-					} else {
-						throw new IfcFormatException(currentLineNumber, String.format("Expected '%s'", StringUtils.SEMICOLON));
+				if (indexOfEndLine >= 0) {
+					
+					int indexOfApostrophe = cache.lastIndexOf(IfcVocabulary.StepFormat.STRING_VALUE, indexOfEndLine);
+					if (indexOfApostrophe >= 0) {
+						Matcher matcher = STATEMENT.matcher(cache);
+						indexOfEndLine = matcher.find(0) ? matcher.end() - 1 : -1;  
 					}
+					
+					if (indexOfEndLine > 0) {
+						String statement = cache.substring(0, indexOfEndLine).trim();
+						
+						if (indexOfEndLine == length - 1) {
+							cache = new StringBuilder();
+						} else {
+							cache = new StringBuilder(cache.substring(indexOfEndLine + 1));
+						}
+									
+						return statement;						
+					}
+					
 				}
 				
-				cache.append(line);				
 			}
+				
+			
+			String line = getNextLine();
+			
+			if (line == null) {
+				if (cache.length() == 0) {
+					return null;
+				} else {
+					throw new IfcFormatException(currentLineNumber, String.format("Expected '%s'", StringUtils.SEMICOLON));
+				}
+			}
+			
+			cache.append(line);				
 			
 		}		
 	}
