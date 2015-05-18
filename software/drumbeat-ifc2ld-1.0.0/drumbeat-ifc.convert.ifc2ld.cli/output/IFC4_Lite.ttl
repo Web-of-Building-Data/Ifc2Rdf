@@ -9,9 +9,6 @@ ifc:IfcDoorStandardCase
         a                owl:Class ;
         rdfs:subClassOf  ifc:IfcDoor .
 
-ifc:BOOLEAN  a           owl:Class ;
-        rdfs:subClassOf  expr:EnumerationClass .
-
 ifc:IfcPreDefinedPropertySet
         a                 owl:Class ;
         rdfs:subClassOf   ifc:IfcPropertySetDefinition ;
@@ -631,6 +628,8 @@ ifc:Set_OF_IfcStyleAssignmentSelect_Slot
         a                owl:Class ;
         rdfs:subClassOf  expr:CollectionSlotClass .
 
+expr:TRUE  a    expr:BOOLEAN , expr:LOGICAL .
+
 ifc:IfcRelConnectsPortToElement
         a                 owl:Class ;
         rdfs:subClassOf   ifc:IfcRelConnects ;
@@ -844,9 +843,6 @@ ifc:IfcParameterValue
         rdfs:subClassOf  expr:DefinedClass .
 
 ifc:LOCKED  a   ifc:IfcStateEnum .
-
-ifc:LOGICAL  a           owl:Class ;
-        rdfs:subClassOf  expr:EnumerationClass .
 
 ifc:IfcBSplineSurface
         a                 owl:Class ;
@@ -1126,6 +1122,8 @@ ifc:IfcRelNests  a        owl:Class ;
 
 ifc:IfcShell  a          owl:Class ;
         rdfs:subClassOf  expr:SelectClass .
+
+expr:UNKNOWN  a  expr:LOGICAL .
 
 ifc:GASSENSOR  a  ifc:IfcSensorTypeEnum .
 
@@ -1781,8 +1779,6 @@ ifc:IfcMaterialProperties
 ifc:IfcInteger  a        owl:Class , ifc:IfcSimpleValue ;
         rdfs:subClassOf  expr:DefinedClass .
 
-ifc:UNKNOWN  a  ifc:LOGICAL .
-
 ifc:Set_OF_IfcOrganization
         a                owl:Class ;
         rdfs:subClassOf  expr:SetClass .
@@ -2269,8 +2265,6 @@ ifc:IfcRelConnectsPorts
         owl:disjointWith  ifc:IfcRelReferencedInSpatialStructure , ifc:IfcRelFillsElement , ifc:IfcRelSequence , ifc:IfcRelConnectsStructuralMember , ifc:IfcRelCoversSpaces , ifc:IfcRelSpaceBoundary , ifc:IfcRelServicesBuildings , ifc:IfcRelContainedInSpatialStructure , ifc:IfcRelInterferesElements , ifc:IfcRelFlowControlElements , ifc:IfcRelCoversBldgElements , ifc:IfcRelConnectsStructuralActivity .
 
 ifc:SLEEVING  a  ifc:IfcCoveringTypeEnum .
-
-ifc:FALSE  a    ifc:BOOLEAN , ifc:LOGICAL .
 
 ifc:IfcLightSourceSpot
         a                owl:Class ;
@@ -4447,6 +4441,8 @@ ifc:IfcRelAssociatesApproval
         rdfs:subClassOf   ifc:IfcRelAssociates ;
         owl:disjointWith  ifc:IfcRelAssociatesMaterial , ifc:IfcRelAssociatesLibrary , ifc:IfcRelAssociatesDocument , ifc:IfcRelAssociatesConstraint , ifc:IfcRelAssociatesClassification .
 
+expr:FALSE  a   expr:BOOLEAN , expr:LOGICAL .
+
 ifc:Set_1_UNBOUNDED_OF_IfcDistributionControlElement
         a                owl:Class ;
         rdfs:subClassOf  ifc:Set_1_UNBOUNDED , ifc:Set_OF_IfcDistributionControlElement .
@@ -5219,7 +5215,7 @@ ifc:LIVE_LOAD_Q  a  ifc:IfcActionSourceTypeEnum .
 
 ifc:    a                owl:Ontology ;
         rdfs:comment     "OWL profile: OWL2_EL.\r\n\t\tConversion options: [\r\n\t\t\t \r\n\t\t]" ;
-        owl:versionInfo  "v1.0 2015/05/18 05:38:39" .
+        owl:versionInfo  "v1.0 2015/05/18 13:48:14" .
 
 ifc:IfcSequenceEnum  a   owl:Class ;
         rdfs:subClassOf  expr:EnumerationClass .
@@ -5875,6 +5871,8 @@ ifc:IfcColour  a         ifc:IfcFillStyleSelect , owl:Class ;
         rdfs:subClassOf  expr:SelectClass .
 
 ifc:MANSARD_ROOF  a  ifc:IfcRoofTypeEnum .
+
+expr:BOOLEAN  a  owl:Class .
 
 ifc:RESIDUALCURRENT  a  ifc:IfcProtectiveDeviceTrippingUnitTypeEnum .
 
@@ -6732,6 +6730,8 @@ ifc:STRAIGHT_RUN_RAMP
 ifc:List_2_UNBOUNDED_OF_REAL
         a                owl:Class ;
         rdfs:subClassOf  ifc:List_2_UNBOUNDED , ifc:List_OF_REAL .
+
+expr:LOGICAL  a  owl:Class .
 
 ifc:IfcMaterialDefinition
         a                owl:Class , ifc:IfcMaterialSelect , ifc:IfcResourceObjectSelect , ifc:IfcObjectReferenceSelect ;
@@ -8578,9 +8578,9 @@ ifc:IfcWindowStandardCase
         a                owl:Class ;
         rdfs:subClassOf  ifc:IfcWindow .
 
-ifc:TRUE_LENGTH  a  ifc:IfcProjectedOrTrueLengthEnum .
-
 ifc:NETWORKBRIDGE  a  ifc:IfcCommunicationsApplianceTypeEnum .
+
+ifc:TRUE_LENGTH  a  ifc:IfcProjectedOrTrueLengthEnum .
 
 ifc:IfcTankTypeEnum  a   owl:Class ;
         rdfs:subClassOf  expr:EnumerationClass .
@@ -8738,8 +8738,6 @@ ifc:IfcWallStandardCase
         rdfs:subClassOf  ifc:IfcWall .
 
 ifc:AWNING  a   ifc:IfcShadingDeviceTypeEnum .
-
-ifc:TRUE  a     ifc:BOOLEAN , ifc:LOGICAL .
 
 ifc:IfcStructuralSurfaceAction
         a                owl:Class ;

@@ -95,7 +95,9 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 			if (nonEntityTypeInfo instanceof IfcLiteralTypeInfo) {
 				exportLiteralTypeInfo((IfcLiteralTypeInfo)nonEntityTypeInfo);
 				adapter.exportEmptyLine();
-			} 
+			} else if (nonEntityTypeInfo instanceof IfcLogicalTypeInfo) {
+				exportLogicalTypeInfo((IfcLogicalTypeInfo)nonEntityTypeInfo);				
+			}
 		}
 		adapter.endSection();
 
@@ -186,6 +188,28 @@ public class Ifc2RdfSchemaExporter extends Ifc2RdfExporterBase {
 		adapter.exportTriple(typeResource, RDF.type, RDFS.Datatype);
 		adapter.exportTriple(typeResource, OWL.sameAs, super.getXsdDataType(typeInfo));
 		
+	}
+	
+	private void exportLogicalTypeInfo(IfcLogicalTypeInfo typeInfo) {
+		
+		String typeUri = super.formatExpressOntologyName(typeInfo.getName());
+		Resource typeResource = createUriResource(typeUri);
+		adapter.exportTriple(typeResource, RDF.type, OWL.Class);
+
+		List<String> enumValues = typeInfo.getValues(); 
+		List<RDFNode> enumValueNodes = new ArrayList<>();
+
+		for (String value : enumValues) {
+			enumValueNodes.add(super.createUriResource(super.formatExpressOntologyName(value)));
+		}
+		
+		if (owlProfile.supportsRdfProperty(OWL.oneOf, EnumSet.of(RdfTripleObjectTypeEnum.ZeroOrOneOrMany))) {			
+			RDFList rdfList = super.createList(enumValueNodes);			
+			adapter.exportTriple(typeResource, OWL.oneOf, rdfList);
+		} else { // if (!context.isEnabledOption(Ifc2RdfConversionOptionsEnum.ForceConvertLogicalValuesToString)) {
+			enumValueNodes.stream().forEach(node ->
+					adapter.exportTriple((Resource)node, RDF.type, typeResource));			
+		}		
 	}	
 
 	private void exportEnumerationTypeInfo(IfcEnumerationTypeInfo typeInfo) {

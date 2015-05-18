@@ -24,6 +24,7 @@ import fi.hut.cs.drumbeat.ifc.data.schema.IfcDefinedTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcEntityTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcEnumerationTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcLiteralTypeInfo;
+import fi.hut.cs.drumbeat.ifc.data.schema.IfcLogicalTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcNonEntityTypeInfo;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcSchema;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcTypeEnum;
@@ -264,6 +265,11 @@ public class Ifc2RdfModelExporter extends Ifc2RdfExporterBase {
 			
 			adapter.exportTriple(resource, RDF.type, super.createUriResource(super.formatTypeName(type)));
 			adapter.exportTriple(resource, RDF.value, super.createUriResource(super.formatOntologyName((String)literalValue.getValue())));
+			
+		} else if (type instanceof IfcLogicalTypeInfo) {
+			
+			adapter.exportTriple(resource, RDF.type, super.createUriResource(super.formatExpressOntologyName(type.getName())));
+			adapter.exportTriple(resource, RDF.value, super.createUriResource(super.formatExpressOntologyName((String)literalValue.getValue())));
 			
 		} else {			
 			throw new RuntimeException(String.format("Invalid literal value type: %s (%s)", type, type.getClass()));			

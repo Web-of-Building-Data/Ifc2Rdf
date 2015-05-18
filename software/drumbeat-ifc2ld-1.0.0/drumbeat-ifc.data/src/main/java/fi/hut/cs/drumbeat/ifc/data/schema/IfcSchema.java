@@ -52,8 +52,8 @@ public class IfcSchema implements Serializable {
 	public final IfcDefinedTypeInfo IFC_TIME_STAMP = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_TIME_STAMP, IfcVocabulary.TypeNames.DATETIME);
 	public final IfcDefinedTypeInfo IFC_TEXT = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_TEXT, IfcVocabulary.TypeNames.STRING);
 	
-	public final IfcEnumerationTypeInfo BOOLEAN = new IfcLogicalTypeInfo(this, IfcVocabulary.TypeNames.BOOLEAN, Arrays.asList(LogicalEnum.TRUE, LogicalEnum.FALSE));
-	public final IfcEnumerationTypeInfo LOGICAL = new IfcLogicalTypeInfo(this, IfcVocabulary.TypeNames.LOGICAL, Arrays.asList(LogicalEnum.TRUE, LogicalEnum.FALSE, LogicalEnum.UNKNOWN));
+	public final IfcLogicalTypeInfo BOOLEAN = new IfcLogicalTypeInfo(this, IfcVocabulary.TypeNames.BOOLEAN, Arrays.asList(LogicalEnum.TRUE, LogicalEnum.FALSE));
+	public final IfcLogicalTypeInfo LOGICAL = new IfcLogicalTypeInfo(this, IfcVocabulary.TypeNames.LOGICAL, Arrays.asList(LogicalEnum.TRUE, LogicalEnum.FALSE, LogicalEnum.UNKNOWN));
 	
 	
 	private static final long serialVersionUID = 1L;

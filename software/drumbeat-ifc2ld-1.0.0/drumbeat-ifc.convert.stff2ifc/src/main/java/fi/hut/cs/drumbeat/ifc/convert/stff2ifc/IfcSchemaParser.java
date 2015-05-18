@@ -514,7 +514,8 @@ public class IfcSchemaParser {
 			} else {
 				assert (attributeTypeInfo instanceof IfcDefinedTypeInfo ||
 						attributeTypeInfo instanceof IfcEnumerationTypeInfo ||
-						attributeTypeInfo instanceof IfcLiteralTypeInfo) :
+						attributeTypeInfo instanceof IfcLiteralTypeInfo ||
+						attributeTypeInfo instanceof IfcLogicalTypeInfo) :
 					attributeTypeInfo.getClass();
 				
 //				if (attributeTypeInfo instanceof IfcLiteralTypeInfo) {

@@ -9,6 +9,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 import fi.hut.cs.drumbeat.common.config.document.ConfigurationDocument;
 import fi.hut.cs.drumbeat.common.config.document.ConfigurationParserException;
+import fi.hut.cs.drumbeat.ifc.common.IfcVocabulary;
+import fi.hut.cs.drumbeat.ifc.data.LogicalEnum;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcCollectionKindEnum;
 import fi.hut.cs.drumbeat.rdf.RdfVocabulary;
 
@@ -64,6 +66,12 @@ public class Ifc2RdfVocabulary {
 			}
 			return baseUri;
 		}
+		
+		public static final Resource BOOLEAN = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + IfcVocabulary.TypeNames.BOOLEAN);
+		public static final Resource LOGICAL = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + IfcVocabulary.TypeNames.LOGICAL);
+		public static final Resource TRUE = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + LogicalEnum.TRUE);
+		public static final Resource FALSE = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + LogicalEnum.FALSE);
+		public static final Resource UNKNOWN = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + LogicalEnum.UNKNOWN);
 		
 		public static final Resource DefinedClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "DefinedClass");		
 		public static final Resource EnumerationClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "EnumerationClass");		
