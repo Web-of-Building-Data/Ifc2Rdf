@@ -95,15 +95,16 @@ public class OwlProfile {
 				return !tripleObjectType.contains(RdfTripleObjectTypeEnum.NonClassIdentifier);
 			}
 			
-		} else if (owlProfileId == OwlProfileEnum.OWL2_EL) {
+		} else if (owlProfileId == OwlProfileEnum.OWL2_EL || owlProfileId == OwlProfileEnum.OWL2_QL) {
 
 			if (property.equals(OWL2.allValuesFrom) ||		// ObjectAllValuesFrom, DataAllValuesFrom
-				property.equals(OWL2.disjointUnionOf) ||		// DisjointUnion
+				property.equals(OWL2.disjointUnionOf) ||	// DisjointUnion				
 				property.equals(OWL.oneOf) ||				// ObjectOneOf, DataOneOf
 				property.equals(OWL.unionOf) ||				// ObjectUnionOf, DataUnionOf
 				property.equals(OWL.maxCardinality) ||		// ObjectMaxCardinality, DataMaxCardinality
 				property.equals(OWL.minCardinality) ||		// ObjectMinCardinality, DataMinCardinality 
-				property.equals(OWL.cardinality)) 			// ObjectExactCardinality, DataExactCardinality
+				property.equals(OWL.cardinality) || 			// ObjectExactCardinality, DataExactCardinality
+				property.equals(OWL2.hasKey)) 			// ObjectExactCardinality, DataExactCardinality
 			{				
 				//
 				// XXXAllValuesFrom, XXXCardinality, XXXUnionOf, DisjointUnion are not supported by OWL 2 EL
@@ -119,12 +120,16 @@ public class OwlProfile {
 				// Many XXXObjectProperty are not supported by OWL 2 EL
 				// See) || http) ||//www.w3.org/TR/owl2-profiles/#Feature_Overview
 				//				
-				return !tripleObjectType.contains(RdfTripleObjectTypeEnum.Object);
+				return false; // !tripleObjectType.contains(RdfTripleObjectTypeEnum.Object);
 			}
 			
 		} else if (owlProfileId == OwlProfileEnum.OWL2_RL) {
 
-			if (property.equals(OWL.Thing)) {
+			if (property.equals(OWL.Thing) ||
+				property.equals(OWL.oneOf) ||				// ObjectOneOf, DataOneOf
+				property.equals(OWL.unionOf) ||				// ObjectUnionOf, DataUnionOf
+				property.equals(OWL.disjointWith))		// DisjointClasses 
+			{
 				//
 				// Usage of owl) ||Thing is restricted by the grammar of OWL 2 RL
 				// See) || http) ||//www.w3.org/TR/owl2-profiles/#Entities_3
@@ -168,7 +173,7 @@ public class OwlProfile {
 	
 	public boolean supportXsdType(Resource type) {
 		if (owlProfileId == OwlProfileEnum.OWL2_EL || owlProfileId == OwlProfileEnum.OWL2_QL) {
-			if (type.equals(XSD.xboolean)) {
+			if (type.equals(XSD.xboolean) || type.equals(XSD.xdouble)) {
 				//
 				// The following datatypes must not be used in OWL 2 EL and OWL 2 QL) ||
 				// xsd) ||boolean, xsd) ||double, xsd) ||float, xsd) ||XXXInteger (exception xsd) ||integer and xsd) ||nonNegativeInteger),
@@ -178,6 +183,10 @@ public class OwlProfile {
 				//
 				return false;
 			}
+		} else if (owlProfileId == OwlProfileEnum.OWL2_RL) {		
+			if (type.equals(RdfVocabulary.OWL.real)) {
+				return false;
+			}			
 		}
 		
 		//

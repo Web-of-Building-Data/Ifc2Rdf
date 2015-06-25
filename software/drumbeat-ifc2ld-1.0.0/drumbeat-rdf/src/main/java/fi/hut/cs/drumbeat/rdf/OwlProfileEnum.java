@@ -9,10 +9,11 @@ public enum OwlProfileEnum {
 	OWL2_EL,
 	OWL2_QL,
 	OWL2_RL,
+	OWL2_DL,
 	OWL2_Full;
 	
 	public static final EnumSet<OwlProfileEnum> OWL1 = EnumSet.of(OWL1_Lite, OWL1_DL, OWL1_Full);		
-	public static final EnumSet<OwlProfileEnum> OWL2 = EnumSet.of(OWL2_EL, OWL2_QL, OWL2_RL, OWL2_Full);
+	public static final EnumSet<OwlProfileEnum> OWL2 = EnumSet.of(OWL2_EL, OWL2_QL, OWL2_RL, OWL2_DL, OWL2_Full);
 	
 	public float toVersion() {
 		if (OWL1.contains(this)) {

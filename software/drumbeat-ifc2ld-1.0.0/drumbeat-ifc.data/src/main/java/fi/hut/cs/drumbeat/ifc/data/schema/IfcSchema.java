@@ -34,16 +34,16 @@ public class IfcSchema implements Serializable {
 	 * Predefined literal types
 	 */
 	public final IfcLiteralTypeInfo BINARY = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BINARY, IfcTypeEnum.INTEGER);
-	public final IfcLiteralTypeInfo BINARY32 = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BINARY32, IfcTypeEnum.INTEGER);
+//	public final IfcLiteralTypeInfo BINARY32 = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BINARY32, IfcTypeEnum.INTEGER);
 //	public final IfcLiteralTypeInfo BOOLEAN = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.BOOLEAN, IfcTypeEnum.LOGICAL); // true or false
 	public final IfcLiteralTypeInfo DATETIME = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.DATETIME, IfcTypeEnum.DATETIME);
-	public final IfcLiteralTypeInfo GUID = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.GUID, IfcTypeEnum.GUID);
+//	public final IfcLiteralTypeInfo GUID = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.GUID, IfcTypeEnum.GUID);
 	public final IfcLiteralTypeInfo INTEGER = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.INTEGER, IfcTypeEnum.INTEGER);
 //	public final IfcLiteralTypeInfo LOGICAL = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.LOGICAL, IfcTypeEnum.LOGICAL); // true, false or null
-	public final IfcLiteralTypeInfo NUMBER = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.NUMBER, IfcTypeEnum.REAL);
+	public final IfcLiteralTypeInfo NUMBER = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.NUMBER, IfcTypeEnum.NUMBER);
 	public final IfcLiteralTypeInfo REAL = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.REAL, IfcTypeEnum.REAL);
 	public final IfcLiteralTypeInfo STRING = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.STRING, IfcTypeEnum.STRING);
-	public final IfcLiteralTypeInfo STRING255 = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.STRING255, IfcTypeEnum.STRING);
+//	public final IfcLiteralTypeInfo STRING255 = new IfcLiteralTypeInfo(this, IfcVocabulary.TypeNames.STRING255, IfcTypeEnum.STRING);
 	
 	public final IfcDefinedTypeInfo IFC_BOOLEAN = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_BOOLEAN, IfcVocabulary.TypeNames.BOOLEAN);
 	public final IfcDefinedTypeInfo IFC_INTEGER = new IfcDefinedTypeInfo(this, IfcVocabulary.TypeNames.IFC_INTEGER, IfcVocabulary.TypeNames.INTEGER);
@@ -85,14 +85,14 @@ public class IfcSchema implements Serializable {
 		addEntityTypeInfo(IFC_SPACIAL_STRUCTURAL_ELEMENT);
 		
 		addNonEntityTypeInfo(BINARY);
-		addNonEntityTypeInfo(BINARY32);
+//		addNonEntityTypeInfo(BINARY32);
 		addNonEntityTypeInfo(DATETIME);
-		addNonEntityTypeInfo(GUID);
+//		addNonEntityTypeInfo(GUID);
 		addNonEntityTypeInfo(INTEGER);
 		addNonEntityTypeInfo(NUMBER);
 		addNonEntityTypeInfo(REAL);
 		addNonEntityTypeInfo(STRING);
-		addNonEntityTypeInfo(STRING255);
+//		addNonEntityTypeInfo(STRING255);
 		
 		addNonEntityTypeInfo(IFC_BOOLEAN);
 		addNonEntityTypeInfo(IFC_INTEGER);

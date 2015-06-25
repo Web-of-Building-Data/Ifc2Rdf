@@ -118,7 +118,7 @@ public class IfcVocabulary {
 		public static final String IFC_ROOT = "IfcRoot";
 		public static final String IFC_SPACIAL_STRUCTURAL_ELEMENT = "IfcSpacialStructuralElement";
 		public static final String IFC_RELATIONSHIP = "IfcRelationship";
-		public static final String IFC_PROPERTY_DEFINITION = "IfcPropertydefinition";
+		public static final String IFC_PROPERTY_DEFINITION = "IfcPropertyDefinition";
 		
 		public static final String IFC_BOOLEAN = "IfcBoolean";
 		public static final String IFC_INTEGER = "IfcInteger";
@@ -128,7 +128,7 @@ public class IfcVocabulary {
 		public static final String IFC_TIME_STAMP = "IfcTimeStamp";	
 		
 		public static final String BINARY = "BINARY";
-		public static final String BINARY32 = "BINARY32";
+//		public static final String BINARY32 = "BINARY32";
 		public static final String BOOLEAN = "BOOLEAN";
 		public static final String DATETIME = "DATETIME";		
 		public static final String GUID = "STRING22";
@@ -137,7 +137,7 @@ public class IfcVocabulary {
 		public static final String NUMBER = "NUMBER";
 		public static final String REAL = "REAL";
 		public static final String STRING = "STRING";
-		public static final String STRING255 = "STRING255";
+//		public static final String STRING255 = "STRING255";
 		
 	}
 	

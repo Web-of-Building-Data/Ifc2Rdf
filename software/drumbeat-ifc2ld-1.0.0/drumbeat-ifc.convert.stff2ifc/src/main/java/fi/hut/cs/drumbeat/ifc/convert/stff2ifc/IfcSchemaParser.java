@@ -154,7 +154,12 @@ public class IfcSchemaParser {
 			for (IfcEntityTypeInfoText entityTypeInfoText : entityTypeInfoTexts) {
 				bindEntityInverseLinks(entityTypeInfoText);
 				bindEntityUniqueKeys(entityTypeInfoText);
-			}				
+			}
+			
+			for (IfcEntityTypeInfo entityTypeInfo : schema.getEntityTypeInfos()) {
+				setEntityAttributeIndexes(entityTypeInfo);				
+			}
+
 
 			//
 			// return schema
@@ -173,6 +178,7 @@ public class IfcSchemaParser {
 	private IfcNonEntityTypeInfo parseNonEntityTypeInfo(String[] tokens) throws IOException, IfcFormatException, IfcNotFoundException {
 		
 		tokens = RegexUtils.split2(tokens[1].trim(), RegexUtils.WHITE_SPACE);			
+		
 		String typeName = IfcHelper.getFormattedTypeName(tokens[0]);
 		
 		tokens = RegexUtils.split2(tokens[1], IfcVocabulary.ExpressFormat.EQUAL);			
@@ -542,7 +548,17 @@ public class IfcSchemaParser {
 				typeHeader.equals(IfcVocabulary.ExpressFormat.BAG);
 	}
 	
-	
+	private void setEntityAttributeIndexes(IfcEntityTypeInfo entityTypeInfo) {
+		int attributeCount = 0;
+		
+		if (entityTypeInfo.getSuperTypeInfo() != null) {
+			attributeCount = entityTypeInfo.getSuperTypeInfo().getInheritedAttributeInfos().size();
+		}
+		
+		for (IfcAttributeInfo attributeInfo : entityTypeInfo.getAttributeInfos()) {
+			attributeInfo.setAttributeIndex(attributeCount++);
+		}			
+	}
 	
 	private void bindEntityInverseLinks(IfcEntityTypeInfoText entityTypeInfoText) throws IfcException {
 

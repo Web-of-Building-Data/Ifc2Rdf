@@ -27,7 +27,7 @@ public class Ifc2RdfVocabulary {
 	public static final String DEFAULT_ONTOLOGY_PREFIX = "ifc:";
 	public static final String DEFAULT_ONTOLOGY_NAMESPACE_FORMAT = DEFAULT_ONTOLOGY_BASE + "%s#";	
 	public static final String DEFAULT_MODEL_PREFIX = ":";
-	public static final String DEFAULT_MODEL_NAMESPACE_FORMAT = "http://drumbeat.cs.hut.fi/model/";
+	public static final String DEFAULT_MODEL_NAMESPACE_FORMAT = "http://drumbeat.cs.hut.fi/model/";	
 
 	public static class IFC {
 		
@@ -73,32 +73,49 @@ public class Ifc2RdfVocabulary {
 		public static final Resource FALSE = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + LogicalEnum.FALSE);
 		public static final Resource UNKNOWN = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + LogicalEnum.UNKNOWN);
 		
-		public static final Resource DefinedClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "DefinedClass");		
-		public static final Resource EnumerationClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "EnumerationClass");		
-		public static final Resource SelectClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "SelectClass");		
-		public static final Resource EntityClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "EntityClass");		
-		public static final Resource CollectionClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "CollectionClass");
-		public static final Resource ArrayClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "DefinedClass");		
-		public static final Resource ListClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "ListClass");		
-		public static final Resource SetClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "SetClass");		
-		public static final Resource BagClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "BagClass");		
-		public static final Resource CollectionSlotClass = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "CollectionSlotClass");
+		public static final Resource Array = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Array");		
+		public static final Resource Bag = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Bag");		
+		public static final Resource Collection = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Collection");
+		public static final Resource Defined = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Defined");		
+		public static final Resource Entity = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Entity");		
+		public static final Resource EntityProperty = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "EntityProperty");
+		public static final Resource Enum = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Enum");		
+		public static final Resource InverseEntityProperty = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "InverseEntityProperty");
+		public static final Resource List = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "List");		
+		public static final Resource Select = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Select");		
+		public static final Resource Set = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Set");		
+		public static final Resource Slot = RdfVocabulary.DEFAULT_MODEL.createResource(getBaseUri() + "Slot");
 
+		public static final Property endIndex = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "endIndex");
 		public static final Property index = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "index");
+		public static final Property isOrdered = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "isOrdered");
 		public static final Property item = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "item");
 		public static final Property itemType = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "itemType");
+//		public static final Property hasBinary = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasBinary");
+//		public static final Property hasBoolean = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasBoolean");
+//		public static final Property hasLogical = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasLogical");
+//		public static final Property hasInteger = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasInteger");
+//		public static final Property hasNumber = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasNumber");
+//		public static final Property hasReal = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasReal");
+//		public static final Property hasString = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasString");
+		public static final Property hasValue = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "hasValue");
+		public static final Property next = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "next");
+		public static final Property previous = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "previous");
+//		public static final Property propertyIndex = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "propertyIndex");
 		public static final Property slot = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "slot");
 		public static final Property size = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "size");
+		public static final Property startIndex = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "startIndex");
+//		public static final Property value = RdfVocabulary.DEFAULT_MODEL.createProperty(getBaseUri() + "value");
 		
 		public static Resource getCollectionClass(IfcCollectionKindEnum collectionKind) {
 			if (collectionKind == IfcCollectionKindEnum.List) {
-				return Ifc2RdfVocabulary.EXPRESS.ListClass;				
+				return Ifc2RdfVocabulary.EXPRESS.List;				
 			} else if (collectionKind == IfcCollectionKindEnum.Set) {
-				return Ifc2RdfVocabulary.EXPRESS.SetClass;				
+				return Ifc2RdfVocabulary.EXPRESS.Set;				
 			} else if (collectionKind == IfcCollectionKindEnum.Array) {
-				return Ifc2RdfVocabulary.EXPRESS.ArrayClass;				
+				return Ifc2RdfVocabulary.EXPRESS.Array;				
 			} else {
-				return Ifc2RdfVocabulary.EXPRESS.BagClass;				
+				return Ifc2RdfVocabulary.EXPRESS.Bag;				
 			}	
 			
 		}

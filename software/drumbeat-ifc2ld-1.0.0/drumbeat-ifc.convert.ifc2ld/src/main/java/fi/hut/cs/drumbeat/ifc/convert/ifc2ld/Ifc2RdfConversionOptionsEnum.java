@@ -16,5 +16,6 @@ public enum Ifc2RdfConversionOptionsEnum {
 //	ForceConvertRdfListToOloOrderedList,
 	ForceConvertEnumerationValuesToString,
 	ForceConvertBooleanValuesToString,
+	UseSpecificDoubleTypes,
 //	ForceConvertPropertyToObjectProperty,
 }

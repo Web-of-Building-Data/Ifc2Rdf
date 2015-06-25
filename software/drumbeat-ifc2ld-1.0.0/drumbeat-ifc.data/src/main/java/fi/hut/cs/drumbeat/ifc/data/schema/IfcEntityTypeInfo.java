@@ -225,5 +225,5 @@ public class IfcEntityTypeInfo extends IfcTypeInfo { // implements IRdfNode {
 		
 		return isLiteralContainerType.booleanValue();
 	}
-
+	
 }

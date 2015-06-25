@@ -1,11 +1,14 @@
 package fi.hut.cs.drumbeat.ifc.common;
 
-import fi.hut.cs.drumbeat.common.string.RegexUtils;
+import fi.hut.cs.drumbeat.common.string.StringUtils;
 
 public class IfcHelper {
 	
 	public static String getFormattedTypeName(String typeName) {
-		return RegexUtils.removeNonSafeUrlSymbols(typeName);		
+		int indexOfOpeningBracket = typeName.indexOf(StringUtils.OPENING_ROUND_BRACKET_CHAR); 
+		return indexOfOpeningBracket < 0 ? typeName : typeName.substring(0, indexOfOpeningBracket);
+		
+//		return RegexUtils.removeNonSafeUrlSymbols(typeName);		
 	}
 
 	public static String getFormattedAttributeName(String attributeName) {

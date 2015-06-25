@@ -16,6 +16,7 @@ public class Ifc2RdfConversionContext {
 	/////////////////////////
 	
 	public static final String CONFIGURATION_SECTION_CONVERTER_TYPE_NAME = "Ifc2Rdf";
+	public static final String CONFIGURATION_PROPERTY_OWL_VERSION = "OwlVersion";
 	
 	private static final String CONFIGURATION_PROPERTY_OWL_PROFILE = "OwlProfile";
 	private static final String CONFIGURATION_PROPERTY_CONVERSION_OPTIONS_PREFIX = "Options.";
@@ -48,19 +49,22 @@ public class Ifc2RdfConversionContext {
 	// NON-STATIC MEMBERS
 	/////////////////////////
 
-	private OwlProfile owlProfile;
+	private String owlVersion; 
+	private OwlProfileList owlProfileList;
 	private String name;
 	private String ontologyPrefix;
 	private String ontologyNamespaceFormat;
 	private String modelPrefix;
-	private String modelNamespaceFormat;	
+	private String modelNamespaceFormat;
 	
 	private EnumSet<Ifc2RdfConversionOptionsEnum> conversionOptions;
 	
 	public Ifc2RdfConversionContext(ConfigurationItemEx configuration) {
 		
-		OwlProfileEnum owlProfileEnum = OwlProfileEnum.valueOf(configuration.getProperties().getProperty(CONFIGURATION_PROPERTY_OWL_PROFILE));
-		owlProfile = new OwlProfile(owlProfileEnum);
+		setOwlVersion(configuration.getProperties().getProperty(CONFIGURATION_PROPERTY_OWL_VERSION, "1.0.0"));
+		
+		String[] owlProfileNames = configuration.getProperties().getProperty(CONFIGURATION_PROPERTY_OWL_PROFILE).split(",");
+		owlProfileList = new OwlProfileList(owlProfileNames);		
 		
 		name = configuration.getName();
 		
@@ -83,11 +87,19 @@ public class Ifc2RdfConversionContext {
 		modelPrefix = properties.getProperty(CONFIGURATION_PROPERTY_MODEL_PREFIX, Ifc2RdfVocabulary.DEFAULT_MODEL_PREFIX);
 		modelNamespaceFormat = properties.getProperty(CONFIGURATION_PROPERTY_MODEL_NAMESPACE_FORMAT, Ifc2RdfVocabulary.DEFAULT_MODEL_NAMESPACE_FORMAT)
 				.replaceAll(CONFIGURATION_NAMESPACE_FORMAT_VARIABLE_SCHEMA_VERSION, "%1s")
-				.replaceAll(CONFIGURATION_VARIABLE_CONVERTER_CONTEXT_NAME, "%2s");
+				.replaceAll(CONFIGURATION_VARIABLE_CONVERTER_CONTEXT_NAME, "%2s");		
 	}
 	
-	public OwlProfile getOwlProfile() {
-		return owlProfile;
+	public String getOwlVersion() {
+		return owlVersion;
+	}
+
+	public void setOwlVersion(String owlVersion) {
+		this.owlVersion = owlVersion;
+	}
+
+	public OwlProfileList getOwlProfileList() {
+		return owlProfileList;
 	}
 	
 	public String getName() {

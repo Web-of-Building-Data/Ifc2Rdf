@@ -36,19 +36,19 @@
 	<!-- Converters -->	
 	<converterPool type="Ifc2Rdf">
 		
-		<converter name="Lite" enabled="true" default="false">
+		<converter name="Simple" enabled="true" default="false">
 			<params>
-				<param name="OwlProfile" value="OWL2_EL" />
+				<param name="OwlVersion" value="1.0.1" />
+				<param name="OwlProfile" value="OWL2_EL,OWL2_QL,OWL2_RL,OWL2_DL" />
+				<param name="Options.UseSpecificDoubleTypes" value="false" />
 				<param name="Options.IgnoreSelectTypes" value="false" />
 				<param name="Options.IgnoreEnumerationTypes" value="false" />
 				<param name="Options.IgnoreDefinedTypes" value="false" />
 				<param name="Options.IgnoreCollectionTypes" value="false" />
 				<param name="Options.IgnoreEntityTypes" value="false" />
-				<param name="Options.ExportProperties" value="false" />
+				<param name="Options.ExportProperties" value="true" />
 				<param name="Options.ExportInverseProperties" value="false" />
 				<param name="Options.ExportPropertyCardinalities" value="false" />
-				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
-				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
 				<param name="Options.ExportDebugInfo" value="false" />
 				<param name="Ontology.Prefix" value="ifc" />
 				<param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$#" />
@@ -59,7 +59,9 @@
 		
 		<converter name="Standard" enabled="true" default="false">
 			<params>
-				<param name="OwlProfile" value="OWL2_RL" />
+				<param name="OwlVersion" value="1.0.1" />
+				<param name="OwlProfile" value="OWL2_RL,OWL2_DL" />
+				<param name="Options.UseSpecificDoubleTypes" value="false" />
 				<param name="Options.IgnoreSelectTypes" value="false" />
 				<param name="Options.IgnoreEnumerationTypes" value="false" />
 				<param name="Options.IgnoreDefinedTypes" value="false" />
@@ -68,8 +70,6 @@
 				<param name="Options.ExportProperties" value="true" />
 				<param name="Options.ExportInverseProperties" value="false" />
 				<param name="Options.ExportPropertyCardinalities" value="false" />
-				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
-				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
 				<param name="Options.ExportDebugInfo" value="false" />
 				<param name="Ontology.Prefix" value="ifc" />
 				<!--  param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$_$Converter.Context.Name$#" / -->
@@ -81,7 +81,9 @@
 
 		<converter name="Extended" enabled="true" default="false">
 			<params>
-				<param name="OwlProfile" value="OWL2_RL" />
+				<param name="OwlVersion" value="1.0.1" />
+				<param name="OwlProfile" value="OWL2_DL" />
+				<param name="Options.UseSpecificDoubleTypes" value="false" />
 				<param name="Options.IgnoreSelectTypes" value="false" />
 				<param name="Options.IgnoreEnumerationTypes" value="false" />
 				<param name="Options.IgnoreDefinedTypes" value="false" />
@@ -90,8 +92,6 @@
 				<param name="Options.ExportProperties" value="true" />
 				<param name="Options.ExportInverseProperties" value="false" />
 				<param name="Options.ExportPropertyCardinalities" value="true" />
-				<param name="Options.ForceConvertEnumerationValuesToString" value="false" />
-				<param name="Options.ForceConvertBooleanValuesToString" value="false" />
 				<param name="Options.ExportDebugInfo" value="false" />
 				<param name="Ontology.Prefix" value="ifc" />
 				<!--  param name="Ontology.NamespaceFormat" value="http://drumbeat.cs.hut.fi/owl/$Schema.Version$_$Converter.Context.Name$#" / -->

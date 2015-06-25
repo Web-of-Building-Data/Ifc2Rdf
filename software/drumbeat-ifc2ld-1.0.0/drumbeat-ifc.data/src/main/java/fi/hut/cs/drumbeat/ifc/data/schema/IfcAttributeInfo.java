@@ -12,14 +12,14 @@ public class IfcAttributeInfo implements Comparable<IfcAttributeInfo>,
 	private IfcEntityTypeInfo entityTypeInfo;
 	private String name;
 	private String uniqueName;
+	private int attributeIndex;
 	private IfcTypeInfo attributeTypeInfo;
 	private boolean isOptional;
 	// private Cardinality cardinality;
 	private boolean isFunctional;
 	private boolean isInverseFunctional;
 
-	public IfcAttributeInfo(IfcEntityTypeInfo entityTypeInfo, String name,
-			IfcTypeInfo attributeTypeInfo) {
+	public IfcAttributeInfo(IfcEntityTypeInfo entityTypeInfo, String name, IfcTypeInfo attributeTypeInfo) {
 		this.entityTypeInfo = entityTypeInfo;
 		this.name = name;
 		this.attributeTypeInfo = attributeTypeInfo;
@@ -46,6 +46,14 @@ public class IfcAttributeInfo implements Comparable<IfcAttributeInfo>,
 	 */
 	public void setUniqueName(String rdfName) {
 		this.uniqueName = rdfName;
+	}
+
+	public int getAttributeIndex() {
+		return attributeIndex;
+	}
+
+	public void setAttributeIndex(int attributeIndex) {
+		this.attributeIndex = attributeIndex;
 	}
 
 	public IfcTypeInfo getAttributeTypeInfo() {

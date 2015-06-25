@@ -13,6 +13,11 @@ public class RdfVocabulary {
 	
 	public static class OWL {
 		public static final String BASE_PREFIX = "owl";
+		public static final String BASE_URI = "http://www.w3.org/2002/07/owl#";
+		
+		public static final Property FunctionalDataProperty = DEFAULT_MODEL.createProperty(BASE_URI + "FunctionalDataProperty");
+
+		public static final Resource real = DEFAULT_MODEL.createResource(BASE_URI + "real");
 	}
 	
 	public static class RDF {

@@ -13,7 +13,7 @@ import fi.hut.cs.drumbeat.ifc.data.metamodel.IfcStepFileDescription;
 import fi.hut.cs.drumbeat.ifc.data.metamodel.IfcStepFileName;
 import fi.hut.cs.drumbeat.ifc.data.model.*;
 import fi.hut.cs.drumbeat.ifc.data.schema.IfcSchema;
-import fi.hut.cs.drumbeat.rdf.OwlProfile;
+import fi.hut.cs.drumbeat.rdf.OwlProfileList;
 import fi.hut.cs.drumbeat.rdf.RdfVocabulary;
 import fi.hut.cs.drumbeat.rdf.export.RdfExportAdapter;
 
@@ -27,7 +27,7 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 	private Model jenaModel;
 	
 	private Ifc2RdfConversionContext context;
-	private OwlProfile owlProfile;
+	private OwlProfileList owlProfileList;
 	private RdfExportAdapter adapter;
 	
 	public Ifc2RdfMetaModelExporter(String metaDataSetUri, IfcModel ifcModel, Ifc2RdfConversionContext context, RdfExportAdapter rdfExportAdapter) {
@@ -37,7 +37,7 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 		this.metaModel = ifcModel.getMetaModel();
 		this.ifcSchema = ifcModel.getSchema();
 		this.context = context;
-		this.owlProfile = context.getOwlProfile();
+		this.owlProfileList = context.getOwlProfileList();
 		this.jenaModel = getJenaModel();
 		adapter = rdfExportAdapter;
 		
@@ -83,7 +83,7 @@ public class Ifc2RdfMetaModelExporter extends Ifc2RdfExporterBase {
 //				.replaceFirst("\\]", "\r\n\t\t]")
 //				.replaceAll(",", "\r\n\t\t\t");		
 		conversionOptionsString = String.format("OWL profile: %s.\r\n\t\tConversion options: %s",
-				owlProfile.getOwlProfileId(),
+				owlProfileList.getOwlProfileIds(),
 				conversionOptionsString); 
 		adapter.exportTriple(dataSetResource, RdfVocabulary.DCTERMS.description, jenaModel.createTypedLiteral(conversionOptionsString));		
 

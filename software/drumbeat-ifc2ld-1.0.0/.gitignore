@@ -1,12 +1,15 @@
 /.metadata/
 /.recommenders/
+/.xd/
 /output/
 /net.linkedbuildingdata.rdf.versioning/
 /Servers*/
 /*test*/
 /*web*/
-/drumbeat-ifc.processing.grounding.ifc.extended/
+/drumbeat-ifc.convert.ifc2ld2/
+/ifc2ld2/
 /drumbeat-service*/
 /drumbeat-rdf.versioning/
 /drumbeat-interface/
 /*TempFiles/
+maven-output.txt
